@@ -4,6 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
 
 use App\Http\Controllers\Admin\LoginController;
+use App\Http\Controllers\Customer\CustomerLoginController;
+use App\Http\Controllers\Customer\CustomerController;
+
+
 
 
 /*
@@ -27,4 +31,16 @@ Route::get('/login', [LoginController::class, 'showLoginForm'])->name('admin.log
 Route::post('/login', [LoginController::class, 'login']);
 //Route::get('/register',[LoginController::class,'register'])->name('register');
 Route::get('/logout', [LoginController::class, 'logout'])->name('admin.logout');
+
+
+
+
+
+/////Customer
+Route::get('/home', [CustomerController::class, 'index'])->name('customer.home');
+
+Route::get('/login', [CustomerLoginController::class, 'showLoginForm'])->name('customer.login');
+Route::post('/login', [CustomerLoginController::class, 'login']);
+Route::get('/register',[CustomerLoginController::class,'register'])->name('register');
+Route::get('/logout', [CustomerLoginController::class, 'logout'])->name('admin.logout');
 

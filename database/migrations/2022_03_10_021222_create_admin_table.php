@@ -19,8 +19,8 @@ class CreateAdminTable extends Migration
             $table->string('phone',20);
             $table->string('email')->unique();
             $table->string('password');
-            $table->timestamp('created_at')->nullable();
-            $table->timestamp('updated_at')->nullable();
+            $table->date('created_at');
+            $table->date('updated_at');
             $table->unsignedBigInteger('id_role');
             $table->foreign('id_role')->references('id')->on('role');
         });
