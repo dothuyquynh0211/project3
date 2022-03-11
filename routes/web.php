@@ -32,7 +32,6 @@ Route::get('/admin/logout', [LoginController::class, 'logout'])->name('admin.log
 
 
 
-
 // Đường dẫn trang khách hàng 
 Route::get('/', function () {
     return view('frontend.index');
