@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateImportdetailTable extends Migration
+class CreateImportDetailsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,15 @@ class CreateImportdetailTable extends Migration
      */
     public function up()
     {
-        Schema::create('importdetail', function (Blueprint $table) {
+        Schema::create('import_details', function (Blueprint $table) {
             $table->id('id');
-            $table->integer('id_product');
+            
             $table->integer('quantity');
             $table->float('cost_price');
-            $table->float('cost');
+            $table->unsignedBigInteger('id_product');
+            $table->foreign('id_product')->references('id')->on('products');
             $table->unsignedBigInteger('id_importgoods');
-            $table->foreign('id_importgoods')->references('id')->on('importgoods');
+            $table->foreign('id_importgoods')->references('id')->on('import_goods');
 
         });
     }
@@ -32,6 +33,6 @@ class CreateImportdetailTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('importdetail');
+        Schema::dropIfExists('import_details');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateInvoiceDetailTable extends Migration
+class CreateInvoiceDetailsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,15 @@ class CreateInvoiceDetailTable extends Migration
      */
     public function up()
     {
-        Schema::create('invoice_detail', function (Blueprint $table) {
+        Schema::create('invoice_details', function (Blueprint $table) {
             $table->id('id');
             $table->float('price');
             $table->unsignedBigInteger('id_coupons')->nullable();
             $table->foreign('id_coupons')->references('id')->on('coupons');
             $table->unsignedBigInteger('id_invoice');
-            $table->foreign('id_invoice')->references('id')->on('invoice');
-            $table->unsignedBigInteger('id_product');
-            $table->foreign('id_product')->references('id')->on('product');
-            $table->integer('quantity');
+            $table->foreign('id_invoice')->references('id')->on('invoices');
+            $table->unsignedBigInteger('coupons_code')->nullable();
+           
         });
     }
 
@@ -33,6 +32,6 @@ class CreateInvoiceDetailTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('invoice_detail');
+        Schema::dropIfExists('invoice_details');
     }
 }

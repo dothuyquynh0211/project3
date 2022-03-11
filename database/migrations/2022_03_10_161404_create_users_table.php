@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateColorTable extends Migration
+class CreateUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,14 @@ class CreateColorTable extends Migration
      */
     public function up()
     {
-        Schema::create('color', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->id('id');
             $table->string('name');
+            $table->string('avatar',300);
+            $table->string('email')->unique();
+            $table->string('password');
+            $table->string('phone',20);
+            $table->string('address',300);
         });
     }
 
@@ -26,6 +31,6 @@ class CreateColorTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('color');
+        Schema::dropIfExists('users');
     }
 }

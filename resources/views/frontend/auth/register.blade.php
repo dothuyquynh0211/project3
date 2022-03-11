@@ -19,7 +19,7 @@
 </head>
 <style>
   body{
-  background: url('http://phucgroup.vn/profiles/phucgroupvn/uploads/attach/1455617082_services4.jpg');
+  background: url('https://png.pngtree.com/thumb_back/fw800/back_our/20190620/ourmid/pngtree-fashion-women-s-products-investment-joining-poster-background-material-image_161486.jpg');
   font-family: 'Oxygen', sans-serif;
   color: #fff !important;
 }
@@ -34,7 +34,7 @@ p {
 	font-size: 50px;
 	font-family: 'Passion One', cursive; 
 	font-weight: 400; 
-  color: #fff;
+  color: rgb(219, 71, 71);
 }
 
 hr{
@@ -91,6 +91,8 @@ input::-webkit-input-placeholder {
 			</div> 
 			<div class="main-login main-center">
 				<form class="form-horizontal" method="post" action="#">
+				
+						@csrf
 					<div class="form-group">
 						<label for="name" class="cols-sm-2 control-label">Your Name</label>
 						<div class="cols-sm-10">
@@ -136,11 +138,11 @@ input::-webkit-input-placeholder {
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="username" class="cols-sm-2 control-label">Username</label>
+						<label for="username" class="cols-sm-2 control-label">Avatar</label>
 						<div class="cols-sm-10">
 							<div class="input-group">
 								<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-								<input type="text" class="form-control" name="username" id="username"  placeholder="Enter your Username"/>
+								<input type="file" class="form-control" name="avatar" id="username"  placeholder="Enter your Username"/>
 							</div>
 							<div class="message" id="message_username">
 							</div>
@@ -157,17 +159,7 @@ input::-webkit-input-placeholder {
 							</div>
 						</div>
 					</div>
-					<div class="form-group">
-						<label for="confirm" class="cols-sm-2 control-label">Confirm Password</label>
-						<div class="cols-sm-10">
-							<div class="input-group">
-								<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-								<input type="password" class="form-control" name="conf_password" id="conf_password"  placeholder="Confirm your Password"/>
-							</div>
-							<div class="message" id="message_conf_password">
-							</div>
-						</div>
-					</div>
+					
 					<div class="form-group ">
 						<button type="button" class="btn btn-primary btn-lg btn-block login-button" onclick="check()">Register</button>
 					</div>
@@ -175,7 +167,7 @@ input::-webkit-input-placeholder {
 			</div>
 			<div class="panel-heading">
 				<div class="panel-title text-center">
-					<h3 class="title">Design by Hoang Viet Thang</h3>
+					<h3 class="title">Design by Thúy Quỳnh</h3>
 					<hr />
 				</div>
 			</div> 
