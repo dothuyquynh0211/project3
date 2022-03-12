@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
 
 use App\Http\Controllers\Admin\LoginController;
+use App\Http\Controllers\User\AuthController;
+
+
 
 
 /*
@@ -18,9 +21,9 @@ use App\Http\Controllers\Admin\LoginController;
 */
 // Đường dẫn trang admin - trước mỗi đường dẫn thêm tiền tố admin để phân biết với bên khách hàng 
 
-
+   
 Route::get('/admin', function () {
-    return redirect()->route('admin.home');    
+    return redirect()->route('admin.home');
 });
 
 Route::get('/admin/home', [AdminController::class, 'index'])->name('admin.home');
@@ -29,6 +32,14 @@ Route::get('/admin/login', [LoginController::class, 'showLoginForm'])->name('adm
 Route::post('/login', [LoginController::class, 'login']);
 //Route::get('/register',[LoginController::class,'register'])->name('register');
 Route::get('/admin/logout', [LoginController::class, 'logout'])->name('admin.logout');
+
+//User
+
+Route::get('/login', [AuthController::class, 'showFormLogin'])->name('user.login');
+Route::post('/login', [AuthController::class, 'loginUser']);
+Route::get('/register',[AuthController::class,'showFormRegister'])->name('user.register');
+Route::post('/register', [AuthController::class, 'register']);
+Route::get('/logoutUser', [AuthController::class, 'logoutUser'])->name('user.logout');
 
 
 
@@ -60,3 +71,9 @@ Route::get('/blog', function () {
 Route::get('/blog-detail', function () {
     return view('frontend.blog_details');
 });
+
+
+
+
+
+

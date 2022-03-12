@@ -24,7 +24,7 @@ class LoginController extends Controller
                 'password' => $request->input('password'),
             ]
         )) {
-            //Alert::success('Đăng nhập thành công', 'WELCOME TO HOME !!!');
+           // Alert::success('Đăng nhập thành công', 'WELCOME TO HOME !!!');
             return redirect()->route('admin.home');
             // dd( Auth::guard('admin')->id());
             // return "da dang nhap thang cong";
