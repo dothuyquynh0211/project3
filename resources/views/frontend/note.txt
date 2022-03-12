@@ -1,1 +1,2 @@
 Đây là thư mục chứa code của bên khách hàng
+<link rel="stylesheet" href="{{ mix('/css/app.css') }}">
