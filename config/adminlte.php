@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'CHANEL',
+    'title' => 'AdminLTE 3',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -45,12 +45,12 @@ return [
     |
     */
 
-    'logo' => '<b>CHANEL</b> FA KE',
-    'logo_img' => 'https://swagger.com.vn/wp-content/uploads/2020/09/tui-xach-chanel-gabrielle-large-hobo-bag-1.jpg',
+    'logo' => 'Todd & Quinn',
+    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
-    'logo_img_alt' => 'AdminLTE',
+    'logo_img_alt' =>'Todd & Quinn',
 
     /*
     |--------------------------------------------------------------------------
@@ -227,7 +227,6 @@ return [
     'menu' => [
         // Navbar items:
         [
-            
             'type'         => 'navbar-search',
             'text'         => 'search',
             'topnav_right' => true,
@@ -243,87 +242,80 @@ return [
             'text' => 'search',
         ],
         [
-            'text' => 'Quản lí tài khoản',
+            'text' => 'blog',
             'url'  => 'admin/blog',
             'can'  => 'manage-blog',
         ],
+        // [
+        //     'text'        => 'pages',
+        //     'url'         => 'admin/pages',
+        //     'icon'        => 'far fa-fw fa-file',
+        //     'label'       => 4,
+        //     'label_color' => 'success',
+        // ],
         [
-           
             'text'        => 'Thống kê',
             'url'         => 'admin/pages',
-            'icon'        => 'fa-solid fa-chart-gantt',
-            'label'       => 4,
-            'label_color' => 'success',
-        ],
-        ['header' => 'account_settings'],
+            'icon'        => 'far fa-fw fa-file',
+            // 'label'       => 4,
+            // 'label_color' => 'success',
+         ],
+        ['header' => 'Danh mục'],
         [
-            'text' => 'Quản lí tài khoản',
+            'text' => 'Quản lý sản phẩm ',
             'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-        
-        
-        [
-            
-            'text'    => 'Quản lí sản phẩm',
-            'icon'    => 'fa-solid fa-bags-shopping',
+            // 'icon' => 'fas fa-fw fa-user',
             'submenu' => [
                 [
-                    'text' => 'Quản lí màu sắc',
+                    'text' => 'Quản lý màu sắc',
                     'url'  => '#',
+                ],
+                [
+                    'text'    => 'Quản lý size',
+                    'url'     => '#',
+                    
+                ],
+                [
+                    'text' => 'Quản lý brand',
+                    'url'  => '#',
+                ],
+            ],
+        ],
+        [
+            'text' => 'Quản lý hoá đơn ',
+            'url'  => '#',
+            'icon' => 'fa-solid fa-file-invoice-dollar',
+        ],
+        [
+            'text'    => 'Quản lý kho hàng ',
+            // 'icon'    => 'fas fa-fw fa-share',
+            'submenu' => [
+                [
+                    'text' => 'Nhập kho',
+                    'url'  => '#',
+                ],
+                [
+                    'text'    => 'Kiểm kho',
+                    'url'     => '#',
                 ],
                 
-                [
-                    'text' => 'Quản lí size',
-                    'url'  => '#',
-                ],
-                [
-                    'text' => 'Quản lí nguồn gốc',
-                    'url'  => '#',
-                ],
-            
+            ],
         ],
-    ],
-    [
-            
-        'text'    => 'Quản lí kho hàng',
-        'icon'    => 'fa-solid fa-bags-shopping',
-        'submenu' => [
-            [
-                'text' => ' nhập kho',
-                'url'  => '#',
-            ],
-            
-            [
-                'text' => 'kiểm kho',
-                'url'  => '#',
-            ],
-            [
-                'text' => 'tồn kho',
-                'url'  => '#',
-            ],
-        
-    ],
-],
-[
-    'text'        => 'Quản lí hóa đơn',
-    'url'         => 'admin/pages',
-    'icon'        => 'far fa-fw fa-file',
-    
-],
-[
-    'text'        => 'Quản lí mã giảm giá',
-    'url'         => 'admin/pages',
-    'icon'        => 'far fa-fw fa-file',
-    
-],
-[
-    'text'        => 'Quản lí danh mục',
-    'url'         => 'admin/pages',
-    'icon'        => 'far fa-fw fa-file',
-   
-],
-        
+        [
+            'text'       => 'Quản lý mã khuyến mại',
+            // 'icon_color' => 'red',
+            'url'        => '#',
+        ],
+        [
+            'text'       => 'Quản lý danh mục sản phẩm ',
+            // 'icon_color' => 'yellow',
+            'url'        => '#',
+        ],
+        [
+            'text'       => 'Quản lý tài khoản ',
+            // 'icon_color' => 'cyan',
+            'url'        => '#',
+        ],
     ],
 
     /*
