@@ -65,7 +65,7 @@
                 <div class="col-xl-6 col-lg-7">
                     <nav class="header__menu">
                         <ul>
-                            <li><a href="/index">Home</a></li>
+                            <li><a href="/">Home</a></li>
                             <li><a href="#">Women’s</a></li>
                             <li><a href="#">Men’s</a></li>
                             <li class="active"><a href="/shop">Shop</a></li>
@@ -109,7 +109,7 @@
     <!-- Content Begin -->
     @yield('content')
     <!-- Content End -->
-    <div class="instagram">
+    {{-- <div class="instagram">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-2 col-md-4 col-sm-4 p-0">
@@ -162,7 +162,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- Instagram End -->
     
     <!-- Footer Section Begin -->

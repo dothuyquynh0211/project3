@@ -43,10 +43,6 @@
                 "theme",
                 "web"
             ],
-            "support": {
-                "issues": "https://github.com/ColorlibHQ/AdminLTE/issues",
-                "source": "https://github.com/ColorlibHQ/AdminLTE/tree/v3.2.0"
-            },
             "time": "2022-02-07T20:33:09+00:00"
         },
         {
@@ -1007,10 +1003,6 @@
                 "administrator",
                 "laravel"
             ],
-            "support": {
-                "issues": "https://github.com/jeroennoten/Laravel-AdminLTE/issues",
-                "source": "https://github.com/jeroennoten/Laravel-AdminLTE/tree/v3.8.0"
-            },
             "time": "2022-02-10T17:50:18+00:00"
         },
         {
@@ -7591,5 +7583,5 @@
         "php": "^7.3|^8.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "1.1.0"
 }

@@ -29,7 +29,7 @@ Route::get('/admin', function () {
 Route::get('/admin/home', [AdminController::class, 'index'])->name('admin.home');
 
 Route::get('/admin/login', [LoginController::class, 'showLoginForm'])->name('admin.login');
-Route::post('/login', [LoginController::class, 'login']);
+Route::post('/admin/login', [LoginController::class, 'login']);
 //Route::get('/register',[LoginController::class,'register'])->name('register');
 Route::get('/admin/logout', [LoginController::class, 'logout'])->name('admin.logout');
 
@@ -71,9 +71,3 @@ Route::get('/blog', function () {
 Route::get('/blog-detail', function () {
     return view('frontend.blog_details');
 });
-
-
-
-
-
-

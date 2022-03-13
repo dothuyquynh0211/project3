@@ -9,7 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class AdminModel extends Authenticatable
 {
     use HasFactory ;
-    protected $table ='admin';
+    protected $table ='admins';
     protected $fillable = ['id','name','phone','email','password','create_at','updated_at','id_roles'];
     protected $hidden = ['password'];
 }
