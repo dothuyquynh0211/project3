@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 3',
+    'title' => 'Todd & Quinn',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -46,11 +46,11 @@ return [
     */
 
     'logo' => 'Todd & Quinn',
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+    'logo_img' => 'frontend/images/logo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
-    'logo_img_alt' =>'Todd & Quinn',
+    'logo_img_alt' => 'Todd & Quinn',
 
     /*
     |--------------------------------------------------------------------------
@@ -259,31 +259,31 @@ return [
             'icon'        => 'far fa-fw fa-file',
             // 'label'       => 4,
             // 'label_color' => 'success',
-         ],
+        ],
         ['header' => 'Danh mục'],
         [
             'text' => 'Quản lý sản phẩm ',
-            'url'  => 'admin/settings',
+            'url'  => '/admin/product',
             // 'icon' => 'fas fa-fw fa-user',
             'submenu' => [
                 [
                     'text' => 'Quản lý màu sắc',
-                    'url'  => '#',
+                    'url'  => '/backend/colors/index',
                 ],
                 [
                     'text'    => 'Quản lý size',
-                    'url'     => '#',
-                    
+                    'url'     => '/backend/sizes/index',
+
                 ],
                 [
                     'text' => 'Quản lý brand',
-                    'url'  => '#',
+                    'url'  => '/backend/brand/index',
                 ],
             ],
         ],
         [
             'text' => 'Quản lý hoá đơn ',
-            'url'  => '#',
+            'url'  => 'admin/invoice',
             'icon' => 'fa-solid fa-file-invoice-dollar',
         ],
         [
@@ -292,29 +292,44 @@ return [
             'submenu' => [
                 [
                     'text' => 'Nhập kho',
-                    'url'  => '#',
+                    'url'  => '',
                 ],
                 [
                     'text'    => 'Kiểm kho',
                     'url'     => '#',
                 ],
-                
+
             ],
         ],
         [
             'text'       => 'Quản lý mã khuyến mại',
             // 'icon_color' => 'red',
-            'url'        => '#',
+            'url'        => '/admin/coupons',
         ],
         [
             'text'       => 'Quản lý danh mục sản phẩm ',
             // 'icon_color' => 'yellow',
-            'url'        => '#',
+            'url'        => 'admin/category',
         ],
         [
             'text'       => 'Quản lý tài khoản ',
             // 'icon_color' => 'cyan',
-            'url'        => '#',
+            // 'url'        => '',
+            'submenu' => [
+                [
+                    'text' => 'Nhân viên ',
+                    'url'  => '/admin/account/staff',
+                ],
+                [
+                    'text'    => 'Khách hàng ',
+                    'url'     => '/admin/account/customer',
+
+                ],
+                [
+                    'text' => 'Phân quyền ',
+                    'url'  => '/admin/account/roles',
+                ],
+            ],
         ],
     ],
 
