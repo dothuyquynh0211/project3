@@ -26,7 +26,7 @@ use App\Http\Controllers\Admin\AccountController;
 Route::get('/admin', function () {
     return redirect()->route('admin.home');
 });
-    //Darboard
+    //Dashboard
 Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.home');
 
     // Login, logout admin
@@ -35,9 +35,15 @@ Route::post('/admin/login', [LoginController::class, 'login']);
 Route::get('/admin/logout', [LoginController::class, 'logout'])->name('admin.logout');
     
     //Manage account staff and customer 
-Route::get('/admin/account/roles', [AccountController::class, 'index']);
-Route::post('/admin/account/roles', [AccountController::class, 'add']);
+Route::get('/admin/account/roles', [AccountController::class, 'indexRoles']);
+Route::post('/admin/account/roles', [AccountController::class, 'addRoles']);
+Route::get('/admin/account/roles/edit/{id}', [AccountController::class,'editRoles']);
+Route::post('/admin/account/roles/update', [AccountController::class, 'updateRoles']);
+Route::get('/admin/account/roles/delete/{id}', [AccountController::class, 'deleteRoles']);
     
+Route::get('/admin/account/staff', [AccountController::class, 'indexAccount']);
+Route::post('/admin/account/staff', [AccountController::class, 'addAccount']);
+
 
 
 
