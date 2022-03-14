@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AdminController;
 
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\User\AuthController;
+use App\Http\Controllers\Admin\AccountController;
 
 
 
@@ -25,15 +26,22 @@ use App\Http\Controllers\User\AuthController;
 Route::get('/admin', function () {
     return redirect()->route('admin.home');
 });
+    //Darboard
+Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.home');
 
-Route::get('/admin/home', [AdminController::class, 'index'])->name('admin.home');
-
+    // Login, logout admin
 Route::get('/admin/login', [LoginController::class, 'showLoginForm'])->name('admin.login');
 Route::post('/admin/login', [LoginController::class, 'login']);
-//Route::get('/register',[LoginController::class,'register'])->name('register');
 Route::get('/admin/logout', [LoginController::class, 'logout'])->name('admin.logout');
+    
+    //Manage account staff and customer 
+Route::get('/admin/account/roles', [AccountController::class, 'index']);
+Route::post('/admin/account/roles', [AccountController::class, 'add']);
+    
 
-//User
+
+
+//Đường dẫn trang khách hàng 
 
 Route::get('/login', [AuthController::class, 'showFormLogin'])->name('user.login');
 Route::post('/login', [AuthController::class, 'loginUser']);
@@ -41,9 +49,6 @@ Route::get('/register',[AuthController::class,'showFormRegister'])->name('user.r
 Route::post('/register', [AuthController::class, 'register']);
 Route::get('/logoutUser', [AuthController::class, 'logoutUser'])->name('user.logout');
 
-
-
-// Đường dẫn trang khách hàng 
 Route::get('/', function () {
     return view('frontend.index');
 });
