@@ -17,15 +17,15 @@ class CreateInvoicesTable extends Migration
             $table->id('id');
             $table->string('receiver');
             $table->string('phone',20);
-            $table->string('address',300);
+            $table->string('address');
             $table->float('total_payment');
-            $table->string('note',300);
+            $table->string('note');
             $table->timestamp('created_at');
             $table->tinyInteger('stt')->default(1);
             $table->string(' payment_method');
             $table->unsignedBigInteger('id_admin');
             $table->foreign('id_admin')->references('id')->on('admins');
-$table->unsignedBigInteger('id_user');
+            $table->unsignedBigInteger('id_user');
             $table->foreign('id_user')->references('id')->on('users');
 
         });

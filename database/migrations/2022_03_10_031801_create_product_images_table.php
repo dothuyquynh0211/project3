@@ -17,7 +17,7 @@ class CreateProductImagesTable extends Migration
             $table->id('id');
             $table->unsignedBigInteger('id_product');
             $table->foreign('id_product')->references('id')->on('products');
-            $table->string('url',500);
+            $table->string('url');
         });
     }
 
