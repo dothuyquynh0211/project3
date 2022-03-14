@@ -6,7 +6,7 @@
     <div class="col-lg-12">
         <section class="panel">
             <header class="panel-heading">
-                Thêm roles
+                Thêm quyền 
             </header>
                 <?php
                 $message = Session::get('message');
@@ -27,31 +27,36 @@
                     
                     <button type="submit" name="add_roles" class="btn btn-info">Thêm quyền </button>
                     </form>
+                    <br>
                 </div>
-
             </div>
-            <table class="table table-hover">
-
-                <thead>
-                    <th>Mã</th>
-                    <th>Tên quyền </th>
-                    <th >Ation </th>
-                </thead>
-                <tbody>
-                    @foreach ($list as $item)
-                    <tr>
-                        <td>{{$item->id}}</td>
-                        <td>{{$item->name}}</td>
-                        <td>
-                            <div class='btn-group'>
-                                <a href="/admin/account/roles/delete" class="btn btn-danger btn-xs ">Delete </a>
-                                <a href="/admin/account/roles/edit/{{$item->id}}" class="btn btn-primary btn-xs ">Edit</a>
-                            </div>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+            <div>
+                <div class="form-group">
+                    <label>Danh sách quyền  </label>
+                </div>
+                <table class="table table-hover">
+                    <thead>
+                        <th>Mã</th>
+                        <th>Tên quyền </th>
+                        <th >Ation </th>
+                    </thead>
+                    <tbody>
+                        @foreach ($list as $item)
+                        <tr>
+                            <td>{{$item->id}}</td>
+                            <td>{{$item->name}}</td>
+                            <td>
+                                <div class='btn-group'>
+                                    <a href="/admin/account/roles/delete/{{$item->id}}" class="btn btn-danger btn-xs ">Delete </a>
+                                    <a href="/admin/account/roles/edit/{{$item->id}}" class="btn btn-primary btn-xs ">Edit</a>
+                                </div>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+            
         </section>
 
     </div>
