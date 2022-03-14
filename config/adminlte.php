@@ -46,7 +46,7 @@ return [
     */
 
     'logo' => 'Todd & Quinn',
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+    'logo_img' => 'frontend/images/logo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -268,16 +268,16 @@ return [
             'submenu' => [
                 [
                     'text' => 'Quản lý màu sắc',
-                    'url'  => '/admin/color',
+                    'url'  => '/backend/colors/index',
                 ],
                 [
                     'text'    => 'Quản lý size',
-                    'url'     => '/admin/size',
+                    'url'     => '/backend/sizes/index',
 
                 ],
                 [
                     'text' => 'Quản lý brand',
-                    'url'  => '/admin/brand',
+                    'url'  => '/backend/brand/index',
                 ],
             ],
         ],

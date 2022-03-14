@@ -18,7 +18,7 @@ class LoginController extends Controller
     function login(Request $request)
     {
 
-        if (Auth::guard('admin')->attempt(
+        if (Auth::guard('admins')->attempt(
             [
                 'email' => $request->input('email'),
                 'password' => $request->input('password'),
@@ -35,7 +35,7 @@ class LoginController extends Controller
     }
     function logout()
     {
-        Auth::guard('admin')->logout();
+        Auth::guard('admins')->logout();
         //session()->forget('admin');
         return redirect()->route('admin.login');
     }

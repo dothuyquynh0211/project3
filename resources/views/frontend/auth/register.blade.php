@@ -161,7 +161,7 @@ input::-webkit-input-placeholder {
 					</div>
 					
 					<div class="form-group ">
-						<button type="button" class="btn btn-primary btn-lg btn-block login-button" onclick="check()">Register</button>
+						<button type="submit" class="btn btn-primary btn-lg btn-block login-button" onclick="check()">Register</button>
 					</div>
 				</form>
 			</div>

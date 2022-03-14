@@ -4,11 +4,11 @@
 
 
 @section('content')
-@if(Auth::guard('admin')->user() !=null)
-    <span>{{Auth::guard('admin')->user()->name}}</span>
+@if(Auth::guard('admins')->user() !=null)
+    <span>{{Auth::guard('admins')->user()->name}}</span>
     
     @endif
-    @if(Auth::guard('admin')->user() ==null)
+    @if(Auth::guard('admins')->user() ==null)
                                         <a href="{{route('admin.login')}}" class="nav-link active">
                                              <i class="fas fa-sign-in-alt nav-icon"></i><p>Đăng nhập</p></a>
 

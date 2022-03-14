@@ -85,8 +85,19 @@
                 <div class="col-lg-3">
                     <div class="header__right">
                         <div class="header__right__auth">
-                            <a href="#">Login</a>
-                            <a href="#">Register</a>
+                            @if(Auth::guard('users')->user() !=null)
+                            <span>{{Auth::guard('users')->user()->name}}</span>
+                            
+                                <a href="{{route('user.logout')}}"  class="nav-link active"><i class="fas fa-sign-in-alt nav-icon"></i><p>Đăng xuất</p></a>
+                            @else
+    
+                                                                <a href="{{route('user.login')}}" class="nav-link active">
+                                                                     <i class="fas fa-sign-in-alt nav-icon"></i><p>Login</p></a>
+                        
+                                                                     <a href="{{route('user.register')}}" class="nav-link active">
+                                                                        <i class="fas fa-sign-in-alt nav-icon"></i><p>Register</p></a> 
+                                                                
+                                                                @endif
                         </div>
                         <ul class="header__right__widget">
                             <li><span class="icon_search search-switch"></span></li>
