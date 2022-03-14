@@ -41,16 +41,16 @@ class AuthController extends Controller
             ]
         )) {
             //Alert::success('Đăng nhập thành công', 'WELCOME TO HOME !!!');
-            // return redirect()->route('user.index');
+            return redirect()->route('user.index');
             // dd( Auth::guard('admin')->id());
             // return "da dang nhap thang cong";
-            return view('frontend.index');
+            // return view('frontend.index');
         } else {
             // return "Dang nhap that bai";
             return redirect()->back()->with('error', 'Bạn không có quyền truy cập');
         }
     }
-    function logout()
+    function logoutUser()
     {
         Auth::guard('users')->logout();
         //session()->forget('admin');

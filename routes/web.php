@@ -5,7 +5,7 @@ use App\Http\Controllers\Admin\AdminController;
 
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\User\AuthController;
-
+use App\Http\Controllers\User\UserController;
 
 
 
@@ -26,7 +26,7 @@ Route::get('/admin', function () {
     return redirect()->route('admin.home');
 });
 
-Route::get('/admin/home', [AdminController::class, 'index'])->name('admin.home');
+Route::get('/admin/index', [AdminController::class, 'index'])->name('admin.home');
 
 Route::get('/admin/login', [LoginController::class, 'showLoginForm'])->name('admin.login');
 
@@ -40,7 +40,7 @@ Route::get('/admin/logout', [LoginController::class, 'logout'])->name('admin.log
 // Route::get('/user/index', function () {
 //     return redirect()->route('user.index');
 // });
-// Route::get('/user/index', [AuthController::class, 'index'])->name('user.index');
+ Route::get('/', [UserController::class, 'index'])->name('user.index');
 
 Route::get('/login', [AuthController::class, 'showFormLogin'])->name('user.login');
 Route::post('/login', [AuthController::class, 'loginUser']);
@@ -51,9 +51,9 @@ Route::get('/logoutUser', [AuthController::class, 'logoutUser'])->name('user.log
 
 
 // Đường dẫn trang khách hàng 
-Route::get('/', function () {
-    return view('frontend.index');
-});
+// Route::get('/', function () {
+//     return view('frontend.index');
+// });
 Route::get('/checkout', function () {
     return view('frontend.checkout');
 });
