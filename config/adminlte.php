@@ -263,20 +263,23 @@ return [
         ['header' => 'Danh mục'],
         [
             'text' => 'Quản lý sản phẩm ',
-            'url'  => '/admin/product',
             // 'icon' => 'fas fa-fw fa-user',
             'submenu' => [
                 [
-                    'text' => 'Quản lý màu sắc',
+                    'text' => 'Sản phẩm',
+                    'url'  => '/admin/product',
+                ],
+                [
+                    'text' => 'Màu sắc',
                     'url'  => '/admin/color',
                 ],
                 [
-                    'text'    => 'Quản lý size',
+                    'text'    => 'Size',
                     'url'     => '/admin/size',
 
                 ],
                 [
-                    'text' => 'Quản lý brand',
+                    'text' => 'Brand',
                     'url'  => '/admin/brand',
                 ],
             ],
@@ -288,15 +291,19 @@ return [
         ],
         [
             'text'    => 'Quản lý kho hàng ',
-            // 'icon'    => 'fas fa-fw fa-share',
+            // 'icon'    => 'fas fa-fw fa-share',\            
             'submenu' => [
                 [
+                    'text' => 'Kho hàng',
+                    'url'  => '/admin/warehouse/',
+                ],
+                [
                     'text' => 'Nhập kho',
-                    'url'  => '',
+                    'url'  => '/admin/warehouse/import',
                 ],
                 [
                     'text'    => 'Kiểm kho',
-                    'url'     => '#',
+                    'url'     => '/admin/warehouse/inventory',
                 ],
 
             ],

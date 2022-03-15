@@ -21,9 +21,9 @@ class CreateInvoicesTable extends Migration
             $table->float('total_payment');
             $table->string('note');
             $table->timestamp('created_at');
-            $table->tinyInteger('stt')->default(1);
+            $table->tinyInteger('status_order')->default(1);
             $table->string(' payment_method');
-            $table->unsignedBigInteger('id_admin');
+            $table->unsignedBigInteger('id_admin')->nullable();
             $table->foreign('id_admin')->references('id')->on('admins');
             $table->unsignedBigInteger('id_user');
             $table->foreign('id_user')->references('id')->on('users');

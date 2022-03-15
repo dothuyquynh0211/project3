@@ -15,12 +15,13 @@ class CreateInvoiceDetailsTable extends Migration
     {
         Schema::create('invoice_details', function (Blueprint $table) {
             $table->id('id');
+            $table->unsignedBigInteger('id_product')->nullable();
+            $table->foreign('id_product')->references('id')->on('product');
+            $table->integer('quantity');
             $table->float('price');
-            $table->unsignedBigInteger('id_coupons')->nullable();
-            $table->foreign('id_coupons')->references('id')->on('coupons');
             $table->unsignedBigInteger('id_invoice');
             $table->foreign('id_invoice')->references('id')->on('invoices');
-            $table->unsignedBigInteger('coupons_code')->nullable();
+            $table->string('coupons_code')->nullable();
            
         });
     }

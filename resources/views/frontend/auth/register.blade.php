@@ -90,7 +90,7 @@ input::-webkit-input-placeholder {
 				</div>
 			</div> 
 			<div class="main-login main-center">
-				<form class="form-horizontal" method="post" action="#">
+				<form class="form-horizontal" method="post">
 				
 						@csrf
 					<div class="form-group">
@@ -161,13 +161,14 @@ input::-webkit-input-placeholder {
 					</div>
 					
 					<div class="form-group ">
-						<button type="button" class="btn btn-primary btn-lg btn-block login-button" onclick="check()">Register</button>
+						{{-- <button type="button" class="btn btn-primary btn-lg btn-block login-button" >Register</button> --}}
+						<button type="submit" class="btn btn-primary btn-lg btn-block login-button" >Register</button>
 					</div>
 				</form>
 			</div>
 			<div class="panel-heading">
 				<div class="panel-title text-center">
-					<h3 class="title">Design by Thúy Quỳnh</h3>
+					<h3 class="title">Todd & Quinn Shop</h3>
 					<hr />
 				</div>
 			</div> 

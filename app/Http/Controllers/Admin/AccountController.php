@@ -16,7 +16,7 @@ class AccountController extends Controller
         $data = array(
             'list' => DB::table('roles')->get()
         );
-        return view('backend.add_roles',$data);
+        return view('backend.account.index_roles',$data);
     }
     
     public function addRoles(Request $request){
@@ -32,7 +32,7 @@ class AccountController extends Controller
     public function editRoles($id ) {
         $row = DB::table('roles')->where('id',$id)->first();
         $data = array('info'=> $row);
-        return view('backend.edit_roles',$data);
+        return view('backend.account.edit_roles',$data);
     }
     
     public function updateRoles(Request $request){
@@ -50,7 +50,7 @@ class AccountController extends Controller
             'roles' => DB::table('roles')->get(),
             'list' =>DB::table('admins')->join('roles','roles.id','=','admins.id_role')->select('admins.*','roles.name as roles_name')->get()
         );
-        return view('backend.index_account',$data);
+        return view('backend.account.index_account',$data);
     }
     public function addAccount(Request $request){
         $query = DB::table('admins')->insert([ 
@@ -63,11 +63,38 @@ class AccountController extends Controller
             'updated_at' => date("Y-m-d H:i:s")            
 
         ]);
-        if ($query) {
+        if ($query) { 
             return back()->with('message','Data have been successfully inserted');
         } else {
             return back()->with('message','Something went wrong');
         }
         
     }
+    
+    public function editAccount($id ) {
+        $row = DB::table('admins')->where('id',$id)->first();
+        $data = array(
+            'info'=> $row,
+            'roles' => DB::table('roles')->get(),            
+        );
+        return view('backend.account.edit_account',$data);
+    }
+    
+    public function updateAccount(Request $request){
+        $query = DB::table('admins')->where('id', $request->input('id'))->update([ 
+            'name' => $request->input('name'),
+            'phone' =>$request->input('phone'),
+            'email' =>$request->input('email'),
+            'password' => Hash::make($request->input('password')),
+            'id_role' =>$request->input('id_roles'),
+            'updated_at' => date("Y-m-d H:i:s")   
+        ]);
+        return redirect('/admin/account/staff');
+    }
+    
+    public function deleteAccount($id) {
+        $delete = DB::table('admins')->where('id', $id)->delete();
+        return redirect('/admin/account/staff');
+    }
+
 }
