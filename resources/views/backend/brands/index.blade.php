@@ -6,7 +6,7 @@
     <div class="col-lg-12">
         <section class="panel">
             <header class="panel-heading">
-                Thêm màu
+                Thêm hãng
             </header>
                 <?php
                 $message = Session::get('message');
@@ -18,37 +18,37 @@
             <div class="panel-body">
 
                 <div class="position-center">
-                    <form role="form" action="/backend/colors/index" method="post">
+                    <form role="form" action="/backend/brands/index" method="post">
                         {{ csrf_field() }}
                     <div class="form-group">
-                        <label>Tên màu</label>
-                        <input type="color" value="#e66465" name="name_colors" class="form-control"  placeholder="Tên màu ">
+                        <label>Tên hãng</label>
+                        <input type="text"  name="name_brands" class="form-control"  placeholder="Tên hãng ">
                     </div>
                     
-                    <button type="submit" name="add_colors" class="btn btn-info">Thêm màu </button>
+                    <button type="submit" name="add_brands" class="btn btn-info">Thêm hãng</button>
                     </form>
                     <br>
                 </div>
             </div>
             <div>
                 <div class="form-group">
-                    <label>Danh sách màu  </label>
+                    <label>Danh sách hãng </label>
                 </div>
                 <table class="table table-hover">
                     <thead>
                         <th>Mã</th>
-                        <th>Tên màu</th>
+                        <th>Tên hãng</th>
                         <th >Action </th>
                     </thead>
                     <tbody>
-                        @foreach ($colors as $item)
+                        @foreach ($brands as $item)
                         <tr>
                             <td>{{$item->id}}</td>
                             <td>{{$item->name}}</td>
                             <td>
                                 <div class='btn-group'>
-                                    <a href="/backend/colors/index/delete/{{$item->id}}" class="btn btn-danger btn-xs ">Delete </a>
-                                    <a href="/backend/colors/edit/{{$item->id}}" class="btn btn-primary btn-xs ">Edit</a>
+                                    <a href="/backend/brands/index/delete/{{$item->id}}" class="btn btn-danger btn-xs ">Delete </a>
+                                    <a href="/backend/brands/edit/{{$item->id}}" class="btn btn-primary btn-xs ">Edit</a>
                                 </div>
                             </td>
                         </tr>

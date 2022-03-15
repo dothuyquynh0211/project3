@@ -277,7 +277,7 @@ return [
                 ],
                 [
                     'text' => 'Quản lý brand',
-                    'url'  => '/backend/brand/index',
+                    'url'  => '/backend/brands/index',
                 ],
             ],
         ],
