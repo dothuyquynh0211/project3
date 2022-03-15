@@ -4,52 +4,44 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\SizeModel;
 
-class SizeConTroller extends Controller
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+
+class SizeController extends Controller
 {
-    function index(){
+    //
+    public function indexSizes(){
+        $data = array(
+            'sizes' => DB::table('sizes')->get()
+        );
+        return view('backend.sizes.index',$data);
+    }
+    
+    public function addSizes(Request $request){
+        $query = DB::table('sizes')->insert([ 'name' => $request->input('name_sizes')]);
+        if ($query) {
+            return back()->with('message','Data have been successfully inserted');
+        } else {
+            return back()->with('message','Something went wrong');
+        }
         
-        $sizes = SizeModel::index();
-      
-       return view('backend.sizes.index',['sizes'=>$sizes]);
-       
+    }
+    
+    public function editSizes($id ) {
+        $row = DB::table('sizes')->where('id',$id)->first();
+        $data = array('info'=> $row);
+        return view('backend.sizes.edit',$data);
+    }
+    
+    public function updateSizes(Request $request){
+        $query = DB::table('sizes')->where('id', $request->input('id'))->update([ 'name' => $request->input('name_sizes')]);
+        return redirect('/backend/sizes/index');
+    }
+    
+    public function deleteSizes($id) {
+        $delete = DB::table('sizes')->where('id', $id)->delete();
+        return redirect('backend/sizes/index');
     }
 
-   
-    function insert(){
-        return view('backend.sizes.insert');
-    }
-    function edit($id){
-        $kiemtra = SizeModel::get($id)[0];
-        return view('backend.sizes.edit',['kiemtra'=> $kiemtra]);
-    
-    }
-    
-    function store(Request $req){
-        $name = $req->input('name');
-       
-        
-        $rs = SizeModel::store($name);
-        if($rs==0) return "Insert thất bại";
-        else{
-            return redirect()->route('/index');
-        }
-    }
-    function update(Request $req, $id){
-        $name = $req->input('name');
-        $rs =SizeModel::update($id,$name);
-        if($rs==0) return "Cập nhật thất bại";
-        else{
-            return redirect('/index'); 
-        }
-    
-    }
-    function destroy($id){
-      $rs = SizeModel::destroy($id);
-      if($rs == 0) return "Xóa thất bại";
-        else{
-            return redirect('index'); 
-        }
-    }
 }

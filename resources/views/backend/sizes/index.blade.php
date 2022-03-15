@@ -1,54 +1,64 @@
 @extends('backend.layout.master')
-@section('title','Size')
-
+@section('title','Trang chủ Admin')
 
 @section('content')
-<h1 class="text-center display-4">Loại sách</h1>
+<div class="row">
+    <div class="col-lg-12">
+        <section class="panel">
+            <header class="panel-heading">
+                Thêm size
+            </header>
+                <?php
+                $message = Session::get('message');
+                if($message){
+                    echo '<span class="text-alert">'.$message.'</span>';
+                    Session::put('message',null);
+                }
+                ?>
+            <div class="panel-body">
 
-<div class="container-fluid">
-<div style="clear:both"></div>
-<button style="float: right;" type="button">
-  <a href="{{url('/backend/sizes/insert')}}" style="color: salmon"><i class="fas fa-user-edit nav-icon"></i>Thêm loại sách</a></button>
-<table class="table table-borderd table-hover" id="student_tbl">
-  <thead>
-    <tr class="table table-primary">
-      <td>ID</td>
-      <td>Loại Size</td>
-      
-      
-      <td>Hành động</td>
+                <div class="position-center">
+                    <form role="form" action="/backend/sizes/index" method="post">
+                        {{ csrf_field() }}
+                    <div class="form-group">
+                        <label>Tên màu</label>
+                        <input type="text"  name="name_sizes" class="form-control"  placeholder="Tên màu ">
+                    </div>
+                    
+                    <button type="submit" name="add_sizes" class="btn btn-info">Thêm size</button>
+                    </form>
+                    <br>
+                </div>
+            </div>
+            <div>
+                <div class="form-group">
+                    <label>Danh sách màu  </label>
+                </div>
+                <table class="table table-hover">
+                    <thead>
+                        <th>Mã</th>
+                        <th>Tên size</th>
+                        <th >Action </th>
+                    </thead>
+                    <tbody>
+                        @foreach ($sizes as $item)
+                        <tr>
+                            <td>{{$item->id}}</td>
+                            <td>{{$item->name}}</td>
+                            <td>
+                                <div class='btn-group'>
+                                    <a href="/backend/sizes/delete/{{$item->id}}" class="btn btn-danger btn-xs ">Delete </a>
+                                    <a href="/backend/sizes/edit/{{$item->id}}" class="btn btn-primary btn-xs ">Edit</a>
+                                </div>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+            
+        </section>
 
-    </tr>
-  </thead>
-  <tbody>
-    @forelse ($sizes as $item)
-    <tr>
-      <td>{{$item->id}}</td>
-      <td>{{$item->name}}</td>
-     
-      
-      <td>
-        <a href="{{url('/edit/'.$item->id)}}"><i class="far fa-edit"></i></a>
-        <a>||</a>
-
-        <a href="{{url('/delete/'.$item->id)}}"><i class="far fa-trash-alt"></i></a>
-      </td>
-    </tr>
-    @empty
-    <tr>
-      <td class="text-center" colspan="3">Danh sách trống</td>
-    </tr>
-    @endforelse
-  </tbody>
-</table>
+    </div>
 </div>
-
-@endsection
-@section('script')
-<script>
-  $(document).ready(function() {
-    $('#student_tbl').DataTable();
-
-  });
-</script>
 @endsection

@@ -11,6 +11,7 @@ use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Admin\AccountController;
 use App\Http\Controllers\Admin\SizeController;
 use App\Http\Controllers\Admin\ColorController;
+use App\Http\Controllers\Admin\BrandController;
 
 
 
@@ -32,13 +33,6 @@ Route::get('/admin/index', [AdminController::class, 'index'])->name('admin.home'
 Route::get('/admin/login', [LoginController::class, 'showLoginForm'])->name('admin.login');
 
 Route::post('admin/login', [LoginController::class, 'login']);
-
-
-//Route::get('/register',[LoginController::class,'register'])->name('register');
-
-    // Login, logout admin
-// Route::get('/admin/login', [LoginController::class, 'showLoginForm'])->name('admin.login');
-// Route::post('/admin/login', [LoginController::class, 'login']);
 
 Route::get('/admin/logout', [LoginController::class, 'logout'])->name('admin.logout');
     
@@ -72,37 +66,35 @@ Route::get('/logoutUser', [AuthController::class, 'logoutUser'])->name('user.log
 
 
 ////////SIZES
-Route::get('backend/sizes/index', [SizeController::class, 'index'])->name('/index');
-//view insert
-Route::get('/backend/sizes/insert', [SizeController::class, 'insert']);
-//xử li lưu trữ
-Route::post('/create', [SizeController::class, 'store']);
-//view edit
-Route::get('/edit/{id}', [SizeController::class, 'edit']);
-//xử lí cập nhật
-Route::post('/edit/{id}', [SizeController::class, 'update']);
-//Xóa
-Route::get('/delete/{id}', [TypeController::class, 'destroy']);
+Route::get('/backend/sizes/index', [SizeController::class, 'indexSizes']);
+Route::post('/backend/sizes/index', [SizeController::class, 'addSizes']);
+Route::get('/backend/sizes/edit/{id}', [SizeController::class,'editSizes']);
+Route::post('/backend/sizes/index/update', [SizeController::class, 'updateSizes']);
+Route::get('/backend/sizes/index/delete/{id}', [SizeController::class, 'deleteSizes']);
+
 
 
 
 
 //////COLORS
-Route::get('backend/colors/index', [ColorController::class, 'indexColor'])->name('/indexColor');
-//view insert
-Route::get('/backend/color/insert', [ColorController::class, 'insert']);
-//xử li lưu trữ
-Route::post('/create', [ColorController::class, 'store']);
-//view edit
-Route::get('/edit/{id}', [ColorController::class, 'edit']);
-//xử lí cập nhật
-Route::post('/edit/{id}', [ColorController::class, 'update']);
-//Xóa
-Route::get('/delete/{id}', [ColorController::class, 'destroy']);
-// Đường dẫn trang khách hàng 
-// Route::get('/', function () {
-//     return view('frontend.index');
-// });
+Route::get('/backend/colors/index', [ColorController::class, 'indexColors']);
+Route::post('/backend/colors/index', [ColorController::class, 'addColors']);
+Route::get('/backend/colors/edit/{id}', [ColorController::class,'editColors']);
+Route::post('/backend/colors/index/update', [ColorController::class, 'updateColors']);
+Route::get('/backend/colors/index/delete/{id}', [ColorController::class, 'deleteColors']);
+
+
+
+
+///////BRANDS
+Route::get('/backend/brands/index', [BrandController::class, 'indexBrands']);
+Route::post('/backend/brands/index', [BrandController::class, 'addBrands']);
+Route::get('/backend/brands/edit/{id}', [BrandController::class,'editBrands']);
+Route::post('/backend/brands/index/update', [BrandController::class, 'updateBrands']);
+Route::get('/backend/brands/index/delete/{id}', [BrandController::class, 'deleteBrands']);
+
+
+
 
 Route::get('/', function () {
     return view('frontend.index');
