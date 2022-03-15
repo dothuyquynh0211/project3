@@ -24,7 +24,7 @@ class CreateInvoicesTable extends Migration
             $table->tinyInteger('stt')->default(1);
             $table->string(' payment_method');
             $table->unsignedBigInteger('id_admin');
-            $table->foreign('id_admin')->references('id')->on('admins');
+            $table->foreign('id_admin')->references('id')->on('admins')->nullable();
             $table->unsignedBigInteger('id_user');
             $table->foreign('id_user')->references('id')->on('users');
 
