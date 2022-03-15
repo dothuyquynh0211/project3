@@ -13,6 +13,7 @@ class AuthController extends Controller
         return view('frontend.auth.register');
     }
     public function register(Request $request){
+        // dd($request->all());
         $user = new User();
         $user->name = $request->name;
         $user->avatar = $request->avatar;
@@ -33,24 +34,25 @@ class AuthController extends Controller
     function loginUser(Request $request)
     {
 
-        if (Auth::guard('user')->attempt(
+        if (Auth::guard('users')->attempt(
             [
                 'email' => $request->input('email'),
                 'password' => $request->input('password'),
             ]
         )) {
             //Alert::success('Đăng nhập thành công', 'WELCOME TO HOME !!!');
-            return redirect()->route('user.home');
+            return redirect()->route('user.index');
             // dd( Auth::guard('admin')->id());
             // return "da dang nhap thang cong";
+            // return view('frontend.index');
         } else {
             // return "Dang nhap that bai";
             return redirect()->back()->with('error', 'Bạn không có quyền truy cập');
         }
     }
-    function logout()
+    function logoutUser()
     {
-        Auth::guard('user')->logout();
+        Auth::guard('users')->logout();
         //session()->forget('admin');
         return redirect()->route('user.login');
     }

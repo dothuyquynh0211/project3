@@ -5,20 +5,23 @@ use App\Http\Controllers\Admin\AdminController;
 
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\User\AuthController;
+
+use App\Http\Controllers\User\UserController;
+
 use App\Http\Controllers\Admin\AccountController;
+<<<<<<< HEAD
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\WarehouseController;
+=======
+use App\Http\Controllers\Admin\SizeController;
+use App\Http\Controllers\Admin\ColorController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+
+
+
+
+>>>>>>> 8309175c7f6beb824897f01e2997cbb747b994f2
+
 // Đường dẫn trang admin - trước mỗi đường dẫn thêm tiền tố admin để phân biết với bên khách hàng 
 
    
@@ -28,9 +31,20 @@ Route::get('/admin', function () {
     //Dashboard
 Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.home');
 
-    // Login, logout admin
+
+Route::get('/admin/index', [AdminController::class, 'index'])->name('admin.home');
+
 Route::get('/admin/login', [LoginController::class, 'showLoginForm'])->name('admin.login');
-Route::post('/admin/login', [LoginController::class, 'login']);
+
+Route::post('admin/login', [LoginController::class, 'login']);
+
+
+//Route::get('/register',[LoginController::class,'register'])->name('register');
+
+    // Login, logout admin
+// Route::get('/admin/login', [LoginController::class, 'showLoginForm'])->name('admin.login');
+// Route::post('/admin/login', [LoginController::class, 'login']);
+
 Route::get('/admin/logout', [LoginController::class, 'logout'])->name('admin.logout');
     
     //Manage account staff and customer 
@@ -65,6 +79,13 @@ Route::get('/', function () {
     return view('frontend.index');
 });
 
+
+//User
+// Route::get('/user/index', function () {
+//     return redirect()->route('user.index');
+// });
+ Route::get('/', [UserController::class, 'index'])->name('user.index');
+
 //Đường dẫn trang khách hàng 
 
 Route::get('/login', [AuthController::class, 'showFormLogin'])->name('user.login');
@@ -73,9 +94,44 @@ Route::get('/register',[AuthController::class,'showFormRegister'])->name('user.r
 Route::post('/register', [AuthController::class, 'register']);
 Route::get('/logoutUser', [AuthController::class, 'logoutUser'])->name('user.logout');
 
+
+////////SIZES
+Route::get('backend/sizes/index', [SizeController::class, 'index'])->name('/index');
+//view insert
+Route::get('/backend/sizes/insert', [SizeController::class, 'insert']);
+//xử li lưu trữ
+Route::post('/create', [SizeController::class, 'store']);
+//view edit
+Route::get('/edit/{id}', [SizeController::class, 'edit']);
+//xử lí cập nhật
+Route::post('/edit/{id}', [SizeController::class, 'update']);
+//Xóa
+Route::get('/delete/{id}', [TypeController::class, 'destroy']);
+
+
+
+
+//////COLORS
+Route::get('backend/colors/index', [ColorController::class, 'indexColor'])->name('/indexColor');
+//view insert
+Route::get('/backend/color/insert', [ColorController::class, 'insert']);
+//xử li lưu trữ
+Route::post('/create', [ColorController::class, 'store']);
+//view edit
+Route::get('/edit/{id}', [ColorController::class, 'edit']);
+//xử lí cập nhật
+Route::post('/edit/{id}', [ColorController::class, 'update']);
+//Xóa
+Route::get('/delete/{id}', [ColorController::class, 'destroy']);
+// Đường dẫn trang khách hàng 
+// Route::get('/', function () {
+//     return view('frontend.index');
+// });
+
 Route::get('/', function () {
     return view('frontend.index');
 });
+
 Route::get('/checkout', function () {
     return view('frontend.checkout');
 });

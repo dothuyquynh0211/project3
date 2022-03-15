@@ -163,6 +163,7 @@ input::-webkit-input-placeholder {
 					<div class="form-group ">
 						{{-- <button type="button" class="btn btn-primary btn-lg btn-block login-button" >Register</button> --}}
 						<button type="submit" class="btn btn-primary btn-lg btn-block login-button" >Register</button>
+
 					</div>
 				</form>
 			</div>
