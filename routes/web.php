@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\SizeController;
 use App\Http\Controllers\Admin\ColorController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CouponsController;
+use App\Http\Controllers\Admin\ProductController;
 
 // Đường dẫn trang admin - trước mỗi đường dẫn thêm tiền tố admin để phân biệt với bên khách hàng 
 
@@ -95,7 +96,13 @@ Route::post('/admin/coupons/update', [CouponsController::class, 'updateCoupons']
 Route::get('/admin/coupons/delete/{id}', [CouponsController::class, 'deleteCoupons']);
 
     //Manage Product
-
+Route::get('/admin/product', [ProductController::class, 'index']);
+Route::get('/admin/product/create', [ProductController::class, 'create']);
+Route::post('/admin/product/create', [ProductController::class, 'store']);
+Route::get('/admin/product/edit/{id}', [ProductController::class,'editProduct']);
+Route::post('/admin/product/update', [ProductController::class, 'updateProduct']);
+Route::get('/admin/product/delete/{id}', [ProductController::class, 'deleteProduct']);
+    
 
 
 

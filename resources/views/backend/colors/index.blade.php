@@ -46,7 +46,6 @@
                             <td>{{$item->id}}</td>
                             <td>
                                 <div style="background:{{$item->name}};width: 30px;height: 30px;" >
-
                                 </div>
                             </td>
                             <td>
