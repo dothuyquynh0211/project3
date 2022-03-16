@@ -18,7 +18,7 @@
             <div class="panel-body">
 
                 <div class="position-center">
-                    <form role="form" action="/backend/colors/index" method="post">
+                    <form role="form" action="/admin/color" method="post">
                         {{ csrf_field() }}
                     <div class="form-group">
                         <label>Tên màu</label>
@@ -37,18 +37,22 @@
                 <table class="table table-hover">
                     <thead>
                         <th>Mã</th>
-                        <th>Tên màu</th>
+                        <th>Màu</th>
                         <th >Action </th>
                     </thead>
                     <tbody>
                         @foreach ($colors as $item)
                         <tr>
                             <td>{{$item->id}}</td>
-                            <td>{{$item->name}}</td>
+                            <td>
+                                <div style="background:{{$item->name}};width: 30px;height: 30px;" >
+
+                                </div>
+                            </td>
                             <td>
                                 <div class='btn-group'>
-                                    <a href="/backend/colors/index/delete/{{$item->id}}" class="btn btn-danger btn-xs ">Delete </a>
-                                    <a href="/backend/colors/edit/{{$item->id}}" class="btn btn-primary btn-xs ">Edit</a>
+                                    <a href="/admin/color/delete/{{$item->id}}" class="btn btn-danger btn-xs ">Delete </a>
+                                    <a href="/admin/color/edit/{{$item->id}}" class="btn btn-primary btn-xs ">Edit</a>
                                 </div>
                             </td>
                         </tr>

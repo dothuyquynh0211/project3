@@ -18,7 +18,7 @@
             <div class="panel-body">
 
                 <div class="position-center">
-                    <form role="form" action="/backend/colors/index/update" method="post">
+                    <form role="form" action="/admin/color/update" method="post">
                         {{ csrf_field() }}
                     <input type="hidden" name="id" value="{{$info->id}}" />
                     <div class="form-group">

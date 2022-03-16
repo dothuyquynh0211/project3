@@ -6,9 +6,9 @@
     <div class="col-lg-12">
         <section class="panel">
             <header class="panel-heading">
-                Thêm hãng
+                Thêm danh mục sản phẩm 
             </header>
-                <?php
+            <?php
                 $message = Session::get('message');
                 if($message){
                     echo '<span class="text-alert">'.$message.'</span>';
@@ -18,37 +18,39 @@
             <div class="panel-body">
 
                 <div class="position-center">
-                    <form role="form" action="/admin/brand" method="post">
+                    <form role="form" action="/admin/category" method="post">
                         {{ csrf_field() }}
-                    <div class="form-group">
-                        <label>Tên hãng</label>
-                        <input type="text"  name="name_brands" class="form-control"  placeholder="Tên hãng ">
-                    </div>
-                    
-                    <button type="submit" name="add_brands" class="btn btn-info">Thêm hãng</button>
+                        <div class="form-group">
+                            <label>Tên danh mục </label>
+                            <input type="text" name="name_category" class="form-control">
+                        </div>
+
+                        <button type="submit" name="add_category" class="btn btn-info">Thêm </button>
                     </form>
                     <br>
                 </div>
             </div>
             <div>
                 <div class="form-group">
-                    <label>Danh sách hãng </label>
+                    <label>Danh sách danh mục sản phẩm  </label>
                 </div>
                 <table class="table table-hover">
                     <thead>
                         <th>Mã</th>
-                        <th>Tên hãng</th>
-                        <th >Action </th>
+                        <th>Tên danh mục  </th>
+                        <th>Ation </th>
                     </thead>
                     <tbody>
-                        @foreach ($brands as $item)
+                        @foreach ($list as $item)
                         <tr>
                             <td>{{$item->id}}</td>
                             <td>{{$item->name}}</td>
                             <td>
                                 <div class='btn-group'>
-                                    <a href="/admin/brand/delete/{{$item->id}}" class="btn btn-danger btn-xs ">Delete </a>
-                                    <a href="/admin/brand/edit/{{$item->id}}" class="btn btn-primary btn-xs ">Edit</a>
+                                    <a href="/admin/category/delete/{{$item->id}}"
+                                        class="btn btn-danger btn-xs ">Delete </a>
+                                    <a href="/admin/category/edit/{{$item->id}}"
+                                        class="btn btn-primary btn-xs ">Edit</a>
                                 </div>
                             </td>
                         </tr>
@@ -56,7 +58,7 @@
                     </tbody>
                 </table>
             </div>
-            
+
         </section>
 
     </div>

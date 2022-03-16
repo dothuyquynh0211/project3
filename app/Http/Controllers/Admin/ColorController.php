@@ -36,12 +36,12 @@ class ColorController extends Controller
     
     public function updateColors(Request $request){
         $query = DB::table('colors')->where('id', $request->input('id'))->update([ 'name' => $request->input('name_colors')]);
-        return redirect('/backend/colors/index');
+        return redirect('/admin/color');
     }
     
     public function deleteColors($id) {
         $delete = DB::table('colors')->where('id', $id)->delete();
-        return redirect('backend/colors/index');
+        return redirect('/admin/color');
     }
 
 }

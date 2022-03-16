@@ -6,9 +6,9 @@
     <div class="col-lg-12">
         <section class="panel">
             <header class="panel-heading">
-                Sửa 
+                Sửa danh mục sản phẩm 
             </header>
-                <?php
+            <?php
                 $message = Session::get('message');
                 if($message){
                     echo '<span class="text-alert">'.$message.'</span>';
@@ -18,19 +18,20 @@
             <div class="panel-body">
 
                 <div class="position-center">
-                    <form role="form" action="/admin/brand/update" method="post">
+                    <form role="form" action="/admin/category/update" method="post">
                         {{ csrf_field() }}
-                    <input type="hidden" name="id" value="{{$info->id}}" />
-                    <div class="form-group">
-                        <label>Tên hãng </label>
-                        <input type="text" name="name_brands" class="form-control"  placeholder="Tên hãng " value="{{ $info->name}}">
-                    </div>
-                    
-                    <button type="submit" name="add_brands" class="btn btn-info">Cập nhật  </button>
-                    </form>
-                </div>
+                        <input type="hidden" name="id" value="{{$info->id}}" />                       
+                        <div class="form-group">
+                            <label>Tên danh mục </label>
+                            <input type="text" name="name_category" class="form-control" value="{{$info->name}}">
+                        </div>
 
+                        <button type="submit" name="add_category" class="btn btn-info">Cập nhật  </button>
+                    </form>
+                    <br>
+                </div>
             </div>
+
         </section>
 
     </div>

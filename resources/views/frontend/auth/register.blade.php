@@ -86,21 +86,26 @@ input::-webkit-input-placeholder {
 			<div class="panel-heading">
 				<div class="panel-title text-center">
 					<h1 class="title">RESGISTER</h1>
-					<hr />
 				</div>
 			</div> 
 			<div class="main-login main-center">
-				<form class="form-horizontal" method="post" action="#">
-				
+				<form class="form-horizontal" method="post" enctype="multipart/form-data">		
 						@csrf
+					<div class="form-group">
+						<div class="cols-sm-10">
+							{{-- <label for="avt" class="cols-sm-2 control-label">Number Phone</label> --}}
+							<div class="input-group">
+								<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+								<input type="file" class="form-control" name="avatar" id="username"  placeholder="Enter your Username"/>
+							</div>
+						</div>
+					</div>
 					<div class="form-group">
 						<label for="name" class="cols-sm-2 control-label">Your Name</label>
 						<div class="cols-sm-10">
 							<div class="input-group">
 								<span class="input-group-addon"><i class="fa fa-user fa-lg" aria-hidden="true"></i></span>
 								<input type="text" class="form-control" name="name" id="name"  placeholder="Enter your Name" />
-							</div>
-							<div class="message" id="message_name">
 							</div>
 						</div>
 					</div>
@@ -111,8 +116,6 @@ input::-webkit-input-placeholder {
 								<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
 								<input type="email" class="form-control" name="email" id="email"  placeholder="Enter your Email"/>
 							</div>
-							<div class="message" id="message_mail">
-							</div>
 						</div>
 					</div>
 					<div class="form-group">
@@ -121,8 +124,6 @@ input::-webkit-input-placeholder {
 							<div class="input-group">
 								<span class="input-group-addon"><i class="fa fa-map-marker fa-lg"></i></span>
 								<input type="address" class="form-control" name="address" id="address"  placeholder="Enter your Address"/>
-							</div>
-							<div class="message" id="message_address">
 							</div>
 						</div>
 					</div>
@@ -133,21 +134,9 @@ input::-webkit-input-placeholder {
 								<span class="input-group-addon"><i class="fa fa-phone-square fa-lg" aria-hidden="true"></i></span>
 								<input type="phone" class="form-control" name="phone" id="phone"  placeholder="Enter your Phone Number"/>
 							</div>
-							<div class="message" id="message_phone">
-							</div>
 						</div>
 					</div>
-					<div class="form-group">
-						<label for="username" class="cols-sm-2 control-label">Avatar</label>
-						<div class="cols-sm-10">
-							<div class="input-group">
-								<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-								<input type="file" class="form-control" name="avatar" id="username"  placeholder="Enter your Username"/>
-							</div>
-							<div class="message" id="message_username">
-							</div>
-						</div>
-					</div>
+					
 					<div class="form-group">
 						<label for="password" class="cols-sm-2 control-label">Password</label>
 						<div class="cols-sm-10">
@@ -155,20 +144,18 @@ input::-webkit-input-placeholder {
 								<span class="input-group-addon"><i class="fa fa-unlock fa-lg" aria-hidden="true"></i></span>
 								<input type="password" class="form-control" name="password" id="password"  placeholder="Enter your Password"/>
 							</div>
-							<div class="message" id="message_password">
-							</div>
 						</div>
 					</div>
 					
 					<div class="form-group ">
-						<button type="submit" class="btn btn-primary btn-lg btn-block login-button" onclick="check()">Register</button>
+						<button type="submit" class="btn btn-primary btn-lg btn-block login-button" >Register</button>
+
 					</div>
 				</form>
 			</div>
 			<div class="panel-heading">
 				<div class="panel-title text-center">
-					<h3 class="title">Design by Thúy Quỳnh</h3>
-					<hr />
+					<h3 class="title">Todd & Quinn Shop</h3>
 				</div>
 			</div> 
 		</div>

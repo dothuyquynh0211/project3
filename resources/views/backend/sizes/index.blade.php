@@ -18,7 +18,7 @@
             <div class="panel-body">
 
                 <div class="position-center">
-                    <form role="form" action="/backend/sizes/index" method="post">
+                    <form role="form" action="/admin/size" method="post">
                         {{ csrf_field() }}
                     <div class="form-group">
                         <label>Tên màu</label>
@@ -47,8 +47,8 @@
                             <td>{{$item->name}}</td>
                             <td>
                                 <div class='btn-group'>
-                                    <a href="/backend/sizes/delete/{{$item->id}}" class="btn btn-danger btn-xs ">Delete </a>
-                                    <a href="/backend/sizes/edit/{{$item->id}}" class="btn btn-primary btn-xs ">Edit</a>
+                                    <a href="/admin/size/delete/{{$item->id}}" class="btn btn-danger btn-xs ">Delete </a>
+                                    <a href="/admin/size/edit/{{$item->id}}" class="btn btn-primary btn-xs ">Edit</a>
                                 </div>
                             </td>
                         </tr>

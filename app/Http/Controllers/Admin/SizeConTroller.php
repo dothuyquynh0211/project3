@@ -36,12 +36,12 @@ class SizeController extends Controller
     
     public function updateSizes(Request $request){
         $query = DB::table('sizes')->where('id', $request->input('id'))->update([ 'name' => $request->input('name_sizes')]);
-        return redirect('/backend/sizes/index');
+        return redirect('/admin/size');
     }
     
     public function deleteSizes($id) {
         $delete = DB::table('sizes')->where('id', $id)->delete();
-        return redirect('backend/sizes/index');
+        return redirect('admin/size');
     }
 
 }

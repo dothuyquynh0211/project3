@@ -74,8 +74,8 @@
                             <td>{{$item->roles_name}}</td>
                             <td>
                                 <div class='btn-group'>
-                                    <a href="/admin/account/roles/delete/{{$item->id}}" class="btn btn-danger btn-xs ">Delete </a>
-                                    <a href="/admin/account/roles/edit/{{$item->id}}" class="btn btn-primary btn-xs ">Edit</a>
+                                    <a href="/admin/account/staff/delete/{{$item->id}}" class="btn btn-danger btn-xs ">Delete </a>
+                                    <a href="/admin/account/staff/edit/{{$item->id}}" class="btn btn-primary btn-xs ">Edit</a>
                                 </div>
                             </td>
                         </tr>

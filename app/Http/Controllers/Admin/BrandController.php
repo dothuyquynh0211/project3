@@ -36,11 +36,11 @@ class BrandController extends Controller
     
     public function updateBrands(Request $request){
         $query = DB::table('brands')->where('id', $request->input('id'))->update([ 'name' => $request->input('name_brands')]);
-        return redirect('/backend/brands/index');
+        return redirect('/admin/brand');
     }
     
     public function deleteBrands($id) {
         $delete = DB::table('brands')->where('id', $id)->delete();
-        return redirect('backend/brands/index');
+        return redirect('/admin/brand');
     }
 }
