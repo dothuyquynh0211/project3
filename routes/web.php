@@ -15,11 +15,9 @@ use App\Http\Controllers\Admin\WarehouseController;
 use App\Http\Controllers\Admin\SizeController;
 use App\Http\Controllers\Admin\ColorController;
 use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\CouponsController;
 
-
-
-
-// Đường dẫn trang admin - trước mỗi đường dẫn thêm tiền tố admin để phân biết với bên khách hàng 
+// Đường dẫn trang admin - trước mỗi đường dẫn thêm tiền tố admin để phân biệt với bên khách hàng 
 
    
 Route::get('/admin', function () {
@@ -37,8 +35,8 @@ Route::get('/admin/logout', [LoginController::class, 'logout'])->name('admin.log
 Route::get('/admin/size', [SizeController::class, 'indexSizes']);
 Route::post('/admin/size', [SizeController::class, 'addSizes']);
 Route::get('/admin/size/edit/{id}', [SizeController::class,'editSizes']);
-Route::post('/admin/size/index/update', [SizeController::class, 'updateSizes']);
-Route::get('/admin/size/index/delete/{id}', [SizeController::class, 'deleteSizes']);
+Route::post('/admin/size/update', [SizeController::class, 'updateSizes']);
+Route::get('/admin/size/delete/{id}', [SizeController::class, 'deleteSizes']);
 
     //Manage Color
 Route::get('/admin/color', [ColorController::class, 'indexColors']);
@@ -88,53 +86,35 @@ Route::get('/admin/warehouse/edit/{id}', [WarehouseController::class,'edit']);
 Route::post('/admin/warehouse/update', [WarehouseController::class, 'update']);
 Route::get('/admin/warehouse/delete/{id}', [WarehouseController::class, 'delete']);
 
-    //Manage product
-    Route::get('/admin/product', function () {
-        return view('backend.coupons.add_coupons');
-    });
+    //Manage coupons
+Route::get('/admin/coupons', [CouponsController::class, 'indexCoupons']);
+Route::get('/admin/coupons/add', [CouponsController::class, 'add']);
+Route::post('/admin/coupons/add', [CouponsController::class, 'addCoupons']);
+Route::get('/admin/coupons/edit/{id}', [CouponsController::class,'editCoupons']);
+Route::post('/admin/coupons/update', [CouponsController::class, 'updateCoupons']);
+Route::get('/admin/coupons/delete/{id}', [CouponsController::class, 'deleteCoupons']);
 
+    //Manage Product
 
 
 
 
     
 
-//User
-// Route::get('/user/index', function () {
-//     return redirect()->route('user.index');
-// });
+// Đường dẫn trang khách hàng 
+
  Route::get('/', [UserController::class, 'index'])->name('user.index');
-
-//Đường dẫn trang khách hàng 
-
+ 
 Route::get('/login', [AuthController::class, 'showFormLogin'])->name('user.login');
 Route::post('/login', [AuthController::class, 'loginUser']);
 Route::get('/register',[AuthController::class,'showFormRegister'])->name('user.register');
 Route::post('/register', [AuthController::class, 'register']);
 Route::get('/logoutUser', [AuthController::class, 'logoutUser'])->name('user.logout');
-
-Route::get('/', function () {
-    return view('frontend.index');
-});
-
-Route::get('/checkout', function () {
-    return view('frontend.checkout');
-});
-Route::get('/contact', function () {
-    return view('frontend.contact');
-});
-Route::get('/shop', function () {
-    return view('frontend.shop');
-});
-Route::get('/cart', function () {
-    return view('frontend.shop_cart');
-});
-Route::get('/cart', function () {
-    return view('frontend.shop_cart');
-});
-Route::get('/product-detail', function () {
-    return view('frontend.product_details');
-});
+Route::get('/checkout',[UserController::class, 'checkout']);
+Route::get('/contact', [UserController::class, 'contact']);
+Route::get('/shop', [UserController::class, 'category']);
+Route::get('/cart', [UserController::class, 'cart']);
+Route::get('/product-detail',[UserController::class, 'productDetail']);
 Route::get('/blog', function () {
     return view('frontend.blog');
 });

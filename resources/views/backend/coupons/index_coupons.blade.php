@@ -6,38 +6,44 @@
     <div class="col-lg-12">
         <section class="panel">
             <header class="panel-heading">
-                <a href="/admin/account/customer/add">Thêm tài khoản </a> 
+                <a href="/admin/coupons/add">Thêm mã </a> 
             </header>
             <div>
                 <div class="form-group">
-                    <label>Danh sách tài khoản   </label>
+                    <label>Danh sách   </label>
                 </div>
                 <table class="table table-hover">
                     <thead>
                         <th> Mã</th>
-                        <th> Tên khách hàng  </th>
-                        <th> Email </th>
-                        <th> Số điện thoại </th>
-                        <th> Địa chỉ </th>
+                        <th> Tên mã</th>
+                        <th> Giá trị </th>
+                        <th> Mã code </th>
+                        <th> Số lần sử dụng </th>
+                        <th> Trạng thái</th>
+                        <th> Ngày bắt đầu</th>
+                        <th> Ngày kết thúc </th>
                         <th> Action </th>
                     </thead>
                     <tbody>
 
-                        {{-- @foreach ($list as $item)
+                        @foreach ($list as $item)
                         <tr>
                             <td>{{$item->id}}</td>
                             <td>{{$item->name}}</td>
-                            <td>{{$item->email}}</td>
-                            <td>{{$item->phone}}</td>
-                            <td>{{$item->address}}</td>
+                            <td>{{$item->value}}</td>
+                            <td>{{$item->coupons_code}}</td>
+                            <td>{{$item->coupons_number}}</td>
+                            <td>{{$item->status}}</td>
+                            <td>{{$item->start_date}}</td>
+                            <td>{{$item->end_date}}</td>
                             <td>
                                 <div class='btn-group'>
-                                    <a href="/admin/account/customer/delete/{{$item->id}}" class="btn btn-danger btn-xs ">Delete </a>
-                                    <a href="/admin/account/customer/edit/{{$item->id}}" class="btn btn-primary btn-xs ">Edit</a>
+                                    <a href="/admin/coupons/delete/{{$item->id}}" class="btn btn-danger btn-xs ">Delete </a>
+                                    <a href="/admin/coupons/edit/{{$item->id}}" class="btn btn-primary btn-xs ">Edit</a>
                                 </div>
                             </td>
                         </tr>
-                        @endforeach --}}
+                        @endforeach
                     </tbody>
                 </table>
             </div>

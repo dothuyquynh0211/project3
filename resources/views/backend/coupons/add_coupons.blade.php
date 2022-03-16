@@ -18,7 +18,7 @@
             <div class="panel-body">
 
                 <div class="position-center">
-                    <form role="form" action="/admin/account/customer/add" method="post">
+                    <form role="form" action="/admin/coupons/add" method="post">
                         {{ csrf_field() }}
                     <div class="form-group">
                         <label>Tên mã  </label>
@@ -26,15 +26,15 @@
                     </div>                                     
                     <div class="form-group">
                         <label>Giá trị ( đơn vị %) </label>
-                        <input type="email" name="text" class="form-control"  placeholder="30">
+                        <input type="text" name="value" class="form-control"  placeholder="30">
                     </div>
                     <div class="form-group">
                         <label>Mã code </label>
-                        <input type="text" name="avt" class="form-control"  placeholder="FREE">
+                        <input type="text" name="coupons_code" class="form-control"  placeholder="FREE">
                     </div>
                     <div class="form-group">
                         <label>Số lần sử dụng  </label>
-                        <input type="text" name="phone" class="form-control">
+                        <input type="text" name="coupons_number" class="form-control">
                     </div>
                     <div class="form-group">
                         <label>Trạng thái </label>
@@ -48,7 +48,7 @@
                         <label>Ngày kết thúc </label>
                         <input type="date" name="end_date" class="form-control" >
                     </div>               
-                    <button type="submit" name="add_account" class="btn btn-info">Thêm</button>
+                    <button type="submit" name="add_" class="btn btn-info">Thêm</button>
                     </form>
                     <br>
                 </div>

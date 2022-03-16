@@ -15,17 +15,17 @@
                     Session::put('message',null);
                 }
                 ?>
-            <div class="panel-body">
+            <div class="panel-body col-lg-4">
 
                 <div class="position-center">
                     <form role="form" action="/admin/color" method="post">
                         {{ csrf_field() }}
                     <div class="form-group">
-                        <label>Tên màu</label>
+                        <label>Chọn màu</label>
                         <input type="color" value="#e66465" name="name_colors" class="form-control"  placeholder="Tên màu ">
                     </div>
                     
-                    <button type="submit" name="add_colors" class="btn btn-info">Thêm màu </button>
+                    <button type="submit" name="add_colors" class="btn btn-info">Thêm </button>
                     </form>
                     <br>
                 </div>
