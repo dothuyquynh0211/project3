@@ -1,19 +1,38 @@
 @extends('backend.layout.master')
-@section('title','cập nhật size')
+@section('title','Trang chủ Admin')
+
 @section('content')
-<h1 class="text-center display-4">Cập nhật loại sách</h1>
-<form class="text-center" style="width:60%;margin:auto;" method="POST" enctype="multipart/form-data">
-@csrf
-<div class="input-group mb-3">
-  <span class="input-group-text" id="basic-addon0">ID</span>
-  <input readonly value="{{$kiemtra->id}}"  type="text" class="form-control" placeholder="Họ và tên"  aria-describedby="basic-addon0">
-</div>
-<div class="input-group mb-3">
-  <span class="input-group-text" id="basic-addon1">SIZE</span>
-  <input value="{{$kiemtra->name}}" name="names" type="text" class="form-control" placeholder="Loại sách"  aria-describedby="basic-addon1">
-</div>
+<div class="row">
+    <div class="col-lg-12">
+        <section class="panel">
+            <header class="panel-heading">
+                Sửa 
+            </header>
+                <?php
+                $message = Session::get('message');
+                if($message){
+                    echo '<span class="text-alert">'.$message.'</span>';
+                    Session::put('message',null);
+                }
+                ?>
+            <div class="panel-body">
 
-<button class="btn btn-primary">UPDATE</button>
+                <div class="position-center">
+                    <form role="form" action="/admin/size/update" method="post">
+                        {{ csrf_field() }}
+                    <input type="hidden" name="id" value="{{$info->id}}" />
+                    <div class="form-group">
+                        <label>Tên màu </label>
+                        <input type="text" name="name_sizes" class="form-control"  placeholder="Tên hãng " value="{{ $info->name}}">
+                    </div>
+                    
+                    <button type="submit" name="add_sizes" class="btn btn-info">Cập nhật  </button>
+                    </form>
+                </div>
 
-</form>
+            </div>
+        </section>
+
+    </div>
+</div>
 @endsection

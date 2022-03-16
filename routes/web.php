@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\WarehouseController;
 use App\Http\Controllers\Admin\SizeController;
 use App\Http\Controllers\Admin\ColorController;
+use App\Http\Controllers\Admin\BrandController;
 
 
 
@@ -24,24 +25,34 @@ use App\Http\Controllers\Admin\ColorController;
 Route::get('/admin', function () {
     return redirect()->route('admin.home');
 });
+
     //Dashboard
 Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.home');
-
-
 Route::get('/admin/index', [AdminController::class, 'index'])->name('admin.home');
-
 Route::get('/admin/login', [LoginController::class, 'showLoginForm'])->name('admin.login');
-
 Route::post('admin/login', [LoginController::class, 'login']);
-
-
-//Route::get('/register',[LoginController::class,'register'])->name('register');
-
-    // Login, logout admin
-// Route::get('/admin/login', [LoginController::class, 'showLoginForm'])->name('admin.login');
-// Route::post('/admin/login', [LoginController::class, 'login']);
-
 Route::get('/admin/logout', [LoginController::class, 'logout'])->name('admin.logout');
+
+    //Manage Size
+Route::get('/admin/size', [SizeController::class, 'indexSizes']);
+Route::post('/admin/size', [SizeController::class, 'addSizes']);
+Route::get('/admin/size/edit/{id}', [SizeController::class,'editSizes']);
+Route::post('/admin/size/index/update', [SizeController::class, 'updateSizes']);
+Route::get('/admin/size/index/delete/{id}', [SizeController::class, 'deleteSizes']);
+
+    //Manage Color
+Route::get('/admin/color', [ColorController::class, 'indexColors']);
+Route::post('/admin/color', [ColorController::class, 'addColors']);
+Route::get('/admin/color/edit/{id}', [ColorController::class,'editColors']);
+Route::post('/admin/color/update', [ColorController::class, 'updateColors']);
+Route::get('/admin/color/delete/{id}', [ColorController::class, 'deleteColors']);
+
+    //Manage Brands
+Route::get('/admin/brand', [BrandController::class, 'indexBrands']);
+Route::post('/admin/brand', [BrandController::class, 'addBrands']);
+Route::get('/admin/brand/edit/{id}', [BrandController::class,'editBrands']);
+Route::post('/admin/brand/update', [BrandController::class, 'updateBrands']);
+Route::get('/admin/brand/delete/{id}', [BrandController::class, 'deleteBrands']);
     
     //Manage account staff and customer 
 Route::get('/admin/account/roles', [AccountController::class, 'indexRoles']);
@@ -83,6 +94,11 @@ Route::get('/admin/warehouse/delete/{id}', [WarehouseController::class, 'delete'
     });
 
 
+
+
+
+    
+
 //User
 // Route::get('/user/index', function () {
 //     return redirect()->route('user.index');
@@ -96,40 +112,6 @@ Route::post('/login', [AuthController::class, 'loginUser']);
 Route::get('/register',[AuthController::class,'showFormRegister'])->name('user.register');
 Route::post('/register', [AuthController::class, 'register']);
 Route::get('/logoutUser', [AuthController::class, 'logoutUser'])->name('user.logout');
-
-
-////////SIZES
-Route::get('backend/sizes/index', [SizeController::class, 'index'])->name('/index');
-//view insert
-Route::get('/backend/sizes/insert', [SizeController::class, 'insert']);
-//xử li lưu trữ
-Route::post('/create', [SizeController::class, 'store']);
-//view edit
-Route::get('/edit/{id}', [SizeController::class, 'edit']);
-//xử lí cập nhật
-Route::post('/edit/{id}', [SizeController::class, 'update']);
-//Xóa
-Route::get('/delete/{id}', [TypeController::class, 'destroy']);
-
-
-
-
-//////COLORS
-Route::get('backend/colors/index', [ColorController::class, 'indexColor'])->name('/indexColor');
-//view insert
-Route::get('/backend/color/insert', [ColorController::class, 'insert']);
-//xử li lưu trữ
-Route::post('/create', [ColorController::class, 'store']);
-//view edit
-Route::get('/edit/{id}', [ColorController::class, 'edit']);
-//xử lí cập nhật
-Route::post('/edit/{id}', [ColorController::class, 'update']);
-//Xóa
-Route::get('/delete/{id}', [ColorController::class, 'destroy']);
-// Đường dẫn trang khách hàng 
-// Route::get('/', function () {
-//     return view('frontend.index');
-// });
 
 Route::get('/', function () {
     return view('frontend.index');

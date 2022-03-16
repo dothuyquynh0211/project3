@@ -4,53 +4,44 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\ColorModel;
+
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class ColorController extends Controller
 {
     //
-    function indexColor(){
+    public function indexColors(){
+        $data = array(
+            'colors' => DB::table('colors')->get()
+        );
+        return view('backend.colors.index',$data);
+    }
+    
+    public function addColors(Request $request){
+        $query = DB::table('colors')->insert([ 'name' => $request->input('name_colors')]);
+        if ($query) {
+            return back()->with('message','Data have been successfully inserted');
+        } else {
+            return back()->with('message','Something went wrong');
+        }
         
-        $colors = ColorModel::indexColor();
-      
-       return view('backend.colors.index',['colors'=>$colors]);
-       
+    }
+    
+    public function editColors($id ) {
+        $row = DB::table('colors')->where('id',$id)->first();
+        $data = array('info'=> $row);
+        return view('backend.colors.edit',$data);
+    }
+    
+    public function updateColors(Request $request){
+        $query = DB::table('colors')->where('id', $request->input('id'))->update([ 'name' => $request->input('name_colors')]);
+        return redirect('/admin/color');
+    }
+    
+    public function deleteColors($id) {
+        $delete = DB::table('colors')->where('id', $id)->delete();
+        return redirect('/admin/color');
     }
 
-   
-    function insert(){
-        return view('backend.sizes.insert');
-    }
-    function edit($id){
-        $kiemtra = ColorModel::get($id)[0];
-        return view('backend.sizes.edit',['kiemtra'=> $kiemtra]);
-    
-    }
-    
-    function store(Request $req){
-        $name = $req->input('name');
-       
-        
-        $rs = ColorModel::store($name);
-        if($rs==0) return "Insert thất bại";
-        else{
-            return redirect()->route('/index');
-        }
-    }
-    function update(Request $req, $id){
-        $name = $req->input('name');
-        $rs = ColorModel::update($id,$name);
-        if($rs==0) return "Cập nhật thất bại";
-        else{
-            return redirect('/index'); 
-        }
-    
-    }
-    function destroy($id){
-      $rs = ColorModel::destroy($id);
-      if($rs == 0) return "Xóa thất bại";
-        else{
-            return redirect('index'); 
-        }
-    }
 }

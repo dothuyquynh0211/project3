@@ -281,7 +281,6 @@ return [
                 [
                     'text' => 'Brand',
                     'url'  => '/admin/brand',
-
                 ],
             ],
         ],

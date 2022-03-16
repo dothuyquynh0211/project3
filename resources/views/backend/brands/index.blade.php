@@ -6,7 +6,7 @@
     <div class="col-lg-12">
         <section class="panel">
             <header class="panel-heading">
-                Thêm màu
+                Thêm hãng
             </header>
                 <?php
                 $message = Session::get('message');
@@ -18,41 +18,37 @@
             <div class="panel-body">
 
                 <div class="position-center">
-                    <form role="form" action="/admin/color" method="post">
+                    <form role="form" action="/admin/brand" method="post">
                         {{ csrf_field() }}
                     <div class="form-group">
-                        <label>Tên màu</label>
-                        <input type="color" value="#e66465" name="name_colors" class="form-control"  placeholder="Tên màu ">
+                        <label>Tên hãng</label>
+                        <input type="text"  name="name_brands" class="form-control"  placeholder="Tên hãng ">
                     </div>
                     
-                    <button type="submit" name="add_colors" class="btn btn-info">Thêm màu </button>
+                    <button type="submit" name="add_brands" class="btn btn-info">Thêm hãng</button>
                     </form>
                     <br>
                 </div>
             </div>
             <div>
                 <div class="form-group">
-                    <label>Danh sách màu  </label>
+                    <label>Danh sách hãng </label>
                 </div>
                 <table class="table table-hover">
                     <thead>
                         <th>Mã</th>
-                        <th>Màu</th>
+                        <th>Tên hãng</th>
                         <th >Action </th>
                     </thead>
                     <tbody>
-                        @foreach ($colors as $item)
+                        @foreach ($brands as $item)
                         <tr>
                             <td>{{$item->id}}</td>
-                            <td>
-                                <div style="background:{{$item->name}};width: 30px;height: 30px;" >
-
-                                </div>
-                            </td>
+                            <td>{{$item->name}}</td>
                             <td>
                                 <div class='btn-group'>
-                                    <a href="/admin/color/delete/{{$item->id}}" class="btn btn-danger btn-xs ">Delete </a>
-                                    <a href="/admin/color/edit/{{$item->id}}" class="btn btn-primary btn-xs ">Edit</a>
+                                    <a href="/admin/brand/delete/{{$item->id}}" class="btn btn-danger btn-xs ">Delete </a>
+                                    <a href="/admin/brand/edit/{{$item->id}}" class="btn btn-primary btn-xs ">Edit</a>
                                 </div>
                             </td>
                         </tr>
