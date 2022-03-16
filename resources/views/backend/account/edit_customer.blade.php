@@ -6,7 +6,7 @@
     <div class="col-lg-12">
         <section class="panel">
             <header class="panel-heading">
-                Thêm sản phẩm 
+                Thêm tài khoản khách hàng 
             </header>
                 <?php
                 $message = Session::get('message');
@@ -18,15 +18,16 @@
             <div class="panel-body">
 
                 <div class="position-center">
-                    <form role="form" action="/admin/product" method="post" enctype="multipart/form-data">
+                    <form role="form" action="/admin/account/customer/update" method="post">
                         {{ csrf_field() }}
+                        <input type="hidden" name="id" value="{{$info->id}}">
                     <div class="form-group">
-                        <label>Tên sản phẩm  </label>
-                        <input type="text" name="name" class="form-control"  placeholder="Tên tài khoản  ">
+                        <label>Tên tài khoản  </label>
+                        <input type="text" name="name" class="form-control" value="{{$info->name}}" placeholder="Tên tài khoản  ">
                     </div>                                     
                     <div class="form-group">
                         <label>Email  </label>
-                        <input type="email" name="email" class="form-control"  placeholder="Email ">
+                        <input type="email" name="email" class="form-control" value="{{$info->email}}" placeholder="Email ">
                     </div>
                     <div class="form-group">
                         <label>Avt  </label>
@@ -34,11 +35,11 @@
                     </div>
                     <div class="form-group">
                         <label>Số điện thoại   </label>
-                        <input type="text" name="phone" class="form-control"  placeholder="Số điện thoại   ">
+                        <input type="text" name="phone" class="form-control" value="{{$info->phone}}" placeholder="Số điện thoại   ">
                     </div>
                     <div class="form-group">
                         <label>Địa chỉ  </label>
-                        <input type="text" name="address" class="form-control"  placeholder="Địa chỉ ">
+                        <input type="text" name="address" class="form-control" value="{{$info->address}}" placeholder="Địa chỉ ">
                     </div>
                     <div class="form-group">
                         <label>Mật khẩu  </label>

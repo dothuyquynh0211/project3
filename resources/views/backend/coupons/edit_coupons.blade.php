@@ -6,7 +6,7 @@
     <div class="col-lg-12">
         <section class="panel">
             <header class="panel-heading">
-                Thêm sản phẩm 
+                Thêm mã khuyến mại
             </header>
                 <?php
                 $message = Session::get('message');
@@ -18,31 +18,35 @@
             <div class="panel-body">
 
                 <div class="position-center">
-                    <form role="form" action="/admin/product" method="post" enctype="multipart/form-data">
+                    <form role="form" action="/admin/account/customer/add" method="post">
                         {{ csrf_field() }}
                     <div class="form-group">
-                        <label>Tên sản phẩm  </label>
+                        <label>Tên mã  </label>
                         <input type="text" name="name" class="form-control"  placeholder="Tên tài khoản  ">
                     </div>                                     
                     <div class="form-group">
-                        <label>Email  </label>
-                        <input type="email" name="email" class="form-control"  placeholder="Email ">
+                        <label>Giá trị ( đơn vị %) </label>
+                        <input type="email" name="text" class="form-control"  placeholder="30">
                     </div>
                     <div class="form-group">
-                        <label>Avt  </label>
-                        <input type="file" name="avt" class="form-control"  placeholder="Email ">
+                        <label>Mã code </label>
+                        <input type="text" name="avt" class="form-control"  placeholder="FREE">
                     </div>
                     <div class="form-group">
-                        <label>Số điện thoại   </label>
-                        <input type="text" name="phone" class="form-control"  placeholder="Số điện thoại   ">
+                        <label>Số lần sử dụng  </label>
+                        <input type="text" name="phone" class="form-control"  placeholder=" ">
                     </div>
                     <div class="form-group">
-                        <label>Địa chỉ  </label>
-                        <input type="text" name="address" class="form-control"  placeholder="Địa chỉ ">
+                        <label>Status </label>
+                        <input type="radio" name="status">
                     </div>
                     <div class="form-group">
-                        <label>Mật khẩu  </label>
-                        <input type="password" name="password" class="form-control"  placeholder="Mật khẩu  ">
+                        <label>Ngày áp dụng </label>
+                        <input type="date" name="start_date" class="form-control"  placeholder="Mật khẩu  ">
+                    </div> 
+                    <div class="form-group">
+                        <label>Ngày kết thúc </label>
+                        <input type="date" name="end_date" class="form-control"  placeholder="Mật khẩu  ">
                     </div>               
                     <button type="submit" name="add_account" class="btn btn-info">Thêm tài khoản  </button>
                     </form>

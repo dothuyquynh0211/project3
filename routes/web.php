@@ -9,18 +9,14 @@ use App\Http\Controllers\User\AuthController;
 use App\Http\Controllers\User\UserController;
 
 use App\Http\Controllers\Admin\AccountController;
-<<<<<<< HEAD
+
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\WarehouseController;
-=======
 use App\Http\Controllers\Admin\SizeController;
 use App\Http\Controllers\Admin\ColorController;
 
 
 
-
-
->>>>>>> 8309175c7f6beb824897f01e2997cbb747b994f2
 
 // Đường dẫn trang admin - trước mỗi đường dẫn thêm tiền tố admin để phân biết với bên khách hàng 
 
@@ -59,7 +55,14 @@ Route::post('/admin/account/staff', [AccountController::class, 'addAccount']);
 Route::get('/admin/account/staff/edit/{id}', [AccountController::class,'editAccount']);
 Route::post('/admin/account/staff/update', [AccountController::class, 'updateAccount']);
 Route::get('/admin/account/staff/delete/{id}', [AccountController::class, 'deleteAccount']);
-    
+  
+Route::get('/admin/account/customer', [AccountController::class, 'indexCustomer'])->name('customer.index');
+Route::get('/admin/account/customer/add', [AccountController::class, 'add']);
+Route::post('/admin/account/customer/add', [AccountController::class, 'addCustomer']);
+Route::get('/admin/account/customer/edit/{id}', [AccountController::class,'editCustomer']);
+Route::post('/admin/account/customer/update', [AccountController::class, 'updateCustomer']);
+Route::get('/admin/account/customer/delete/{id}', [AccountController::class, 'deleteCustomer']);
+  
     //Manage Category
 Route::get('/admin/category', [CategoryController::class, 'index']);
 Route::post('/admin/category', [CategoryController::class, 'add']);
@@ -74,10 +77,10 @@ Route::get('/admin/warehouse/edit/{id}', [WarehouseController::class,'edit']);
 Route::post('/admin/warehouse/update', [WarehouseController::class, 'update']);
 Route::get('/admin/warehouse/delete/{id}', [WarehouseController::class, 'delete']);
 
-// test color
-Route::get('/', function () {
-    return view('frontend.index');
-});
+    //Manage product
+    Route::get('/admin/product', function () {
+        return view('backend.coupons.add_coupons');
+    });
 
 
 //User

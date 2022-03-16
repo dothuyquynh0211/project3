@@ -6,7 +6,7 @@
     <div class="col-lg-12">
         <section class="panel">
             <header class="panel-heading">
-                Thêm sản phẩm 
+                Thêm tài khoản khách hàng 
             </header>
                 <?php
                 $message = Session::get('message');
@@ -18,10 +18,10 @@
             <div class="panel-body">
 
                 <div class="position-center">
-                    <form role="form" action="/admin/product" method="post" enctype="multipart/form-data">
+                    <form role="form" action="/admin/account/customer/add" method="post">
                         {{ csrf_field() }}
                     <div class="form-group">
-                        <label>Tên sản phẩm  </label>
+                        <label>Tên tài khoản  </label>
                         <input type="text" name="name" class="form-control"  placeholder="Tên tài khoản  ">
                     </div>                                     
                     <div class="form-group">
