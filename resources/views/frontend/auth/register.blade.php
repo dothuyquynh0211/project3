@@ -88,6 +88,9 @@ input::-webkit-input-placeholder {
 					<h1 class="title">RESGISTER</h1>
 				</div>
 			</div> 
+			<div class="profile_user" >
+				<img src="/frontend/images/avatar.jpeg" id="img_preview" alt="" style="max-height: 200px; max-width:200px">
+			</div>
 			<div class="main-login main-center">
 				<form class="form-horizontal" method="post" enctype="multipart/form-data">		
 						@csrf
@@ -96,7 +99,7 @@ input::-webkit-input-placeholder {
 							{{-- <label for="avt" class="cols-sm-2 control-label">Number Phone</label> --}}
 							<div class="input-group">
 								<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-								<input type="file" class="form-control" name="avatar" id="username"  placeholder="Enter your Username"/>
+								<input type="file" class="form-control" name="avatar" id="username" onchange="changePhoto()"/>
 							</div>
 						</div>
 					</div>
@@ -163,5 +166,13 @@ input::-webkit-input-placeholder {
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/js.js"></script>
+	<script>
+		function changePhoto(){
+        let vPhoto = document.getElementById('img_preview');
+        let vLink = document.getElementById('username');
+        let vURL = URL.createObjectURL(vLink.files[0]);
+        vPhoto.src = vURL;
+    }
+	</script>
 </body>
 </html>

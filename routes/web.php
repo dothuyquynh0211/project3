@@ -108,9 +108,12 @@ Route::get('/admin/coupons/delete/{id}', [CouponsController::class, 'deleteCoupo
 Route::get('/admin/product', [ProductController::class, 'index']);
 Route::get('/admin/product/create', [ProductController::class, 'create']);
 Route::post('/admin/product/create', [ProductController::class, 'store']);
-Route::get('/admin/product/edit/{id}', [ProductController::class,'editProduct']);
-Route::post('/admin/product/update', [ProductController::class, 'updateProduct']);
-Route::get('/admin/product/delete/{id}', [ProductController::class, 'deleteProduct']);
+Route::get('/admin/product/edit/{id}', [ProductController::class,'edit']);
+Route::post('/admin/product/update/{id}', [ProductController::class, 'update']);
+Route::delete('/admin/product/delete/{id}', [ProductController::class, 'destroy']);
+Route::delete('/deleteimage/{id}',[ProductController::class,'deleteImage']);
+Route::delete('/deletegallery/{id}',[ProductController::class,'deleteGallery']);
+Route::get('/admin/product/detail/{id}', [ProductController::class,'show']);
     
 
 
@@ -127,6 +130,7 @@ Route::get('/register',[AuthController::class,'showFormRegister'])->name('user.r
 Route::post('/register', [AuthController::class, 'register']);
 Route::get('/logoutUser', [AuthController::class, 'logoutUser'])->name('user.logout');
 Route::get('/checkout',[UserController::class, 'checkout']);
+Route::get('/category/{id}',[CategoryController::class, 'show_category_home']);
 Route::get('/contact', [UserController::class, 'contact']);
 Route::get('/shop', [UserController::class, 'category']);
 Route::get('/cart', [UserController::class, 'cart']);

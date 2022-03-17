@@ -14,9 +14,17 @@ class AuthController extends Controller
     }
     public function register(Request $request){
         // dd($request->all());
+        if ($request->hasFile('avatar')) {
+            $file = $request->file('avatar');
+            $imageName = time() . '-' . $file->getClientOriginalName();
+            $file->move('avatar/', $imageName);
+        }
+        else{
+            $imageName="avatar.jpeg";
+        }
         $user = new User();
         $user->name = $request->name;
-        $user->avatar = $request->avatar;
+        $user->avatar = $imageName;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
         $user->phone = $request->phone;
