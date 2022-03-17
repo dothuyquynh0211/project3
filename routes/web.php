@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\ColorController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CouponsController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\ImportgoodsController;
 
 // Đường dẫn trang admin - trước mỗi đường dẫn thêm tiền tố admin để phân biệt với bên khách hàng 
 
@@ -52,7 +53,15 @@ Route::post('/admin/brand', [BrandController::class, 'addBrands']);
 Route::get('/admin/brand/edit/{id}', [BrandController::class,'editBrands']);
 Route::post('/admin/brand/update', [BrandController::class, 'updateBrands']);
 Route::get('/admin/brand/delete/{id}', [BrandController::class, 'deleteBrands']);
-    
+
+
+//Manage Importgoods
+
+Route::get('/admin/warehouse/import', [ImportgoodsController::class, 'indexImportgoods']);
+Route::post('/admin/warehouse/import', [ImportgoodsController::class, 'addImportgoods']);
+Route::get('/admin/warehouse/import/edit/{id}', [ImportgoodsController::class,'editBrands']);
+Route::post('/admin/brand/update', [ImportgoodsController::class, 'updateBrands']);
+Route::get('/admin/brand/delete/{id}', [ImportgoodsController::class, 'deleteBrands']);
     //Manage account staff and customer 
 Route::get('/admin/account/roles', [AccountController::class, 'indexRoles']);
 Route::post('/admin/account/roles', [AccountController::class, 'addRoles']);
