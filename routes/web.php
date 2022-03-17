@@ -121,6 +121,7 @@ Route::get('/register',[AuthController::class,'showFormRegister'])->name('user.r
 Route::post('/register', [AuthController::class, 'register']);
 Route::get('/logoutUser', [AuthController::class, 'logoutUser'])->name('user.logout');
 Route::get('/checkout',[UserController::class, 'checkout']);
+Route::get('/category/{id}',[CategoryController::class, 'show_category_home']);
 Route::get('/contact', [UserController::class, 'contact']);
 Route::get('/shop', [UserController::class, 'category']);
 Route::get('/cart', [UserController::class, 'cart']);

@@ -4,40 +4,62 @@
 
 @endsection
 @section('content')
-{{-- <style>
-    .color-wrap {
+<style>
+    .color-choise-group {
         display: flex;
+        margin-left: 30px;
     }
-.color-content {
-    margin-right: 15px;
-    list-style: none;
-}
-.color {
-    width: 0!important ;
-    height: 0!important;
-    margin: 30px;
-    display: block;
-    position: relative;
-    cursor: pointer;
-}
-.color::after {
-    content: "";
-    display: block;
-    width: 60px;
-    height: 60px;
-    top: 0;
-    left: 0;
-    position: absolute;
-    color: attr(data-color);
-    transform: translate(-50%, -50%);
-}   
 
-.color:checked::after {
-    background-color: green;
-}
-</style> --}}
+    .color-choise {
+        position: relative;
+        width: 50px;
+        height: 50px;
+        margin-right: 15px;
+    }
+
+    .color-choise:last-child {
+        margin-right: 0;
+    }
+
+    .color-choise .radio {
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        border: 0;
+        margin: 0;
+        cursor: pointer;
+        z-index: 999;
+    }
+
+    .color-choise .radio:checked~.radio-span::after {
+        background-image: url('/backend/images/check.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-size: 100%;
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        content: "";
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+    }
+
+    .color-choise .radio-span {
+        width: 100%;
+        height: 100%;
+        background-color: blue;
+        display: block;
+        position: relative;
+    }
+</style>
+
+
 <div class="row">
-    <div class="col-lg-12">
+    <div class="col-lg-6">
         <section class="panel">
             <header class="panel-heading">
                 Thêm sản phẩm 
@@ -72,11 +94,11 @@
                     </div>
                     <div class="form-group">
                         <label> Image </label>
-                        <input type="file" name="image" class="form-control">
+                        <input type="file" name="image" id="url_img"class="form-control" onchange="changePhoto()">
                     </div>
                     <div class="form-group">
                         <label>Image Gallery </label>
-                        <input type="file" name="images[]" class="form-control" multiple>
+                        <input type="file" name="images[]" id="multi_input"class="form-control" multiple >
                     </div>
                     <div class="form-group">
                         <label>Status </label>
@@ -108,22 +130,15 @@
                     </div>
                     <div class="form-group" style="display: flex">
                         <label>Color</label>                        
-                        {{-- <select name="color" id="color"> --}}
-                            {{-- <option value="" >-- chon mau --</option> --}}
-                            {{-- <ul class="color-wrap"> --}}
+                            <div class="color-choise-group">
                             @foreach ($colors as $color)
-                            {{-- <li class="color-content"> --}}
-                            <div class="checkbox-color">
-                                <input type="checkbox" name="color"  class="color" data-color="red" value="{{$color->id}}" style="background:{{$color->name}};width: 30px;height: 30px;" >
-                            {{-- </input> --}}
+
+                                <div class="color-choise">
+                                    <input type="radio" class="radio" name="color" value="{{$color->id}}">
+                                    <span class="radio-span" style="background-color:{{$color->name}} "></span>
+                                </div>   
+                                @endforeach
                             </div>
-                                {{-- <option value="{{$color->id}}" >
-                                    <i style="background-color:{{$color->name}};width: 30px;height: 30px;" > </i>        
-                                </option> --}}
-                            {{-- </li> --}}
-                            @endforeach
-                            {{-- </ul> --}}
-                        {{-- </select> --}}
                     </div>
                     <button type="submit" name="add_account" class="btn btn-info">Thêm tài khoản  </button>
                     </form>
@@ -133,5 +148,34 @@
         </section>
 
     </div>
+    <div class="col-lg-6">
+        <div class="image">
+            <label for="">Image</label>
+            <img src="#" id="img_preview" width="200px" height="200px;">
+        </div>
+        <div class="gallery" >
+            <label for="">Gallery</label>
+            <div id="multi_images"></div>
+        </div>
+    </div>
 </div>
+
+<script>
+    function changePhoto(){
+        let vPhoto = document.getElementById('img_preview');
+        let vLink = document.getElementById('url_img');
+        let vURL = URL.createObjectURL(vLink.files[0]);
+        vPhoto.src = vURL;
+    }
+    const image = document.getElementById("multi_input");
+    image.addEventListener("change", (evt) => {        
+        let imgList = evt.target.files;
+        let showImg = document.getElementById("multi_images");
+        showImg.innerHTML = '';
+        for (const img of imgList) {
+            let url = URL.createObjectURL(img);
+            showImg.innerHTML = `${showImg.innerHTML} <img src="${url}" alt="" style="width:200px" />`;
+        }
+    });
+</script>
 @endsection
