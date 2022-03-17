@@ -59,13 +59,18 @@
             <div class="row">
                 <div class="col-xl-3 col-lg-2">
                     <div class="header__logo">
-                        <a href="/index"><img src="{{('frontend/images/logo.png')}}" alt=""></a>
+                        <a href="/"><img src="{{('/frontend/images/logo.png')}}" alt=""></a>
                     </div>
                 </div>
+                {{-- <h1>{{$abc}}</h1> --}}
                 <div class="col-xl-6 col-lg-7">
                     <nav class="header__menu">
                         <ul>
-                            <li><a href="/">Home</a></li>
+
+                            @foreach ($category as  $item)
+                            <li><a href="/category/{{$item->name}}">{{$item->name}}</a></li>
+                            @endforeach
+                            {{-- <li><a href="/">Home</a></li>
                             <li><a href="#">Women’s</a></li>
                             <li><a href="#">Men’s</a></li>
                             <li class="active"><a href="/shop">Shop</a></li>
@@ -78,7 +83,7 @@
                                 </ul>
                             </li>
                             <li><a href="/block">Blog</a></li>
-                            <li><a href="/contact">Contact</a></li>
+                            <li><a href="/contact">Contact</a></li> --}}
                         </ul>
                     </nav>
                 </div>
@@ -86,18 +91,13 @@
                     <div class="header__right">
                         <div class="header__right__auth">
                             @if(Auth::guard('users')->user() !=null)
-                            <span>{{Auth::guard('users')->user()->name}}</span>
-                            
-                                <a href="{{route('user.logout')}}"  class="nav-link active"><i class="fas fa-sign-in-alt nav-icon"></i><p>Đăng xuất</p></a>
+                                {{-- <span>{{Auth::guard('users')->user()->name}}</span>             --}}
+                                <a href="#">{{Auth::guard('users')->user()->name}}</a>                               
+                                <a href="{{route('user.logout')}}">Logout</a>                               
                             @else
-    
-                                                                <a href="{{route('user.login')}}" class="nav-link active">
-                                                                     <i class="fas fa-sign-in-alt nav-icon"></i><p>Login</p></a>
-                        
-                                                                     <a href="{{route('user.register')}}" class="nav-link active">
-                                                                        <i class="fas fa-sign-in-alt nav-icon"></i><p>Register</p></a> 
-                                                                
-                                                                @endif
+                            <a href="{{route('user.login')}}" >Login</a>
+                            <a href="{{route('user.register')}}" >Register</a>                                     
+                            @endif
                         </div>
                         <ul class="header__right__widget">
                             <li><span class="icon_search search-switch"></span></li>
@@ -183,16 +183,16 @@
                 <div class="col-lg-4 col-md-6 col-sm-7">
                     <div class="footer__about">
                         <div class="footer__logo">
-                            <a href="./index.html"><img src="{{('frontend/images/logo.png')}}" alt=""></a>
+                            <a href="./index.html"><img src="{{('/frontend/images/logo.png')}}" alt=""></a>
                         </div>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
                         cilisis.</p>
                         <div class="footer__payment">
-                            <a href="#"><img src="img/payment/payment-1.png" alt=""></a>
-                            <a href="#"><img src="img/payment/payment-2.png" alt=""></a>
-                            <a href="#"><img src="img/payment/payment-3.png" alt=""></a>
-                            <a href="#"><img src="img/payment/payment-4.png" alt=""></a>
-                            <a href="#"><img src="img/payment/payment-5.png" alt=""></a>
+                            <a href="#"><img src="/img/payment/payment-1.png" alt=""></a>
+                            <a href="#"><img src="/img/payment/payment-2.png" alt=""></a>
+                            <a href="#"><img src="/img/payment/payment-3.png" alt=""></a>
+                            <a href="#"><img src="/img/payment/payment-4.png" alt=""></a>
+                            <a href="#"><img src="/img/payment/payment-5.png" alt=""></a>
                         </div>
                     </div>
                 </div>

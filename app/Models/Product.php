@@ -17,7 +17,7 @@ class Product extends Model
         'image',
         'description',
         'create',
-        'status',
+        'status',  
         'id_brand',
         'id_category',
         'id_size',
