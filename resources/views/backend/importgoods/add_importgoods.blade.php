@@ -30,15 +30,15 @@
                    
                     <div class="form-group">
                         <label> Kho hàng </label>
-                        <select name="warehouse" id="warehouse">
+                        <select name="id_warehouse" id="id_warehouse">
                             @foreach ($warehouses as $warehouse)
-                                <option value="{{$warehouse->id}}">{{$warehouse->name}}</option>
+                                <option value="{{$warehouse->id}}">{{$warehouse->address}}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="form-group">
                         <label>Người duyệt</label>
-                        <select name="admin" id="admin">
+                        <select name="id_admin" id="id_admin">
                             @foreach ($admins as $admin)
                                 <option value="{{$admin->id}}">{{$admin->name}}</option>
                             @endforeach

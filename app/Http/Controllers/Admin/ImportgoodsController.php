@@ -13,30 +13,18 @@ class ImportgoodsController extends Controller
 {
    
   
-    function indexImportgoods()
+    function index()
     {
         
-        $importgoods = ImportgoodsModel::indexImportgoods();
+        $importgoods = ImportgoodsModel::index();
       
        return view('backend.importgoods.index_importgoods',['importgoods'=>$importgoods]);
        
     }
-    function edit($id)
-    {   $importgoods = ImportgoodsModel::get($id);
-        $importgoods1 = ImportgoodsModel::getadmins();
-        $importgoods2= ImportgoodsModel::getwarehouses();
-        //doi ty//đây
-        //  return dd($kiemtra);
-        return view('backend.importgoods.edit', [
-            'importgoods' => $importgoods,
-            'importgoods1' =>$importgoods1,
-            'importgoods2' =>$importgoods2,
-            
-    ]); 
-    }
+   
 
    
-    function addImportgoods()
+    function create()
     {
         $sql1 = ImportgoodsModel::getadmins();
         $sql2 = ImportgoodsModel::getwarehouses();
@@ -48,37 +36,42 @@ class ImportgoodsController extends Controller
         ]);
     }
     function store(Request $req){
-        $date= $req->date;
-        $id_admin= $req->id_admin;
-        $id_warehouse= $req->id_warehouse;
-       
+        $date= $req->input('date');
+        $id_admin= $req->input('id_admin');
+        $id_warehouse= $req->input('id_warehouse');
        
         $rs = ImportgoodsModel::store($date,$id_admin,$id_warehouse);
         if($rs==0) return "Insert thất bại";
         else{
             // Alert::success('Thêm thành công', 'Success Borrowpay');
-            return redirect('/admin/warehouse/import');
+            return redirect('/admin/importgoods');
         }
     }
-    // function update(Request $req, $id){
+    public function edit($id)
+    {
+        $row = DB::table('import_goods')->where('id', $id)->first();
+        $data = array(
+            'info' => $row,
+            'admins' => DB::table('admins')->get(),
+            'warehouses' => DB::table('warehouses')->get(),
+        );
+        return view('backend.importgoods.edit', $data);
+    }
 
-    //      $date= $req->date;
-    //     $id_admin= $req->id_admin;
-    //     $id_warehouse= $req->id_warehouse;
-       
-       
-    //     $rs = ImportgoodsModel::update($dates,$id_admin,$id_warehouse);
-    //     if($rs==0) return "Cập nhật thất bại";
-    //     else{
-    //         return redirect('/admin/importgoods'); 
-    //     }
+    public function update(Request $request)
+    {
+        $query = DB::table('import_goods')->where('id', $request->input('id'))->update([
+           
+            'id_warehouse' => $request->input('id_warehouse'),
+            'id_admin' => $request->input('id_admin'),
+            'date' => date("Y-m-d H:i:s")
+        ]);
+        return redirect('/admin/importgoods/');
+    }
+
+    public function delete($id) {
+        $delete = DB::table('import_goods')->where('id', $id)->delete();
+        return redirect('/admin/importgoods/');
     
-    // }
-    function destroy($id){
-      $rs = ImportgoodsModel::destroy($id);
-      if($rs == 0) return "Xóa thất bại";
-        else{
-            return view('backend.importgoods.index'); 
-        }
     }
 }
