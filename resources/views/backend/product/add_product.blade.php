@@ -140,7 +140,7 @@
                                 @endforeach
                             </div>
                     </div>
-                    <button type="submit" name="add_account" class="btn btn-info">Thêm tài khoản  </button>
+                    <button type="submit" name="add_account" class="btn btn-info">Thêm sản phẩm </button>
                     </form>
                     <br>
                 </div>
