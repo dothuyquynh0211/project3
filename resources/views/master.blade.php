@@ -68,7 +68,7 @@
                         <ul>
 
                             @foreach ($category as  $item)
-                            <li><a href="/category/{{$item->name}}">{{$item->name}}</a></li>
+                            <li><a href="/{{$item->id}}">{{$item->name}}</a></li>
                             @endforeach
                             {{-- <li><a href="/">Home</a></li>
                             <li><a href="#">Women’s</a></li>
@@ -118,6 +118,7 @@
     </header>
     <!-- Header Section End -->
     <!-- Content Begin -->
+
     @yield('content')
     <!-- Content End -->
     {{-- <div class="instagram">
@@ -187,13 +188,13 @@
                         </div>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
                         cilisis.</p>
-                        <div class="footer__payment">
+                        {{-- <div class="footer__payment">
                             <a href="#"><img src="/img/payment/payment-1.png" alt=""></a>
                             <a href="#"><img src="/img/payment/payment-2.png" alt=""></a>
                             <a href="#"><img src="/img/payment/payment-3.png" alt=""></a>
                             <a href="#"><img src="/img/payment/payment-4.png" alt=""></a>
                             <a href="#"><img src="/img/payment/payment-5.png" alt=""></a>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-3 col-sm-5">

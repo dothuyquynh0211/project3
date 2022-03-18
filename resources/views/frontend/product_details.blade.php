@@ -24,9 +24,15 @@
                     <div class="product__details__pic">
                         <div class="product__details__pic__left product__thumb nice-scroll">
                             <a class="pt active" href="#product-1">
-                                <img src="img/product/details/thumb-1.jpg" alt="">
+                                <img src="/image/{{$product->image}}" alt="">
                             </a>
+                            @foreach ($image as $image )
                             <a class="pt" href="#product-2">
+                                <img src="/gallery/{{$image->url}}" alt="">
+                            </a>
+                            @endforeach
+                            
+                            {{-- <a class="pt" href="#product-2">
                                 <img src="img/product/details/thumb-2.jpg" alt="">
                             </a>
                             <a class="pt" href="#product-3">
@@ -34,30 +40,37 @@
                             </a>
                             <a class="pt" href="#product-4">
                                 <img src="img/product/details/thumb-4.jpg" alt="">
-                            </a>
+                            </a> --}}
                         </div>
                         <div class="product__details__slider__content">
                             <div class="product__details__pic__slider owl-carousel">
-                                <img data-hash="product-1" class="product__big__img" src="img/product/details/product-1.jpg" alt="">
-                                <img data-hash="product-2" class="product__big__img" src="img/product/details/product-3.jpg" alt="">
+                                <img data-hash="{{$product->image}}" class="product__big__img" src="/image/{{$product->image}}" alt="">
+                                @foreach ($image as $item )
+                                    {{-- dd($image->id); --}}
+                                    <img data-hash="{{$image->id}}" class="product__big__img" src="/gallery/{{$image->id}}" alt="">
+                                @endforeach
+                                {{-- <img data-hash="product-2" class="product__big__img" src="img/product/details/product-3.jpg" alt="">
                                 <img data-hash="product-3" class="product__big__img" src="img/product/details/product-2.jpg" alt="">
-                                <img data-hash="product-4" class="product__big__img" src="img/product/details/product-4.jpg" alt="">
+                                <img data-hash="product-4" class="product__big__img" src="img/product/details/product-4.jpg" alt=""> --}}
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="product__details__text">
-                        <h3>Essential structured blazer <span>Brand: SKMEIMore Men Watches from SKMEI</span></h3>
-                        <div class="rating">
+                        <h3>{{$product->name}}<span>Brand: {{$product->id_brand}}</span></h3>
+                        {{-- <h3>Essential structured blazer <span>Brand: SKMEIMore Men Watches from SKMEI</span></h3> --}}
+                        {{-- <div class="rating">
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                             <span>( 138 reviews )</span>
-                        </div>
-                        <div class="product__details__price">$ 75.0 <span>$ 83.0</span></div>
+                        </div> --}}
+                        
+                        {{-- <div class="product__details__price">$ 75.0 <span>$ 83.0</span></div> --}}
+                        <div class="product__details__price">$ {{$product->price}}<span></span></div>
                         <p>Nemo enim ipsam voluptatem quia aspernatur aut odit aut loret fugit, sed quia consequuntur
                         magni lores eos qui ratione voluptatem sequi nesciunt.</p>
                         <div class="product__details__button">

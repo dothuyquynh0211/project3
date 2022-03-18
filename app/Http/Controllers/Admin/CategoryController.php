@@ -40,9 +40,4 @@ class CategoryController extends Controller
         $delete = DB::table('categories')->where('id', $id)->delete();
         return redirect('/admin/category');
     }
-    public function show_category_home(){
-        $cate_product = DB::table('categories')->get(); 
-        // dd($cate_product);
-        return view('master')->with('category',$cate_product);
-    }
 }

@@ -51,7 +51,8 @@ class ProductController extends Controller
     {
         if ($request->hasFile('image')) {
             $file = $request->file('image');
-            $imageName = time() . '-' . $file->getClientOriginalName();
+            $namefile = time() . '-' . $file->getClientOriginalName();
+            $imageName = str_replace(' ', '-', $namefile);
             $file->move('image/', $imageName);
             $product = new Product([
                 'name' => $request->name,
@@ -70,8 +71,10 @@ class ProductController extends Controller
         }
         if ($request->hasFile('images')) {
             $files = $request->file('images');
+            
             foreach ($files as $file) {
-                $imageName = time().'-'.$file->getClientOriginalName();
+                $namefile = time() . '-' . $file->getClientOriginalName();
+                $imageName = str_replace(' ', '-', $namefile);
                 $request['id_product'] = $product->id;
                 $request['url'] = $imageName;
                 $file->move('gallery/', $imageName);
@@ -91,10 +94,10 @@ class ProductController extends Controller
     {
         //
         $product = Product::findOrFail($id);
-        $image = Image::where('id_product',$product->id)->get();
+        $image = Image::where('id_product', $product->id)->get();
         // dd($image);
-        
-        return view('backend.product.detail_product')->with('product',$product)->with('image',$image);
+
+        return view('backend.product.detail_product')->with('product', $product)->with('image', $image);
     }
 
     /**
@@ -107,41 +110,40 @@ class ProductController extends Controller
     {
         //
         $products = Product::findOrFail($id);
-        $image = Image::where('id_product',$products->id)->get();
+        $image = Image::where('id_product', $products->id)->get();
         $brands = DB::table('brands')->get();
         $categories = DB::table('categories')->get();
         $sizes = DB::table('sizes')->get();
         $colors = DB::table('colors')->get();
         // dd($image);
-    return view('backend.product.edit_product')
-    ->with('products',$products)
-    ->with('images',$image)
-    ->with('brands',$brands)
-    ->with('categories',$categories)
-    ->with('sizes',$sizes)
-    ->with('colors',$colors);
+        return view('backend.product.edit_product')
+            ->with('products', $products)
+            ->with('images', $image)
+            ->with('brands', $brands)
+            ->with('categories', $categories)
+            ->with('sizes', $sizes)
+            ->with('colors', $colors);
     }
 
     /**
-    * Update the specified resource in storage.
-    *
-    * @param \Illuminate\Http\Request $request
-    * @param int $id
-    * @return \Illuminate\Http\Response
-    */
+     * Update the specified resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
     public function update(Request $request, $id)
     {
-    //
+        //
         $products = Product::findOrFail($id);
-        if($request->hasFile('image')){
-            if(\Illuminate\Filesystem\Filesystem::exists('image/'.$products->image)){
-                \Illuminate\Filesystem\Filesystem::delete('image/'.$products->image);
+        if ($request->hasFile('image')) {
+            if (\Illuminate\Filesystem\Filesystem::exists('image/' . $products->image)) {
+                \Illuminate\Filesystem\Filesystem::delete('image/' . $products->image);
             }
             $file = $request->file('image');
-            $products->image= time() . '-' . $file->getClientOriginalName();
+            $products->image = time() . '-' . $file->getClientOriginalName();
             $file->move('image/', $products->image);
-            $request['image']= $products->image;
-            
+            $request['image'] = $products->image;
         }
         $products->update([
             'name' => $request->name,
@@ -155,12 +157,12 @@ class ProductController extends Controller
             'id_category' => $request->category,
             'id_size' => $request->size,
             'id_color' => $request->color,
-            
+
         ]);
         if ($request->hasFile('images')) {
             $files = $request->file('images');
             foreach ($files as $file) {
-                $imageName = time().'-'.$file->getClientOriginalName();
+                $imageName = time() . '-' . $file->getClientOriginalName();
                 $request['id_product'] = $products->id;
                 $request['url'] = $imageName;
                 $file->move('gallery/', $imageName);
@@ -168,55 +170,54 @@ class ProductController extends Controller
             }
         }
         return redirect('/admin/product');
-    
     }
 
     /**
-    * Remove the specified resource from storage.
-    *
-    * @param int $id
-    * @return \Illuminate\Http\Response
-    */
+     * Remove the specified resource from storage.
+     *
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
     public function destroy($id)
     {
         //
         $products = Product::findOrFail($id);
         // dd($products);
-        if(\Illuminate\Filesystem\Filesystem::exists('image/'.$products->image)){
-            \Illuminate\Filesystem\Filesystem::delete('image/'.$products->image);
+        if (\Illuminate\Filesystem\Filesystem::exists('image/' . $products->image)) {
+            \Illuminate\Filesystem\Filesystem::delete('image/' . $products->image);
         }
-        $images = Image::where('id_product',$products->id)->get();
+        $images = Image::where('id_product', $products->id)->get();
         foreach ($images as $image) {
-            if(\Illuminate\Filesystem\Filesystem::exists('gallery/'.$image->url)){
-                \Illuminate\Filesystem\Filesystem::delete('gallery/'.$image->url);
+            if (\Illuminate\Filesystem\Filesystem::exists('gallery/' . $image->url)) {
+                \Illuminate\Filesystem\Filesystem::delete('gallery/' . $image->url);
             }
-        $image->delete();
+            $image->delete();
         }
 
         $products->delete();
         return redirect('/admin/product');
     }
-    
-    public function deleteGallery($id){
+
+    public function deleteGallery($id)
+    {
         $image = Image::findOrFail($id);
         // dd($products);
-        if(\Illuminate\Filesystem\Filesystem::exists('gallery/'.$image->url)){
-            \Illuminate\Filesystem\Filesystem::delete('gallery/'.$image->url);
+        if (\Illuminate\Filesystem\Filesystem::exists('gallery/' . $image->url)) {
+            \Illuminate\Filesystem\Filesystem::delete('gallery/' . $image->url);
         }
         Image::find($id)->delete();
         return back();
-        return redirect('/admin/product/edit/'.$id);
-                
+        return redirect('/admin/product/edit/' . $id);
     }
 
-    public function deleteImage($id){
+    public function deleteImage($id)
+    {
         $product = Product::findOrFail($id);
         // dd($products);
-        if(\Illuminate\Filesystem\Filesystem::exists('image/'.$product->image)){
-            \Illuminate\Filesystem\Filesystem::delete('image/'.$product->image);
+        if (\Illuminate\Filesystem\Filesystem::exists('image/' . $product->image)) {
+            \Illuminate\Filesystem\Filesystem::delete('image/' . $product->image);
         }
         // Image::find($id)->delete();
-        return redirect('/admin/product/edit/'.$id);
-                
+        return redirect('/admin/product/edit/' . $id);
     }
 }
