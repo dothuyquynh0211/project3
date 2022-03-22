@@ -108,8 +108,8 @@
                             <li><a href="#"><span class="icon_heart_alt"></span>
                                 <div class="tip">2</div>
                             </a></li>
-                            <li><a href="/cart"><span class="icon_bag_alt"></span>
-                                <div class="tip">2</div>
+                            <li><a href="/shop_cart"><span class="icon_bag_alt"></span>
+                                <div class="tip"></div>
                             </a></li>
                         </ul>
                     </div>

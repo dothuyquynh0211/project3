@@ -19,6 +19,8 @@ use App\Http\Controllers\Admin\CouponsController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ImportgoodsController;
 use App\Http\Controllers\Admin\ImportDetailController;
+use App\Http\Controllers\User\CartController;
+
 
 
 // Đường dẫn trang admin - trước mỗi đường dẫn thêm tiền tố admin để phân biệt với bên khách hàng 
@@ -132,8 +134,12 @@ Route::delete('/deleteimage/{id}', [ProductController::class, 'deleteImage']);
 Route::delete('/deletegallery/{id}', [ProductController::class, 'deleteGallery']);
 Route::get('/admin/product/detail/{id}', [ProductController::class, 'show']);
 
+///Cart
+Route::post('/shop_cart', [CartController::class, 'save_cart']);
 
-
+Route::get('/shop_cart', [CartController::class, 'shop_cart']);
+Route::get('/deleteCart/{rowId}', [CartController::class, ' deleteCart']);
+Route::post('/updateCart', [CartController::class, 'updateCart']);
 
 
 
@@ -152,7 +158,7 @@ Route::get('/checkout', [UserController::class, 'checkout']);
 // Route::get('/{category}', [CategoryController::class, 'show_category_home']);
 Route::get('/contact', [UserController::class, 'contact']);
 // Route::get('/{category}', [UserController::class, 'category']);
-Route::get('/cart', [UserController::class, 'cart']);
+
 Route::get('/product-detail/{id}', [UserController::class, 'productDetail']);
 Route::get('/blog', function () {
     return view('frontend.blog');
