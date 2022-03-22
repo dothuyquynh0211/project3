@@ -179,6 +179,7 @@ class ProductController extends Controller
         }
         return redirect('/admin/product');
     }
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -198,7 +199,7 @@ class ProductController extends Controller
             //     $coupon->delete();
             // }
         // dd($products);
-<<<<<<< HEAD
+
         if (File::exists('image/' . $products->image)) {
             File::delete('image/' . $products->image);
         }
@@ -206,15 +207,6 @@ class ProductController extends Controller
         foreach ($images as $image) {
             if (File::exists('gallery/' . $image->url)) {
                 File::delete('gallery/' . $image->url);
-=======
-        if ( \Illuminate\Support\Facades\File::exists('image/' . $products->image)) {
-            \Illuminate\Support\Facades\File::delete('image/' . $products->image);
-        }
-        $images = Image::where('id_product', $products->id)->get();
-        foreach ($images as $image) {
-            if ( \Illuminate\Support\Facades\File::exists('gallery/' . $image->url)) {
-                \Illuminate\Support\Facades\File::delete('gallery/' . $image->url);
->>>>>>> 91f6bf7cfb61c364c90942aaac4d985648519236
             }
             $image->delete();
         }
@@ -224,8 +216,7 @@ class ProductController extends Controller
         return redirect('/admin/product');
         } catch(Exception $e){
             DB::rollBack();             
-        }
-        
+        }        
        
     }
 
@@ -233,13 +224,9 @@ class ProductController extends Controller
     {
         $image = Image::findOrFail($id);
         // dd($products);
-<<<<<<< HEAD
         if (File::exists('gallery/' . $image->url)) {
             File::delete('gallery/' . $image->url);
-=======
-        if (\Illuminate\Support\Facades\File::exists('gallery/' . $image->url)) {
-            \Illuminate\Support\Facades\File::delete('gallery/' . $image->url);
->>>>>>> 91f6bf7cfb61c364c90942aaac4d985648519236
+
         }
         Image::find($id)->delete();
         return back();
@@ -250,13 +237,10 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($id);
         // dd($products);
-<<<<<<< HEAD
+
         if (File::exists('image/' . $product->image)) {
             File::delete('image/' . $product->image);
-=======
-        if (\Illuminate\Support\Facades\File::exists('image/' . $product->image)) {
-            \Illuminate\Support\Facades\File::delete('image/' . $product->image);
->>>>>>> 91f6bf7cfb61c364c90942aaac4d985648519236
+
         }
         // Image::find($id)->delete();
         return redirect('/admin/product/edit/' . $id);
