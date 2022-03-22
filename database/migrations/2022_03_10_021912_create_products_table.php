@@ -17,7 +17,8 @@ class CreateProductsTable extends Migration
             $table->id('id');
             $table->string('name');
             $table->string('sku')->unique();
-            $table->float('price');
+            $table->float('price')->default(0);
+            $table->float('sale_price');
             $table->string('image');
             $table->text('description');
             $table->date('create');

@@ -10,21 +10,22 @@ class Product extends Model
 {
     use HasFactory;
     public $timestamps = false;
-    protected $fillable=[
+    protected $fillable = [
         'name',
         'sku',
         'price',
+        'sale_price',
         'image',
         'description',
         'create',
-        'status',  
+        'status',
         'id_brand',
         'id_category',
         'id_size',
         'id_color',
     ];
-    public function images(){
+    public function images()
+    {
         return $this->hasMany(Image::class);
     }
-    
 }

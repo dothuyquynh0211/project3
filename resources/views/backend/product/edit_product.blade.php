@@ -87,6 +87,10 @@
                         <input type="text" name="price" class="form-control"  placeholder=" 300000 " value="{{$products->price}}">
                     </div>
                     <div class="form-group">
+                        <label>Sale price  </label>
+                        <input type="text" name="sale_price" class="form-control"  placeholder=" 300000 " value="{{$products->sale_price}}">
+                    </div>
+                    <div class="form-group">
                         <label>Description </label>
                         <input type="text" name="description" class="form-control"  placeholder=" 300000 " value="{{$products->description}}">
                     </div>

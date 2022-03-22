@@ -33,13 +33,15 @@
                             <td>{{$item->value}}</td>
                             <td>{{$item->coupons_code}}</td>
                             <td>{{$item->coupons_number}}</td>
-                            <td>{{$item->status}}</td>
+                            <td>{{$item->coupons_condition ? 'Giảm theo %' : 'Giảm cố định'}}</td>
+                            <td>{{$item->status ? 'Hoạt động' : 'Ngừng hoạt động'}}</td>
                             <td>{{$item->start_date}}</td>
                             <td>{{$item->end_date}}</td>
                             <td>
                                 <div class='btn-group'>
                                     <a href="/admin/coupons/delete/{{$item->id}}" class="btn btn-danger btn-xs ">Delete </a>
                                     <a href="/admin/coupons/edit/{{$item->id}}" class="btn btn-primary btn-xs ">Edit</a>
+                                    <a href="/admin/coupons/detail/{{$item->id}}" class="btn btn-primary btn-xs ">detail</a>
                                 </div>
                             </td>
                         </tr>

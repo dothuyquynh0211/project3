@@ -299,7 +299,7 @@ return [
                 ],
                 [
                     'text' => 'Nhập kho',
-                    'url'  => '/admin/warehouse/import',
+                    'url'  => '/admin/importgoods',
                 ],
                 [
                     'text'    => 'Kiểm kho',

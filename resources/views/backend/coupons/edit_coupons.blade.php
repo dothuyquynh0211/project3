@@ -24,11 +24,18 @@
                     <div class="form-group">
                         <label>Tên mã  </label>
                         <input type="text" name="name" class="form-control" value="{{$info->name}}" placeholder="Tên mã ">
-                    </div>                                     
-                    <div class="form-group">
-                        <label>Giá trị ( đơn vị %) </label>
-                        <input type="text" name="value" class="form-control" value="{{$info->value}} " placeholder="30">
                     </div>
+                    <div class="form-group">
+                        <label>Điều kiện</label>
+                        <select name="coupons_condition">
+                            <option value="1">Giảm theo %</option>
+                            <option value="2">Giảm cố định </option>
+                        </select>
+                    </div>                                  
+                    <div class="form-group">
+                        <label>Giá trị </label>
+                        <input type="text" name="value" class="form-control"  value="{{$info->value}} "placeholder="30">
+                    </div>                              
                     <div class="form-group">
                         <label>Mã code </label>
                         <input type="text" name="coupons_code" class="form-control" value="{{$info->coupons_code}} " placeholder="FREE">
