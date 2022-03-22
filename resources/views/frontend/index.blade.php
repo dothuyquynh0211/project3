@@ -101,7 +101,7 @@
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                             </div>
-                            <div class="product__price">{{$item->price}}</div>
+                            <div class="product__price">{{number_format( $item->price)}}VNĐ</div>
                         </div>
                     </div>
                 </div>

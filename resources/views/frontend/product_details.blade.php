@@ -58,7 +58,8 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="product__details__text">
-                        <h3>{{$product->name}}<span>Brand: {{$product->id_brand}}</span></h3>
+                        <h3>{{$product->name}}<span>Brand: {{$product->id_brand}}</span>
+                        <span>ID: {{$product->sku}}</span></h3>
                         {{-- <h3>Essential structured blazer <span>Brand: SKMEIMore Men Watches from SKMEI</span></h3> --}}
                         {{-- <div class="rating">
                             <i class="fa fa-star"></i>
@@ -70,22 +71,28 @@
                         </div> --}}
                         
                         {{-- <div class="product__details__price">$ 75.0 <span>$ 83.0</span></div> --}}
-                        <div class="product__details__price">$ {{$product->price}}<span></span></div>
-                        <p>Nemo enim ipsam voluptatem quia aspernatur aut odit aut loret fugit, sed quia consequuntur
-                        magni lores eos qui ratione voluptatem sequi nesciunt.</p>
+                        
+                        <div class="product__details__price">{{number_format( $product->price)}}VNĐ<span></span></div>
+                        
+                        <form method="POST" action="/shop_cart">
+                            {{csrf_field() }}
                         <div class="product__details__button">
                             <div class="quantity">
                                 <span>Quantity:</span>
                                 <div class="pro-qty">
-                                    <input type="text" value="1">
+                                    <input name="qty" type="number" value="1">
+                                    <input type="hidden" name="productid_hidden" value="{{$product->id}}">
                                 </div>
                             </div>
-                            <a href="#" class="cart-btn"><span class="icon_bag_alt"></span> Add to cart</a>
+                            <button type="submit" class="cart-btn add_cart"><span class="icon_bag_alt"></span> Add to cart</button>
+                        
                             <ul>
                                 <li><a href="#"><span class="icon_heart_alt"></span></a></li>
                                 <li><a href="#"><span class="icon_adjust-horiz"></span></a></li>
                             </ul>
                         </div>
+                    </form>
+
                         <div class="product__details__widget">
                             <ul>
                                 <li>
@@ -301,5 +308,6 @@
         </div>
     </section>
     <!-- Product Details Section End -->
-@endsection
+ 
+    @endsection
     
