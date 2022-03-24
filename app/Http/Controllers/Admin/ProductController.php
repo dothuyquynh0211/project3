@@ -5,10 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Image;
 use App\Models\Product;
-use Illuminate\Filesystem\Filesystem;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Filesystem\Filesystem\File;
+use Illuminate\Support\Facades\File;
+
 class ProductController extends Controller
 {
     /**
@@ -48,7 +49,8 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        if ($request->hasFile('image')) {
+        try{
+            if ($request->hasFile('image')) {
             $file = $request->file('image');
             $namefile = time() . '-' . $file->getClientOriginalName();
             $imageName = str_replace(' ', '-', $namefile);
@@ -57,6 +59,7 @@ class ProductController extends Controller
                 'name' => $request->name,
                 'sku' => $request->sku,
                 'price' => $request->price,
+                'sale_price' => $request->sale_price,
                 'image' => $imageName,
                 'description' => $request->description,
                 'create' => date("Y-m-d H:i:s"),
@@ -68,9 +71,15 @@ class ProductController extends Controller
             ]);
             $product->save();
         }
+        } catch(Exception $e) {
+            echo "<pre>";
+            print_r($e);
+            die();
+        }
+        
         if ($request->hasFile('images')) {
             $files = $request->file('images');
-            
+
             foreach ($files as $file) {
                 $namefile = time() . '-' . $file->getClientOriginalName();
                 $imageName = str_replace(' ', '-', $namefile);
@@ -136,9 +145,8 @@ class ProductController extends Controller
         //
         $products = Product::findOrFail($id);
         if ($request->hasFile('image')) {
-            if (                \Illuminate\Support\Facades\File::exists('image/' . $products->image)) {
-                \Illuminate\Support\Facades\File::delete('image/' . $products->image);
-            }
+            if (File::exists('image/' . $products->image)) {
+                File::delete('image/' . $products->image);
             $file = $request->file('image');
             $products->image = time() . '-' . $file->getClientOriginalName();
             $file->move('image/', $products->image);
@@ -148,6 +156,7 @@ class ProductController extends Controller
             'name' => $request->name,
             'sku' => $request->sku,
             'price' => $request->price,
+            'sale_price' => $request->sale_price,
             'image' => $products->image,
             'description' => $request->description,
             // 'create' => date("Y-m-d H:i:s"),
@@ -170,6 +179,7 @@ class ProductController extends Controller
         }
         return redirect('/admin/product');
     }
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -180,29 +190,43 @@ class ProductController extends Controller
     public function destroy($id)
     {
         //
-        $products = Product::findOrFail($id);
+        DB::beginTransaction();
+        try{
+            
+            $products = Product::findOrFail($id);
+            $coupons = DB::table('product_coupons')->where('id_product',$products->id)->delete();
+            // foreach($coupons as $coupon) {
+            //     $coupon->delete();
+            // }
         // dd($products);
-        if ( \Illuminate\Support\Facades\File::exists('image/' . $products->image)) {
-            \Illuminate\Support\Facades\File::delete('image/' . $products->image);
+
+        if (File::exists('image/' . $products->image)) {
+            File::delete('image/' . $products->image);
         }
         $images = Image::where('id_product', $products->id)->get();
         foreach ($images as $image) {
-            if ( \Illuminate\Support\Facades\File::exists('gallery/' . $image->url)) {
-                \Illuminate\Support\Facades\File::delete('gallery/' . $image->url);
+            if (File::exists('gallery/' . $image->url)) {
+                File::delete('gallery/' . $image->url);
             }
             $image->delete();
         }
 
         $products->delete();
+        DB::commit();
         return redirect('/admin/product');
+        } catch(Exception $e){
+            DB::rollBack();             
+        }        
+       
     }
 
     public function deleteGallery($id)
     {
         $image = Image::findOrFail($id);
         // dd($products);
-        if (\Illuminate\Support\Facades\File::exists('gallery/' . $image->url)) {
-            \Illuminate\Support\Facades\File::delete('gallery/' . $image->url);
+        if (File::exists('gallery/' . $image->url)) {
+            File::delete('gallery/' . $image->url);
+
         }
         Image::find($id)->delete();
         return back();
@@ -213,8 +237,10 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($id);
         // dd($products);
-        if (\Illuminate\Support\Facades\File::exists('image/' . $product->image)) {
-            \Illuminate\Support\Facades\File::delete('image/' . $product->image);
+
+        if (File::exists('image/' . $product->image)) {
+            File::delete('image/' . $product->image);
+
         }
         // Image::find($id)->delete();
         return redirect('/admin/product/edit/' . $id);

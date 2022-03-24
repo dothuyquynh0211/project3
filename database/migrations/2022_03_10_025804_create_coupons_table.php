@@ -19,6 +19,7 @@ class CreateCouponsTable extends Migration
             $table->integer('value');
             $table->string('coupons_code');
             $table->integer('coupons_number');
+            $table->tinyInteger('coupons_condition');
             $table->tinyInteger('status')->default(1);
             $table->date('start_date');
             $table->date('end_date');

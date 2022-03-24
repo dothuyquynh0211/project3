@@ -2,6 +2,10 @@
 @section('title','Trang chủ Admin')
 
 @section('content')
+<script src="{{ asset('public/backend/ckeditor/ckeditor.js') }}"></script>
+    <script>
+        CKEDITOR.replace('ckeditor');
+    </script>
 <div class="panel-body">
 
     <div class="position-center">

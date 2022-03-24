@@ -68,7 +68,11 @@
                         <ul>
 
                             @foreach ($category as  $item)
-                            <li><a href="/{{$item->id}}">{{$item->name}}</a></li>
+                            @php
+                                $url = strtolower($item->name);
+                                $urls = str_replace(' ','_',$url);
+                            @endphp
+                            <li><a href="/{{$urls}}">{{$item->name}}</a></li>
                             @endforeach
                             {{-- <li><a href="/">Home</a></li>
                             <li><a href="#">Women’s</a></li>
