@@ -261,10 +261,11 @@ Created: Colorib
 
                     for (let i = 0; i < totalArray.length; i++) {
                         const element = totalArray[i];
-                        total += Number($(element).text().replace(",", ""));
+                        total += Number($(element).text().replaceAll(",", ""));
                     }
+                    // console.log(total);
 
-                    $(".total-cart").text(total);
+                    $(".total-cart").text(`${formatNumber(total)}VND`);
                     break;
 
                 default:

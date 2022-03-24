@@ -16,10 +16,7 @@ class CartController extends Controller
         $quantity = $request->qty;
         $productId = $request->productid_hidden;
         $product_Inf = DB::table('products')->where('id', $productId)->first();
-        // $brands = DB::table('brands')->get();
-        // $categories = DB::table('categories')->get();
-        // //    Cart::add('293ad', 'Product 1', 1, 9.99, 550);
-        //Cart::destroy();
+       
         $data['id'] = $product_Inf->id;
         $data['name'] = $product_Inf->name;
         $data['qty'] = $quantity;
@@ -32,9 +29,6 @@ class CartController extends Controller
     }
     public function shop_cart()
     {
-        echo '<pre>';
-        print_r(Cart::content());
-        echo '</pre>';
         $brands = DB::table('brands')->get();
         $categories = DB::table('categories')->get();
 

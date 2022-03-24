@@ -61,7 +61,7 @@
                                         <td class="cart__quantity">
                                             <form method="POST" action="/updateCart">
                                                 <div class="pro-qty">
-                                                    <input type="text" value="{{ $v_content->qty }}" name="qty">
+                                                    <input type="text" value="{{ $v_content->qty }}" name="qty" readonly>
                                                     <input type="hidden" value="{{ $v_content->rowId }}" name="rowId_cart"
                                                         class="form-control">
                                                     {{-- //  <button type="submit" name="update_qty" value="cập nhật"><span class="icon_loading"></span> </button> --}}
@@ -133,12 +133,14 @@ echo number_format($subtotal);
                     <div class="cart__total__procced">
                         <h6>Cart total</h6>
                         <ul>
-                            <li>Subtotal <span>0</span></li>
-                            <<<<<<< HEAD <li>Total <span class="total-cart">{{ Cart::total() . '' . 'VND' }}</span>
-                                </li>
-                                =======
-                                <li>Total <span>{{ Cart::subtotal() . '' . 'VNĐ' }}</span></li>
-                                >>>>>>> d52935fdc85b9a4281b3dfa19178278a17235d82
+                            
+                            <li>Subtotal <span
+                                    class="total-cart">{{ number_format(str_replace([',', '.00'], '', Cart::subtotal())) }}VNĐ</span>
+                            </li>
+                            <li>Total <span>0</span></li>
+
+                            {{-- <li>Total <span>{{ Cart::subtotal() . '' . 'VNĐ' }}</span></li> --}}
+
                         </ul>
                         @if (Auth::guard('users')->user() != null)
                             {{-- <span>{{Auth::guard('users')->user()->name}}</span> --}}
