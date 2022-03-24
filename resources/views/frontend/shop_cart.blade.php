@@ -83,6 +83,7 @@ echo number_format($subtotal);
 
                                         </td>
                                     </tr>
+                                    {{-- ======= thuy --}}
                                 @endforeach
                             </tbody>
                         </table>
@@ -133,9 +134,21 @@ echo number_format($subtotal);
                         <h6>Cart total</h6>
                         <ul>
                             <li>Subtotal <span>0</span></li>
-                            <li>Total <span class="total-cart">{{ Cart::total() . '' . 'VND' }}</span></li>
+                            <<<<<<< HEAD <li>Total <span class="total-cart">{{ Cart::total() . '' . 'VND' }}</span>
+                                </li>
+                                =======
+                                <li>Total <span>{{ Cart::subtotal() . '' . 'VNĐ' }}</span></li>
+                                >>>>>>> d52935fdc85b9a4281b3dfa19178278a17235d82
                         </ul>
-                        <a href="frontend.checkout/" class="primary-btn">Proceed to checkout</a>
+                        @if (Auth::guard('users')->user() != null)
+                            {{-- <span>{{Auth::guard('users')->user()->name}}</span> --}}
+                            <a href="/Checkout">Thanh toán</a>
+                        @else
+                            <a href="{{ route('user.login') }}">Login</a>
+                            <a href="{{ route('user.register') }}">Register</a>
+                        @endif
+
+
                     </div>
                 </div>
             </div>

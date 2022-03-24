@@ -20,6 +20,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ImportgoodsController;
 use App\Http\Controllers\Admin\ImportDetailController;
 use App\Http\Controllers\User\CartController;
+use App\Http\Controllers\User\CheckoutController;
 
 
 
@@ -138,8 +139,19 @@ Route::get('/admin/product/detail/{id}', [ProductController::class, 'show']);
 Route::post('/shop_cart', [CartController::class, 'save_cart']);
 
 Route::get('/shop_cart', [CartController::class, 'shop_cart']);
+
 Route::get('/delete_cart', [CartController::class, 'delete_cart']);
 Route::get('/update_cart', [CartController::class, 'update_cart']);
+
+// thuy
+// Route::get('/deleteCart/{rowId}', [CartController::class, 'deleteCart']);
+// Route::post('/updateCart', [CartController::class, 'updateCart']);
+
+
+
+
+////Checkout
+Route::get('/Checkout', [CheckoutController::class,'Checkout']);
 
 
 
@@ -155,7 +167,7 @@ Route::post('/login', [AuthController::class, 'loginUser']);
 Route::get('/register', [AuthController::class, 'showFormRegister'])->name('user.register');
 Route::post('/register', [AuthController::class, 'register']);
 Route::get('/logoutUser', [AuthController::class, 'logoutUser'])->name('user.logout');
-Route::get('/checkout', [UserController::class, 'checkout']);
+
 // Route::get('/{category}', [CategoryController::class, 'show_category_home']);
 Route::get('/contact', [UserController::class, 'contact']);
 // Route::get('/{category}', [UserController::class, 'category']);
