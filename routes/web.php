@@ -63,10 +63,10 @@ Route::get('/admin/brand/delete/{id}', [BrandController::class, 'deleteBrands'])
 Route::get('/admin/importgoods', [ImportgoodsController::class, 'index']);
 Route::get('/admin/importgoods/create', [ImportgoodsController::class, 'create']);
 Route::post('/admin/importgoods/create', [ImportgoodsController::class, 'store']);
-Route::get('/admin/importgoods/edit/{id}', [ImportgoodsController::class,'edit']);
+Route::get('/admin/importgoods/edit/{id}', [ImportgoodsController::class, 'edit']);
 Route::post('/admin/importgoods/update', [ImportgoodsController::class, 'update']);
 Route::get('/admin/importgoods/delete/{id}', [ImportgoodsController::class, 'delete']);
-  
+
 ///Import detail\
 Route::get('admin/detail/{id}', [ImportDetailController::class, 'detail']);
 Route::get('/admin/detail/insertd', [DetailController::class, 'insertd']);
@@ -138,8 +138,9 @@ Route::get('/admin/product/detail/{id}', [ProductController::class, 'show']);
 Route::post('/shop_cart', [CartController::class, 'save_cart']);
 
 Route::get('/shop_cart', [CartController::class, 'shop_cart']);
-Route::get('/deleteCart/{rowId}', [CartController::class, ' deleteCart']);
-Route::post('/updateCart', [CartController::class, 'updateCart']);
+Route::get('/delete_cart', [CartController::class, 'delete_cart']);
+Route::get('/update_cart', [CartController::class, 'update_cart']);
+
 
 
 

@@ -86,7 +86,7 @@
                                 <div class="quantity">
                                     <span>Quantity:</span>
                                     <div class="pro-qty">
-                                        <input name="qty" type="number" value="1">
+                                        <input name="qty" type="text" value="1">
                                         <input type="hidden" name="productid_hidden" value="{{ $product->id }}">
                                     </div>
                                 </div>
