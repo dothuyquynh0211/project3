@@ -196,6 +196,7 @@ Created: Colorib
 	--------------------*/
 	$('.product__thumb .pt').on('click', function(){
 		var imgurl = $(this).data('imgbigurl');
+        
 		var bigImg = $('.product__big__img').attr('src');
 		if(imgurl != bigImg) {
 			$('.product__big__img').attr({src: imgurl});

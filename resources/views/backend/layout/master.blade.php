@@ -2,9 +2,9 @@
 
 @section('title', 'Dashboard')
 
+<script type="text/javascript" src="{{ asset('/backend/ckeditor/ckeditor.js') }}"></script>
 
 @section('content')
-    <script src="{{ asset('public/backend/ckeditor/ckeditor.js') }}"></script>
 
     @if (Auth::guard('admins')->user() != null)
         <span>{{ Auth::guard('admins')->user()->name }}</span>
@@ -21,4 +21,9 @@
     @endif
 
     <p>Welcome to chanel bag.</p>
+
+
 @stop
+<script type="text/javascript">
+    CKEDITOR.replace('ckeditor1');
+</script>

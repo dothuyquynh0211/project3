@@ -26,7 +26,7 @@ class CartController extends Controller
     $data['weight']= $product_Inf->price;
     $data['options']['image']= $product_Inf->image;
     
-         Cart::add($data);
+        Cart::add($data);
          return redirect('/shop_cart');
     }
     public function shop_cart(){

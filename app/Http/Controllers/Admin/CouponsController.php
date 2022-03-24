@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -16,7 +17,8 @@ class CouponsController extends Controller
         $data = array(
             'list' => DB::table('coupons')->get()
         );
-        return view('backend.coupons.index_coupons', $data);
+        $today = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d');
+        return view('backend.coupons.index_coupons', $data)->with('today',$today);
     }
 
     public function add()

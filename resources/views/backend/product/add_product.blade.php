@@ -93,10 +93,7 @@
                                 <label>Giá trước khi giảm</label>
                                 <input type="text" name="sale_price" class="form-control" placeholder=" 350000 ">
                             </div>
-                            <div class="form-group">
-                                <label>Mô tả </label>
-                                <input type="text" name="description" class="form-control" placeholder=" 300000 ">
-                            </div>
+                            
                             <div class="form-group">
                                 <label> Ảnh</label>
                                 <input type="file" name="image" id="url_img" class="form-control"
@@ -147,6 +144,10 @@
                                     @endforeach
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label>Mô tả </label>
+                                <textarea name="description" class="form-control" placeholder=" 300000 " id='ckeditor1'></textarea>
+                            </div>
                             <button type="submit" name="add_account" class="btn btn-info">Thêm sản phẩm </button>
                         </form>
                         <br>
@@ -185,4 +186,7 @@
             }
         });
     </script>
+    <script type="text/javascript">
+    CKEDITOR.replace( 'ckeditor1' );
+</script>
 @endsection
