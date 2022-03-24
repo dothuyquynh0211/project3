@@ -54,13 +54,18 @@
                                     <td class="cart__price">{{number_format( $v_content->price)}}VNĐ</td>
                                   
                                     <td class="cart__quantity">
-                                        <form method="POST" action="/updateCart">
-                                        <div class="pro-qty">
-                                            <input type="text" value="{{$v_content->qty}}" name="quantity">
+                                       
+                                        <div class="cart_quantity_button">
+                                            <form method="POST" action="/updateCart">
+                                                {{csrf_field()}}
+                                            <input type="text" value="{{$v_content->qty}}" name="quantity" class="cart_quantity_input">
                                             <input type="hidden" value="{{$v_content->rowId}}" name="rowId_cart" class="form-control">
-                                          {{-- //  <button type="submit" name="update_qty" value="cập nhật"><span class="icon_loading"></span> </button> --}}
+                                            {{-- <input  type="submit" name="update_qty" class="btn btn-default btn-sm" value="Cập nhật">  --}}
+                                           <button type="submit" name="update_qty" class="btn btn-default btn-small">
+                                            <span class="icon_loading"></span> Cập nhật</button>
+                                            </form>
                                         </div>
-                                        </form>
+                                       
                                     </td>
                                     <td class="cart__total">
                                         <?php 
@@ -113,9 +118,18 @@
                         <h6>Cart total</h6>
                         <ul>
                             <li>Subtotal <span>0</span></li>
-                            <li>Total <span>{{Cart::total().''.'VND'}}</span></li>
+                            <li>Total <span>{{Cart::subtotal().''.'VNĐ'}}</span></li>
                         </ul>
-                        <a href="frontend.checkout/" class="primary-btn">Proceed to checkout</a>
+                        @if(Auth::guard('users')->user() !=null)
+                        {{-- <span>{{Auth::guard('users')->user()->name}}</span>             --}}
+                        <a href="/Checkout">Thanh toán</a>                               
+                                                       
+                    @else
+                    <a href="{{route('user.login')}}" >Login</a>
+                    <a href="{{route('user.register')}}" >Register</a>                                     
+                    @endif
+                 
+
                     </div>
                 </div>
             </div>
