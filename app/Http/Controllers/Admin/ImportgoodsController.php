@@ -3,75 +3,111 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Image;
-use App\Models\ImportgoodsModel;
+use App\Models\Product;
+use Carbon\Carbon;
+use Exception;
 use Illuminate\Http\Request;
-use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\DB;
 
 class ImportgoodsController extends Controller
 {
-   
-  
-    function index()
+    //
+    public function indexImportgoods()
     {
-        
-        $importgoods = ImportgoodsModel::index();
-      
-       return view('backend.importgoods.index_importgoods',['importgoods'=>$importgoods]);
-       
+        $data = array(
+            'list' => DB::table('import_goods')->get()
+        );
+        $today = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d');
+        return view('backend.importgoods.index_importgoods', $data)->with('today',$today);
     }
-   
 
-   
-    function create()
+    public function add()
     {
-        $sql1 = ImportgoodsModel::getadmins();
-        $sql2 = ImportgoodsModel::getwarehouses();
-
-        return view('backend.importgoods.add_importgoods', [
-            'admins' => $sql1,
-            'warehouses'=> $sql2
+        $data1 = array(
+            'admins' => DB::table('admins')->get(),
+            'warehouses' => DB::table('warehouses')->get(),
             
-        ]);
-    }
-    function store(Request $req){
-        $date= $req->input('date');
-        $id_admin= $req->input('id_admin');
-        $id_warehouse= $req->input('id_warehouse');
+        );
+        return view('backend.importgoods.add_importgoods', $data1);
        
-        $rs = ImportgoodsModel::store($date,$id_admin,$id_warehouse);
-        if($rs==0) return "Insert thất bại";
-        else{
-            // Alert::success('Thêm thành công', 'Success Borrowpay');
-            return redirect('/admin/importgoods');
-        }
     }
-    public function edit($id)
+    public function addImportgoods(Request $request)
+    {
+       
+        DB::beginTransaction();
+        try{
+            DB::table('import_goods')->insert([
+                'date' => $request->input('date'),
+                'id_admin' => $request->input('id_admin'),
+                'id_warehouse' => $request->input('id_warehouse'),
+               
+                
+            ]);
+            $importgoods_id = DB::getPDO()->lastInsertId();
+            foreach($request->product_id as $p_id){
+                DB::table('import_details')->insert([
+                    'id_product'=>$p_id,
+                    'id_importgoods' =>$importgoods_id,
+                    'quantity' => $request->input('quantity'),
+                    'cost_price' => $request->input('cost_price'),
+                ]);
+            }
+            DB::commit();
+            return redirect('/admin/importgoods')->with('message', 'Data have been successfully inserted');
+            
+        }catch (Exception $e){
+            DB::rollBack();  
+            return redirect()->back()->with('message', 'Something went wrong');
+
+        }
+        
+        // echo "<pre>";
+        // print_r($coupons_id);
+        // echo "</pre>";
+    }
+
+    public function editImportgoods($id)
     {
         $row = DB::table('import_goods')->where('id', $id)->first();
         $data = array(
             'info' => $row,
-            'admins' => DB::table('admins')->get(),
-            'warehouses' => DB::table('warehouses')->get(),
         );
         return view('backend.importgoods.edit', $data);
     }
 
-    public function update(Request $request)
+    public function updateImportgoods(Request $request)
     {
+        
         $query = DB::table('import_goods')->where('id', $request->input('id'))->update([
-           
-            'id_warehouse' => $request->input('id_warehouse'),
+            'date' => $request->input('date'),
             'id_admin' => $request->input('id_admin'),
-            'date' => date("Y-m-d H:i:s")
+            'id_warehouse' => $request->input('id_warehouse'),
+           
         ]);
-        return redirect('/admin/importgoods/');
+        return redirect('/admin/importgoods');
     }
 
-    public function delete($id) {
+    public function deleteImportgoods($id)
+    {
         $delete = DB::table('import_goods')->where('id', $id)->delete();
-        return redirect('/admin/importgoods/');
-    
+        return redirect('/admin/importgoods');
+    }
+    public function action(Request $request)
+    {
+
+        $value = $request->all()['value'];
+        $filter_data = Product::select('*')->where('name', 'LIKE', '%' . $value . '%')
+            //     // ->orWhere('sku', 'LIKE', '%' . $query . '%')
+            ->get(5);
+        echo json_encode($filter_data, JSON_UNESCAPED_UNICODE);
+    }
+    public function getProduct(Request $request)
+    {
+
+        $value = $request->all()['id'];
+        $filter_data = Product::select('*')->where('id', '=', $value)
+            //     // ->orWhere('sku', 'LIKE', '%' . $query . '%')
+            ->get(1);
+        echo json_encode($filter_data, JSON_UNESCAPED_UNICODE);
     }
 }

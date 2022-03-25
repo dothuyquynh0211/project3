@@ -24,6 +24,7 @@
                     <div class="contact__content">
                         <div class="contact__address">
                             <h5>Contact info</h5>
+                           
                             <ul>
                                 <li>
                                     <h6><i class="fa fa-map-marker"></i> Address</h6>
@@ -41,13 +42,20 @@
                         </div>
                         <div class="contact__form">
                             <h5>SEND MESSAGE</h5>
-                            <form action="#">
-                                <input type="text" placeholder="Name">
-                                <input type="text" placeholder="Email">
-                                <input type="text" placeholder="Website">
-                                <textarea placeholder="Message"></textarea>
-                                <button type="submit" class="site-btn">Send Message</button>
-                            </form>
+                            {!! Form::open(array('route' => 'front.fb', 'class' => '')) !!}
+                            <div>
+                                <label  class="email">Your name</label>
+                                    {!! Form::text('name', null, ['class' => 'input-text', 'placeholder'=>"Your name"]) !!}
+                            </div><div>
+                                <label  class="email">Your email</label>
+                                    {!! Form::text('email', null, ['class' => 'input-text', 'placeholder'=>"Your email"]) !!}
+                            </div><div>
+                                <label class="email">Comments</label>
+                                    {!! Form::textarea('comment', null, ['class' => 'tarea', 'rows'=>"5"]) !!}
+                            </div><div class="send">
+                                {!! Form::submit('Send', ['class' => 'button']) !!}
+                            </div>
+                            {!! Form::close() !!}
                         </div>
                     </div>
                 </div>

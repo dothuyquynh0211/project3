@@ -66,7 +66,7 @@
                 <div class="col-xl-6 col-lg-7">
                     <nav class="header__menu">
                         <ul>
-
+                            <li><a href="/">Giới thiệu</a></li>
                             @foreach ($category as  $item)
                             @php
                                 $url = strtolower($item->name);
@@ -74,8 +74,8 @@
                             @endphp
                             <li><a href="/{{$urls}}">{{$item->name}}</a></li>
                             @endforeach
-                            {{-- <li><a href="/">Home</a></li>
-                            <li><a href="#">Women’s</a></li>
+                          
+                            {{-- <li><a href="#">Women’s</a></li> 
                             <li><a href="#">Men’s</a></li>
                             <li class="active"><a href="/shop">Shop</a></li>
                             <li><a href="#">Pages</a>
@@ -86,8 +86,8 @@
                                     <li><a href="/blog-detail">Blog Details</a></li>
                                 </ul>
                             </li>
-                            <li><a href="/block">Blog</a></li>
-                            <li><a href="/contact">Contact</a></li> --}}
+                                    {{-- <li><a href="/block">Blog</a></li>  --}}
+                             <li><a href="/contact">Contact</a></li> 
                         </ul>
                     </nav>
                 </div>
