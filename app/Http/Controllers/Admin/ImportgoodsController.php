@@ -44,6 +44,8 @@ class ImportgoodsController extends Controller
                 
             ]);
             $importgoods_id = DB::getPDO()->lastInsertId();
+            // dd($importgoods_id);
+            // die();
             foreach($request->product_id as $p_id){
                 DB::table('import_details')->insert([
                     'id_product'=>$p_id,
@@ -60,10 +62,6 @@ class ImportgoodsController extends Controller
             return redirect()->back()->with('message', 'Something went wrong');
 
         }
-        
-        // echo "<pre>";
-        // print_r($coupons_id);
-        // echo "</pre>";
     }
 
     public function editImportgoods($id)

@@ -18,7 +18,7 @@ class CreateInvoiceDetailsTable extends Migration
             $table->unsignedBigInteger('id_product');
             $table->foreign('id_product')->references('id')->on('products');
             $table->integer('quantity');
-            $table->float('price');
+            $table->float('price',10,2);
             $table->unsignedBigInteger('id_invoice');
             $table->foreign('id_invoice')->references('id')->on('invoices');
             $table->string('coupons_code')->nullable();

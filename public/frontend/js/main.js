@@ -220,59 +220,73 @@ Created: Colorib
     proQty.on("click", ".qtybtn", function () {
         var $button = $(this);
         var oldValue = $button.parent().find("input").val();
+
         if ($button.hasClass("inc")) {
             var newVal = parseFloat(oldValue) + 1;
         } else {
             // Don't allow decrementing below zero
             if (oldValue > 0) {
-                var newVal = parseFloat(oldValue) - 1;
+                let newValue = 0;
+                if (oldValue == 1) {
+                    return false;
+                } else {
+                    newVal = parseFloat(oldValue) - 1;
+                }
             } else {
-                newVal = 0;
+                newVal = 1;
             }
         }
-        let rowId = $button.closest("tr").attr("rowId");
+        let checkPage = $button.closest(".product__details__button").length;
 
-        $.ajax({
-            url: "/update_cart",
-            type: "get",
-            data: {
-                rowId: rowId,
-                qty: newVal,
-            },
-        }).done(function (ketqua) {
-            switch (ketqua) {
-                case "success":
-                    $button.parent().find('input[name="qty"]').val(newVal);
-                    let price = $button
-                        .closest("tr")
-                        .find(".content-price")
-                        .val();
+        if (checkPage == 0) {
 
-                    let totalPrice = newVal * price;
-                    // totalPrice = formatNumber(totalPrice, '.', ',')
-                    $button
-                        .closest("tr")
-                        .find(".cart__total .price-total-number")
-                        .text(formatNumber(totalPrice, ".", ","));
-                    // alert("<?=$re; ?>");
+            let rowId = $button.closest("tr").attr("rowId");
 
-                    let totalArray = $(".price-total-number");
-                    let total = 0;
+            $.ajax({
+                url: "/update_cart",
+                type: "get",
+                data: {
+                    rowId: rowId,
+                    qty: newVal,
+                },
+            }).done(function (ketqua) {
+                switch (ketqua) {
+                    case "success":
+                        $button.parent().find('input[id="qty"]').val(newVal);
+                        let price = $button
+                            .closest("tr")
+                            .find(".content-price")
+                            .val();
 
-                    for (let i = 0; i < totalArray.length; i++) {
-                        const element = totalArray[i];
-                        total += Number($(element).text().replaceAll(",", ""));
-                    }
-                    // console.log(total);
+                        let totalPrice = newVal * price;
+                        // totalPrice = formatNumber(totalPrice, '.', ',')
+                        $button
+                            .closest("tr")
+                            .find(".cart__total .price-total-number")
+                            .text(formatNumber(totalPrice, ".", ","));
+                        // alert("<?=$re; ?>");
 
-                    $(".total-cart").text(`${formatNumber(total)}VND`);
-                    break;
+                        let totalArray = $(".price-total-number");
+                        let total = 0;
 
-                default:
-                    break;
-            }
-            // console.log(ketqua);
-        });
+                        for (let i = 0; i < totalArray.length; i++) {
+                            const element = totalArray[i];
+                            total += Number(
+                                $(element).text().replaceAll(",", "")
+                            );
+                        }
+                        // console.log(total);
+
+                        $(".total-cart").text(`${formatNumber(total)}VND`);
+                        break;
+
+                    default:
+                        break;
+                }
+                // console.log(ketqua);
+            });
+        }
+        $button.parent().find('input[name="qty"]').val(newVal);
     });
 
     function formatNumber(num) {
@@ -304,9 +318,7 @@ function deleteCart(rowId, event) {
         switch (ketqua) {
             case "success":
                 $(event).closest("tr").remove();
-
                 break;
-
             default:
                 break;
         }

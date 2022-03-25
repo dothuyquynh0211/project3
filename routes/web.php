@@ -70,6 +70,10 @@ Route::post('/admin/importgoods/add', [ImportgoodsController::class, 'addImportg
 Route::get('/admin/importgoods/edit/{id}', [ImportgoodsController::class, 'edit']);
 Route::post('/admin/importgoods/update', [ImportgoodsController::class, 'update']);
 Route::get('/admin/importgoods/delete/{id}', [ImportgoodsController::class, 'delete']);
+Route::get('/admin/importgoods/action', [ImportgoodsController::class, 'action']);
+Route::get('/admin/importgoods/product', [ImportgoodsController::class, 'getProduct']);
+
+
 
 ///Import detail\
 Route::get('admin/detail/{id}', [ImportDetailController::class, 'detail']);
@@ -138,7 +142,14 @@ Route::delete('/deleteimage/{id}', [ProductController::class, 'deleteImage']);
 Route::delete('/deletegallery/{id}', [ProductController::class, 'deleteGallery']);
 Route::get('/admin/product/detail/{id}', [ProductController::class, 'show']);
 
-///Cart
+//Manage invoice 
+
+Route::get('/admin/invoice', [CheckoutController::class, 'invoice']);
+Route::get('/admin/invoice/update/{id}/{status}', [CheckoutController::class, 'update_invoice']);
+Route::get('/admin/invoice/detail/{id}', [CheckoutController::class, 'invoice_detail']);
+
+
+// Cart
 Route::post('/shop_cart', [CartController::class, 'save_cart']);
 
 Route::get('/shop_cart', [CartController::class, 'shop_cart']);
@@ -146,23 +157,17 @@ Route::get('/shop_cart', [CartController::class, 'shop_cart']);
 Route::get('/delete_cart', [CartController::class, 'delete_cart']);
 Route::get('/update_cart', [CartController::class, 'update_cart']);
 
-// thuy
-// Route::get('/deleteCart/{rowId}', [CartController::class, 'deleteCart']);
-// Route::post('/updateCart', [CartController::class, 'updateCart']);
+// Checkout
+Route::get('/checkout', [CheckoutController::class, 'checkout'])->middleware('auth');
+Route::post('/invoice', [CheckoutController::class, 'save_invoice']);
+Route::get('/history', [CheckoutController::class, 'history']);
+Route::get('/history/{id}', [CheckoutController::class, 'history_detail']);
 
 
-
-
-////Checkout
-Route::get('/Checkout', [CheckoutController::class,'Checkout']);
-
-
-
-
-// Đường dẫn trang khách hàng 
 
 Route::get('/', [UserController::class, 'index'])->name('user.index');
 // Route::get('/cart', [UserController::class, 'cart']);
+
 
 
 Route::get('/login', [AuthController::class, 'showFormLogin'])->name('user.login');
@@ -170,15 +175,6 @@ Route::post('/login', [AuthController::class, 'loginUser']);
 Route::get('/register', [AuthController::class, 'showFormRegister'])->name('user.register');
 Route::post('/register', [AuthController::class, 'register']);
 Route::get('/logoutUser', [AuthController::class, 'logoutUser'])->name('user.logout');
-
-// Route::get('/{category}', [CategoryController::class, 'show_category_home']);
 Route::get('/contact', [UserController::class, 'contact']);
-// Route::get('/{category}', [UserController::class, 'category']);
-
+Route::get('/shop', [UserController::class, 'shop']);
 Route::get('/product-detail/{id}', [UserController::class, 'productDetail']);
-Route::get('/blog', function () {
-    return view('frontend.blog');
-});
-Route::get('/blog-detail', function () {
-    return view('frontend.blog_details');
-});

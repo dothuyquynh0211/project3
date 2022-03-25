@@ -28,10 +28,10 @@
                             </div>
                             <div class="categories__accordion">
                                 <div class="accordion" id="accordionExample">
-                                    @foreach ($category as $item)
+                                    {{-- @foreach ($category as $item) --}}
                                     <div class="card">
                                         <div class="card-heading active">
-                                            <a data-toggle="collapse" data-target="#collapseOne">{{$item->name}}</a>
+                                            {{-- <a data-toggle="collapse" data-target="#collapseOne">{{$item->name}}</a> --}}
                                         </div>
                                         {{-- <div id="collapseOne" class="collapse show" data-parent="#accordionExample">
                                             <div class="card-body">
@@ -46,7 +46,7 @@
                                             </div>
                                         </div> --}}
                                     </div>
-                                    @endforeach
+                                    {{-- @endforeach --}}
                                     {{-- <div class="card">
                                         <div class="card-heading active">
                                             <a data-toggle="collapse" data-target="#collapseOne">Women</a>

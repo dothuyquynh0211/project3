@@ -32,7 +32,7 @@ class CouponsController extends Controller
         } else {
             $status = '0';
         }
-        DB::beginTransaction();
+        DB::beginTransaction(); 
         try{
             DB::table('coupons')->insert([
                 'name' => $request->input('name'),
