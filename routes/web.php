@@ -67,6 +67,7 @@ Route::get('/admin/brand/delete/{id}', [BrandController::class, 'deleteBrands'])
 Route::get('/admin/importgoods', [ImportgoodsController::class, 'indexImportgoods']);
 Route::get('/admin/importgoods/add', [ImportgoodsController::class, 'add']);
 Route::post('/admin/importgoods/add', [ImportgoodsController::class, 'addImportgoods']);
+Route::get('/admin/importgoods/action', [ImportgoodsController::class, 'action']);
 Route::get('/admin/importgoods/edit/{id}', [ImportgoodsController::class, 'edit']);
 Route::post('/admin/importgoods/update', [ImportgoodsController::class, 'update']);
 Route::get('/admin/importgoods/delete/{id}', [ImportgoodsController::class, 'delete']);
