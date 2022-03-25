@@ -6,7 +6,7 @@
     <div class="col-lg-12">
         <section class="panel">
             <header class="panel-heading">
-                <a href="/admin/importgoods/create">Thêm sản phẩm  </a> 
+                <a href="/admin/importgoods/add">Thêm sản phẩm  </a> 
             </header>
             <div>
                 <div class="form-group">
@@ -23,7 +23,7 @@
                     </thead>
                     <tbody>
 
-                        @foreach ($importgoods as $item)
+                        @foreach ($list as $item)
                         <tr>
                             <td>{{$item->id}}</td>
                            
