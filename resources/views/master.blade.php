@@ -1,30 +1,32 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="description" content="Ashion Template">
-        <meta name="keywords" content="Ashion, unica, creative, html">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Todd & Quinn Shop</title>
-    
-        <!-- Google Font -->
-        <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ashion Template">
+    <meta name="keywords" content="Ashion, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Todd & Quinn Shop</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
         rel="stylesheet">
-    
-        <!-- Css Styles -->
-        <link rel="stylesheet" href="{{ mix('/frontend/css/app.css') }}">
-        <link rel="stylesheet" href="{{asset('frontend/css/bootstrap.min.css')}}" type="text/css">
-        <link rel="stylesheet" href="{{asset('frontend/css/font-awesome.min.css')}}" type="text/css">
-        <link rel="stylesheet" href="{{asset('frontend/css/elegant-icons.css')}}" type="text/css">
-        <link rel="stylesheet" href="{{asset('frontend/css/jquery-ui.min.css')}}" type="text/css">
-        <link rel="stylesheet" href="{{asset('frontend/css/magnific-popup.css')}}" type="text/css">
-        <link rel="stylesheet" href="{{asset('frontend/css/owl.carousel.min.css')}}" type="text/css">
-        <link rel="stylesheet" href="{{asset('frontend/css/slicknav.min.css')}}" type="text/css">
-    </head>
-    <body>
-        <!-- Page Preloder -->
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="{{ mix('/frontend/css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/bootstrap.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('frontend/css/font-awesome.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('frontend/css/elegant-icons.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('frontend/css/jquery-ui.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('frontend/css/magnific-popup.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('frontend/css/owl.carousel.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('frontend/css/slicknav.min.css') }}" type="text/css">
+</head>
+
+<body>
+    <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
     </div>
@@ -36,14 +38,14 @@
         <ul class="offcanvas__widget">
             <li><span class="icon_search search-switch"></span></li>
             <li><a href="#"><span class="icon_heart_alt"></span>
-                <div class="tip">2</div>
-            </a></li>
+                    <div class="tip">2</div>
+                </a></li>
             <li><a href="#"><span class="icon_bag_alt"></span>
-                <div class="tip">2</div>
-            </a></li>
+                    <div class="tip">2</div>
+                </a></li>
         </ul>
         <div class="offcanvas__logo">
-            <a href="./index.html"><img src="{{('frontend/images/logo.png')}}" alt=""></a>
+            <a href="./index.html"><img src="{{ 'frontend/images/logo.png' }}" alt=""></a>
         </div>
         <div id="mobile-menu-wrap"></div>
         <div class="offcanvas__auth">
@@ -59,7 +61,7 @@
             <div class="row">
                 <div class="col-xl-3 col-lg-2">
                     <div class="header__logo">
-                        <a href="/"><img src="{{('/frontend/images/logo.png')}}" alt=""></a>
+                        <a href="/"><img src="{{ '/frontend/images/logo.png' }}" alt=""></a>
                     </div>
                 </div>
                 {{-- <h1>{{$abc}}</h1> --}}
@@ -67,12 +69,12 @@
                     <nav class="header__menu">
                         <ul>
 
-                            @foreach ($category as  $item)
-                            @php
-                                $url = strtolower($item->name);
-                                $urls = str_replace(' ','_',$url);
-                            @endphp
-                            <li><a href="/{{$urls}}">{{$item->name}}</a></li>
+                            @foreach ($category as $item)
+                                @php
+                                    $url = strtolower($item->name);
+                                    $urls = str_replace(' ', '_', $url);
+                                @endphp
+                                <li><a href="/{{ $urls }}">{{ $item->name }}</a></li>
                             @endforeach
                             {{-- <li><a href="/">Home</a></li>
                             <li><a href="#">Women’s</a></li>
@@ -94,23 +96,23 @@
                 <div class="col-lg-3">
                     <div class="header__right">
                         <div class="header__right__auth">
-                            @if(Auth::guard('users')->user() !=null)
-                                {{-- <span>{{Auth::guard('users')->user()->name}}</span>             --}}
-                                <a href="#">{{Auth::guard('users')->user()->name}}</a>                               
-                                <a href="{{route('user.logout')}}">Logout</a>                               
+                            @if (Auth::guard('users')->user() != null)
+                                {{-- <span>{{Auth::guard('users')->user()->name}}</span> --}}
+                                <a href="#">{{ Auth::guard('users')->user()->name }}</a>
+                                <a href="{{ route('user.logout') }}">Logout</a>
                             @else
-                            <a href="{{route('user.login')}}" >Login</a>
-                            <a href="{{route('user.register')}}" >Register</a>                                     
+                                <a href="{{ route('user.login') }}">Login</a>
+                                <a href="{{ route('user.register') }}">Register</a>
                             @endif
                         </div>
                         <ul class="header__right__widget">
                             <li><span class="icon_search search-switch"></span></li>
                             <li><a href="#"><span class="icon_heart_alt"></span>
-                                <div class="tip">2</div>
-                            </a></li>
+                                    <div class="tip">2</div>
+                                </a></li>
                             <li><a href="/shop_cart"><span class="icon_bag_alt"></span>
-                                <div class="tip"></div>
-                            </a></li>
+                                    <div class="tip">{{ $cart_count }}</div>
+                                </a></li>
                         </ul>
                     </div>
                 </div>
@@ -180,7 +182,7 @@
         </div>
     </div> --}}
     <!-- Instagram End -->
-    
+
     <!-- Footer Section Begin -->
     <footer class="footer">
         <div class="container">
@@ -188,10 +190,10 @@
                 <div class="col-lg-4 col-md-6 col-sm-7">
                     <div class="footer__about">
                         <div class="footer__logo">
-                            <a href="./index.html"><img src="{{('/frontend/images/logo.png')}}" alt=""></a>
+                            <a href="./index.html"><img src="{{ '/frontend/images/logo.png' }}" alt=""></a>
                         </div>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                        cilisis.</p>
+                            cilisis.</p>
                         {{-- <div class="footer__payment">
                             <a href="#"><img src="/img/payment/payment-1.png" alt=""></a>
                             <a href="#"><img src="/img/payment/payment-2.png" alt=""></a>
@@ -244,7 +246,12 @@
                 <div class="col-lg-12">
                     <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     <div class="footer__copyright__text">
-                        <p>Copyright &copy; <script>document.write(new Date().getFullYear());</script> All rights reserved | Design by <a href="#" target="_blank">Quynhdt</a></p>
+                        <p>Copyright &copy;
+                            <script>
+                                document.write(new Date().getFullYear());
+                            </script> All rights reserved | Design by <a href="#"
+                                target="_blank">Quynhdt</a>
+                        </p>
                     </div>
                     <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                 </div>
@@ -252,7 +259,7 @@
         </div>
     </footer>
     <!-- Footer Section End -->
-    
+
     <!-- Search Begin -->
     <div class="search-model">
         <div class="h-100 d-flex align-items-center justify-content-center">
@@ -263,17 +270,18 @@
         </div>
     </div>
     <!-- Search End -->
-    
+
     <!-- Js Plugins -->
-    <script src="{{asset('frontend/js/jquery-3.3.1.min.js')}}"></script>
-        <script src="{{asset('frontend/js/bootstrap.min.js')}}"></script>
-        <script src="{{asset('frontend/js/jquery.magnific-popup.min.js')}}"></script>
-        <script src="{{asset('frontend/js/jquery-ui.min.js')}}"></script>
-        <script src="{{asset('frontend/js/mixitup.min.js')}}"></script>
-        <script src="{{asset('frontend/js/jquery.countdown.min.js')}}"></script>
-        <script src="{{asset('frontend/js/jquery.slicknav.js')}}"></script>
-        <script src="{{asset('frontend/js/owl.carousel.min.js')}}"></script>
-        <script src="{{asset('frontend/js/jquery.nicescroll.min.js')}}"></script>
-        <script src="{{asset('frontend/js/main.js')}}"></script>
-    </body>
+    <script src="{{ asset('frontend/js/jquery-3.3.1.min.js') }}"></script>
+    <script src="{{ asset('frontend/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('frontend/js/jquery.magnific-popup.min.js') }}"></script>
+    <script src="{{ asset('frontend/js/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('frontend/js/mixitup.min.js') }}"></script>
+    <script src="{{ asset('frontend/js/jquery.countdown.min.js') }}"></script>
+    <script src="{{ asset('frontend/js/jquery.slicknav.js') }}"></script>
+    <script src="{{ asset('frontend/js/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('frontend/js/jquery.nicescroll.min.js') }}"></script>
+    <script src="{{ asset('frontend/js/main.js') }}"></script>
+</body>
+
 </html>

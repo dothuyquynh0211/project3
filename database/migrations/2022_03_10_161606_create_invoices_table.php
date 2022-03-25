@@ -19,10 +19,10 @@ class CreateInvoicesTable extends Migration
             $table->string('phone',20);
             $table->string('address');
             $table->float('total_payment');
-            $table->string('note');
+            $table->string('note')->nullable();
             $table->timestamp('created_at');
             $table->tinyInteger('status_order')->default(1);
-            $table->string(' payment_method');
+            $table->tinyInteger('payment_method')->default(1);
             $table->unsignedBigInteger('id_admin')->nullable();
             $table->foreign('id_admin')->references('id')->on('admins');
             $table->unsignedBigInteger('id_user');

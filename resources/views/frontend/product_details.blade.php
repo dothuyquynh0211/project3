@@ -6,8 +6,8 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb__links">
-                        <a href="./index.html"><i class="fa fa-home"></i> Home</a>
-                        <a href="#">Women’s </a>
+                        <a href="/"><i class="fa fa-home"></i> Home</a>
+                        <a href="/">Women’s </a>
                         <span>Essential structured blazer</span>
                     </div>
                 </div>
@@ -26,9 +26,9 @@
                             <a class="pt active" href="#product-1">
                                 <img src="/image/{{ $product->image }}" alt="">
                             </a>
-                            <?php $a = 1?>
+                            <?php $a = 1; ?>
                             @foreach ($image as $image)
-                                <a class="pt" href="#product-{{ ++$a}}">
+                                <a class="pt" href="#product-{{ ++$a }}">
                                     <img src="/gallery/{{ $image->url }}" alt="">
                                 </a>
                             @endforeach
@@ -77,8 +77,8 @@
 
                         {{-- <div class="product__details__price">$ 75.0 <span>$ 83.0</span></div> --}}
 
-                        <div class="product__details__price">{{ number_format($product->price) }}VNĐ<span>
-                                {{ number_format($product->sale_price) }}VNĐ</span></div>
+                        <div class="product__details__price">{{ number_format($product->price,0,',','.') }}VNĐ<span>
+                                {{ number_format($product->sale_price,0,',','.') }}VNĐ</span></div>
 
                         <form method="POST" action="/shop_cart">
                             {{ csrf_field() }}
@@ -86,10 +86,11 @@
                                 <div class="quantity">
                                     <span>Quantity:</span>
                                     <div class="pro-qty">
-                                        <input name="qty" type="text" value="1">
+                                        <input name="qty" type="text" value="1" readonly>
                                         <input type="hidden" name="productid_hidden" value="{{ $product->id }}">
                                     </div>
                                 </div>
+
                                 <button type="submit" class="cart-btn add_cart"><span class="icon_bag_alt"></span> Add to
                                     cart</button>
 

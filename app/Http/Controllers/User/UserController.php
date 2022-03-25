@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\Image;
 use App\Models\Product;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -44,11 +45,25 @@ class UserController extends Controller
         $product = Product::findOrFail($id);
         $image = Image::where('id_product', $product->id)->get();
         $attr_product = Product::join('brands', 'brands.id', '=', 'products.id_brand')
-        ->join('categories', 'categories.id', '=', 'products.id_category')
-        ->join('sizes', 'sizes.id', '=', 'products.id_size')
-        ->join('colors', 'colors.id', '=', 'products.id_color')      
-        ->where('products.id',$product->id)
-        ->get(['products.*', 'brands.name as brand_name','colors.name as name_color','categories.name as category_name','sizes.name as size_name'])->first();
+            ->join('categories', 'categories.id', '=', 'products.id_category')
+            ->join('sizes', 'sizes.id', '=', 'products.id_size')
+            ->join('colors', 'colors.id', '=', 'products.id_color')
+            ->where('products.id', $product->id)
+            ->get(['products.*', 'brands.name as brand_name', 'colors.name as name_color', 'categories.name as category_name', 'sizes.name as size_name'])->first();
         return view('frontend.product_details')->with('product', $product)->with('image', $image)->with('attr_product', $attr_product);
+    }
+    public function cart_count()
+    {
+        $cart_count = Cart::count();
+        echo '<pre>';
+        print_r($cart_count);
+        echo '</pre>';
+        die();
+        return view('frontend.shop')->with('cart_count', $cart_count);
+    }
+    public function shop()
+    {
+        // dd('bug');
+        return view('frontend.shop');
     }
 }
