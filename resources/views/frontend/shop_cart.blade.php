@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb__links">
-                        <a href="./index.html"><i class="fa fa-home"></i> Home</a>
+                        <a href="/"><i class="fa fa-home"></i> Home</a>
                         <span>Shopping cart</span>
                     </div>
                 </div>
@@ -61,7 +61,7 @@
                                         <td class="cart__quantity">
                                             <form method="POST" action="/updateCart">
                                                 <div class="pro-qty">
-                                                    <input type="text" value="{{ $v_content->qty }}" name="qty" readonly>
+                                                    <input type="text" value="{{ $v_content->qty }}" name="qty" id="qty" readonly>
                                                     <input type="hidden" value="{{ $v_content->rowId }}" name="rowId_cart"
                                                         class="form-control">
                                                     {{-- //  <button type="submit" name="update_qty" value="cập nhật"><span class="icon_loading"></span> </button> --}}
@@ -133,7 +133,7 @@ echo number_format($subtotal);
                     <div class="cart__total__procced">
                         <h6>Cart total</h6>
                         <ul>
-                            
+
                             <li>Subtotal <span
                                     class="total-cart">{{ number_format(str_replace([',', '.00'], '', Cart::subtotal())) }}VNĐ</span>
                             </li>
@@ -142,13 +142,14 @@ echo number_format($subtotal);
                             {{-- <li>Total <span>{{ Cart::subtotal() . '' . 'VNĐ' }}</span></li> --}}
 
                         </ul>
-                        @if (Auth::guard('users')->user() != null)
-                            {{-- <span>{{Auth::guard('users')->user()->name}}</span> --}}
-                            <a href="/Checkout">Thanh toán</a>
-                        @else
-                            <a href="{{ route('user.login') }}">Login</a>
-                            <a href="{{ route('user.register') }}">Register</a>
-                        @endif
+                        <a href="/checkout">Thanh toán</a>
+                        {{-- @if (Auth::guard('users')->user() != null) --}}
+                        {{-- <span>{{Auth::guard('users')->user()->name}}</span> --}}
+                        {{-- <a href="/checkout">Thanh toán</a> --}}
+                        {{-- @else --}}
+                        {{-- <a href="{{ route('user.login') }}">Login</a>
+                            <a href="{{ route('user.register') }}">Register</a> --}}
+                        {{-- @endif --}}
 
 
                     </div>
