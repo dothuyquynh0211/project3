@@ -37,7 +37,7 @@
                                 <div class='btn-group'>
                                     <a href="/admin/product/detail/{{$item->id}}" class="btn btn-danger btn-xs ">Detail </a>
                                     <form action="/admin/product/delete/{{$item->id}}" method="post">
-                                        <button type="submit" onclick=" return confirm('are you sure')">Delete</button>
+                                        <button type="submit" onclick=" return confirm('are you sure')" class="btn btn-primary btn-xs">Delete</button>
                                         @csrf
                                         @method('delete')
                                     </form>

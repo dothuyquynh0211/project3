@@ -21,12 +21,15 @@ use App\Http\Controllers\Admin\ImportgoodsController;
 use App\Http\Controllers\Admin\ImportDetailController;
 use App\Http\Controllers\User\CartController;
 use App\Http\Controllers\User\CheckoutController;
+use App\Http\Controllers\IndexController;
+
 
 
 
 // Đường dẫn trang admin - trước mỗi đường dẫn thêm tiền tố admin để phân biệt với bên khách hàng 
 
-
+// Route::post('/message/send', ['uses' => IndexController::class,'index', 
+//                                'as' => 'front.fb']);
 Route::get('/admin', function () {
     return redirect()->route('admin.home');
 });
@@ -61,9 +64,9 @@ Route::get('/admin/brand/delete/{id}', [BrandController::class, 'deleteBrands'])
 
 //Manage Importgoods
 
-Route::get('/admin/importgoods', [ImportgoodsController::class, 'index']);
-Route::get('/admin/importgoods/create', [ImportgoodsController::class, 'create']);
-Route::post('/admin/importgoods/create', [ImportgoodsController::class, 'store']);
+Route::get('/admin/importgoods', [ImportgoodsController::class, 'indexImportgoods']);
+Route::get('/admin/importgoods/add', [ImportgoodsController::class, 'add']);
+Route::post('/admin/importgoods/add', [ImportgoodsController::class, 'addImportgoods']);
 Route::get('/admin/importgoods/edit/{id}', [ImportgoodsController::class, 'edit']);
 Route::post('/admin/importgoods/update', [ImportgoodsController::class, 'update']);
 Route::get('/admin/importgoods/delete/{id}', [ImportgoodsController::class, 'delete']);
