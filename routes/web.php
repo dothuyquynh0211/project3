@@ -73,17 +73,17 @@ Route::post('/admin/importgoods/update', [ImportgoodsController::class, 'update'
 Route::get('/admin/importgoods/delete/{id}', [ImportgoodsController::class, 'delete']);
 Route::get('/admin/importgoods/action', [ImportgoodsController::class, 'action']);
 Route::get('/admin/importgoods/product', [ImportgoodsController::class, 'getProduct']);
-
+Route::get('admin/detail/{id}', [ImportgoodController::class, 'detail']);
 
 
 ///Import detail\
-Route::get('admin/detail/{id}', [ImportDetailController::class, 'detail']);
-Route::get('/admin/detail/insertd', [DetailController::class, 'insertd']);
-Route::post('/createdetail', [ImportDetailController::class, 'storedetail']);
-Route::get('/editd/{id}', [ImportDetailController::class, 'editd']);
-//xử lí cập nhật
-Route::post('/editd/{id}', [ImportDetailController::class, 'updated']);
-Route::get('/deleted/{id}', [ImportDetailController::class, 'destroyd']);
+
+// Route::get('/admin/detail/insertd', [DetailController::class, 'insertd']);
+// Route::post('/createdetail', [ImportDetailController::class, 'storedetail']);
+// Route::get('/editd/{id}', [ImportDetailController::class, 'editd']);
+// //xử lí cập nhật
+// Route::post('/editd/{id}', [ImportDetailController::class, 'updated']);
+// Route::get('/deleted/{id}', [ImportDetailController::class, 'destroyd']);
 //view insert
 
 
