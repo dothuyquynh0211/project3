@@ -2,6 +2,9 @@
 
 @section('title', 'Dashboard')
 
+
+
+
 <script type="text/javascript" src="{{ asset('/backend/ckeditor/ckeditor.js') }}"></script>
 
 @section('content')
@@ -21,9 +24,12 @@
     @endif
 
     <p>Welcome to chanel bag.</p>
-
+    
+   
 
 @stop
 <script type="text/javascript">
     CKEDITOR.replace('ckeditor1');
 </script>
+
+
