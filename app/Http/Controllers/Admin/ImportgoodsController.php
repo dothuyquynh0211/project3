@@ -7,6 +7,7 @@ use App\Models\Product;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ImportgoodsController extends Controller
@@ -18,7 +19,7 @@ class ImportgoodsController extends Controller
             'list' => DB::table('import_goods')->get()
         );
         $today = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d');
-        return view('backend.importgoods.index_importgoods', $data)->with('today',$today);
+        return view('backend.importgoods.index_importgoods', $data)->with('today', $today);
     }
 
     public function add()
@@ -26,41 +27,36 @@ class ImportgoodsController extends Controller
         $data1 = array(
             'admins' => DB::table('admins')->get(),
             'warehouses' => DB::table('warehouses')->get(),
-            
+
         );
         return view('backend.importgoods.add_importgoods', $data1);
-       
     }
     public function addImportgoods(Request $request)
     {
-       
+        $id_admin = Auth::guard('admins')->user()->id;
         DB::beginTransaction();
-        try{
+        try {
             DB::table('import_goods')->insert([
                 'date' => $request->input('date'),
-                'id_admin' => $request->input('id_admin'),
+                'id_admin' => $id_admin,
                 'id_warehouse' => $request->input('id_warehouse'),
-               
-                
+
+
             ]);
             $importgoods_id = DB::getPDO()->lastInsertId();
-            // dd($importgoods_id);
-            // die();
-            foreach($request->product_id as $p_id){
+            foreach ($request->product_id as $p_id) {
                 DB::table('import_details')->insert([
-                    'id_product'=>$p_id,
-                    'id_importgoods' =>$importgoods_id,
+                    'id_product' => $p_id,
+                    'id_importgoods' => $importgoods_id,
                     'quantity' => $request->input('quantity'),
                     'cost_price' => $request->input('cost_price'),
                 ]);
             }
             DB::commit();
             return redirect('/admin/importgoods')->with('message', 'Data have been successfully inserted');
-            
-        }catch (Exception $e){
-            DB::rollBack();  
+        } catch (Exception $e) {
+            DB::rollBack();
             return redirect()->back()->with('message', 'Something went wrong');
-
         }
     }
 
@@ -75,12 +71,12 @@ class ImportgoodsController extends Controller
 
     public function updateImportgoods(Request $request)
     {
-        
+
         $query = DB::table('import_goods')->where('id', $request->input('id'))->update([
             'date' => $request->input('date'),
             'id_admin' => $request->input('id_admin'),
             'id_warehouse' => $request->input('id_warehouse'),
-           
+
         ]);
         return redirect('/admin/importgoods');
     }

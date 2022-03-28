@@ -18,7 +18,7 @@ class CouponsController extends Controller
             'list' => DB::table('coupons')->get()
         );
         $today = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d');
-        return view('backend.coupons.index_coupons', $data)->with('today',$today);
+        return view('backend.coupons.index_coupons', $data)->with('today', $today);
     }
 
     public function add()
@@ -32,8 +32,8 @@ class CouponsController extends Controller
         } else {
             $status = '0';
         }
-        DB::beginTransaction(); 
-        try{
+        DB::beginTransaction();
+        try {
             DB::table('coupons')->insert([
                 'name' => $request->input('name'),
                 'value' => $request->input('value'),
@@ -45,21 +45,19 @@ class CouponsController extends Controller
                 'end_date' => $request->input('end_date'),
             ]);
             $coupons_id = DB::getPDO()->lastInsertId();
-            foreach($request->product_id as $p_id){
+            foreach ($request->product_id as $p_id) {
                 DB::table('product_coupons')->insert([
-                    'id_product'=>$p_id,
-                    'id_coupons' =>$coupons_id,
+                    'id_product' => $p_id,
+                    'id_coupons' => $coupons_id,
                 ]);
             }
             DB::commit();
             return redirect('/admin/coupons')->with('message', 'Data have been successfully inserted');
-            
-        }catch (Exception $e){
-            DB::rollBack();  
+        } catch (Exception $e) {
+            DB::rollBack();
             return redirect()->back()->with('message', 'Something went wrong');
-
         }
-        
+
         // echo "<pre>";
         // print_r($coupons_id);
         // echo "</pre>";
@@ -117,4 +115,14 @@ class CouponsController extends Controller
             ->get(1);
         echo json_encode($filter_data, JSON_UNESCAPED_UNICODE);
     }
+
+    public function detailCoupons($id)
+    {
+        $product_coupons = DB::table('product_coupons')
+            ->join('products', 'products.id', '=', 'product_coupons.id_product')
+            ->where('product_coupons.id_coupons',$id)
+            ->get();
+        return view('backend.coupons.detail_coupons')->with('product', $product_coupons);
+    }
+    
 }

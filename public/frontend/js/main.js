@@ -277,7 +277,7 @@ Created: Colorib
                         }
                         // console.log(total);
 
-                        $(".total-cart").text(`${formatNumber(total)}VND`);
+                        $(".total-cart").text(`${formatNumber(total)}đ`);
                         break;
 
                     default:

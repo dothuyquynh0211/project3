@@ -1,14 +1,25 @@
 @extends('backend.layout.master')
-@section('title','Trang chủ Admin')
+@section('title', 'Trang chủ Admin')
 
 @section('content')
-<script src="{{ asset('public/backend/ckeditor/ckeditor.js') }}"></script>
-    <script>
-        CKEDITOR.replace('ckeditor');
-    </script>
-<div class="panel-body">
+    <div class="panel-body">
+        @if (Auth::guard('admins')->user() != null)
+            <span>{{ Auth::guard('admins')->user()->name }}</span>
+        @endif
+        @if (Auth::guard('admins')->user() == null)
+            <a href="{{ route('admin.login') }}" class="nav-link active">
+                <i class="fas fa-sign-in-alt nav-icon"></i>
+                <p>Đăng nhập</p>
+            </a>
+        @else
+            <a href="{{ route('admin.logout') }}" class="nav-link active"><i class="fas fa-sign-in-alt nav-icon"></i>
+                <p>Đăng xuất</p>
+            </a>
+        @endif
 
-    {{-- <div class="position-center">
+        <p>Welcome to chanel bag.</p>
+
+        {{-- <div class="position-center">
         <form role="form" action="/admin/warehouse/update" method="post">
             {{ csrf_field() }}
             <input type="hidden" name="id" value="{{$info->id}}" />                       
@@ -21,5 +32,5 @@
         </form>
         <br>
     </div> --}}
-</div>
+    </div>
 @endsection

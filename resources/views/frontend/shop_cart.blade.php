@@ -53,7 +53,7 @@
                                                     <i class="fa fa-star"></i>
                                         </td>
 
-                                        <td class="cart__price">{{ number_format($v_content->price) }}VNĐ
+                                        <td class="cart__price">{{ number_format($v_content->price,0,',','.') }}đ
                                             <input hidden value="<?= $v_content->price ?>" class="content-price" />
 
                                         </td>
@@ -61,7 +61,8 @@
                                         <td class="cart__quantity">
                                             <form method="POST" action="/updateCart">
                                                 <div class="pro-qty">
-                                                    <input type="text" value="{{ $v_content->qty }}" name="qty" id="qty" readonly>
+                                                    <input type="text" value="{{ $v_content->qty }}" name="qty" id="qty"
+                                                        readonly>
                                                     <input type="hidden" value="{{ $v_content->rowId }}" name="rowId_cart"
                                                         class="form-control">
                                                     {{-- //  <button type="submit" name="update_qty" value="cập nhật"><span class="icon_loading"></span> </button> --}}
@@ -74,7 +75,7 @@ $subtotal = $v_content->price * $v_content->qty;
 echo number_format($subtotal);
 ?></span>
 
-                                            <span>vnd</span>
+                                            <span>đ</span>
                                         </td>
                                         <td class="cart__close" onclick="deleteCart('{{ $v_content->rowId }}',this)">
 
@@ -96,15 +97,8 @@ echo number_format($subtotal);
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="cart__btn">
-                        <a href="#">Continue Shopping</a>
+                        <a href="/">Continue Shopping</a>
                     </div>
-                    {{-- <form action="/test" method="get">
-                        @csrf
-                        <div class="cart__btn">
-                            <button type="submit">Update Cart</button>
-
-                        </div>
-                    </form> --}}
 
                 </div>
                 {{-- <div class="col-lg-6 col-md-6 col-sm-6">
@@ -113,11 +107,6 @@ echo number_format($subtotal);
                     </div>
                 </div> --}}
             </div>
-
-
-
-
-
 
             <div class="row">
                 <div class="col-lg-6">
@@ -133,24 +122,10 @@ echo number_format($subtotal);
                     <div class="cart__total__procced">
                         <h6>Cart total</h6>
                         <ul>
-
-                            <li>Subtotal <span
-                                    class="total-cart">{{ number_format(str_replace([',', '.00'], '', Cart::subtotal())) }}VNĐ</span>
-                            </li>
-                            <li>Total <span>0</span></li>
-
-                            {{-- <li>Total <span>{{ Cart::subtotal() . '' . 'VNĐ' }}</span></li> --}}
-
+                            <li>Subtotal <span class="total-cart">{{ Cart::subtotal(0, ',', '.') }}đ</span></li>
+                            <li>Total <span>{{ Cart::total(0, ',', '.') }}đ</span></li>
                         </ul>
-                        <a href="/checkout">Thanh toán</a>
-                        {{-- @if (Auth::guard('users')->user() != null) --}}
-                        {{-- <span>{{Auth::guard('users')->user()->name}}</span> --}}
-                        {{-- <a href="/checkout">Thanh toán</a> --}}
-                        {{-- @else --}}
-                        {{-- <a href="{{ route('user.login') }}">Login</a>
-                            <a href="{{ route('user.register') }}">Register</a> --}}
-                        {{-- @endif --}}
-
+                        <a href="/checkout" class="primary-btn" >Thanh toán</a>
 
                     </div>
                 </div>

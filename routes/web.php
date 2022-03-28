@@ -127,12 +127,14 @@ Route::post('/admin/coupons/add', [CouponsController::class, 'addCoupons']);
 Route::get('/admin/coupons/edit/{id}', [CouponsController::class, 'editCoupons']);
 Route::post('/admin/coupons/update', [CouponsController::class, 'updateCoupons']);
 Route::get('/admin/coupons/delete/{id}', [CouponsController::class, 'deleteCoupons']);
+Route::get('/admin/coupons/detail/{id}', [CouponsController::class, 'detailCoupons']);
 Route::get('/admin/coupons/action', [CouponsController::class, 'action']);
 Route::get('/admin/coupons/product', [CouponsController::class, 'getProduct']);
 
 
 //Manage Product
 Route::get('/admin/product', [ProductController::class, 'index']);
+Route::get('/admin/product/get-product', [ProductController::class, 'getProduct']);
 Route::get('/admin/product/create', [ProductController::class, 'create']);
 Route::post('/admin/product/create', [ProductController::class, 'store']);
 Route::get('/admin/product/edit/{id}', [ProductController::class, 'edit']);
@@ -145,15 +147,14 @@ Route::get('/admin/product/detail/{id}', [ProductController::class, 'show']);
 //Manage invoice 
 
 Route::get('/admin/invoice', [CheckoutController::class, 'invoice']);
+Route::get('/admin/invoice/get-invoice', [CheckoutController::class, 'getInvoice']);
 Route::get('/admin/invoice/update/{id}/{status}', [CheckoutController::class, 'update_invoice']);
 Route::get('/admin/invoice/detail/{id}', [CheckoutController::class, 'invoice_detail']);
 
 
 // Cart
 Route::post('/shop_cart', [CartController::class, 'save_cart']);
-
 Route::get('/shop_cart', [CartController::class, 'shop_cart']);
-
 Route::get('/delete_cart', [CartController::class, 'delete_cart']);
 Route::get('/update_cart', [CartController::class, 'update_cart']);
 
@@ -166,15 +167,11 @@ Route::get('/history/{id}', [CheckoutController::class, 'history_detail']);
 
 
 Route::get('/', [UserController::class, 'index'])->name('user.index');
-// Route::get('/cart', [UserController::class, 'cart']);
-
-
-
 Route::get('/login', [AuthController::class, 'showFormLogin'])->name('user.login');
 Route::post('/login', [AuthController::class, 'loginUser']);
 Route::get('/register', [AuthController::class, 'showFormRegister'])->name('user.register');
 Route::post('/register', [AuthController::class, 'register']);
 Route::get('/logoutUser', [AuthController::class, 'logoutUser'])->name('user.logout');
 Route::get('/contact', [UserController::class, 'contact']);
-Route::get('/shop', [UserController::class, 'shop']);
+Route::get('/{name_category}', [UserController::class, 'shop']);
 Route::get('/product-detail/{id}', [UserController::class, 'productDetail']);

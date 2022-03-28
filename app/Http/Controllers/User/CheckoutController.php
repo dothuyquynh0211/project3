@@ -9,6 +9,7 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Yajra\DataTables\DataTables;
 
 class CheckoutController extends Controller
 {
@@ -56,10 +57,10 @@ class CheckoutController extends Controller
             return redirect('/history')->with('message', 'You have order');
         } catch (Exception $e) {
             DB::rollBack();
-            echo '<pre>';
-            print_r($e->getMessage());
-            echo '</pre>';
-            // return redirect()->back()->with('message', 'Something went wrong');
+            // echo '<pre>';
+            // print_r($e->getMessage());
+            // echo '</pre>';
+            return redirect()->back()->with('message', 'Something went wrong');
         }
     }
 
@@ -78,21 +79,25 @@ class CheckoutController extends Controller
 
     public function invoice()
     {
-        $invoice  = DB::table('invoices')->orderBy('id', 'DESC')->get();
-        return view('backend.invoice.index_invoice')->with('invoice', $invoice);
+        return view('backend.invoice.index_invoice');
+        
+    }
+    
+    public function getInvoice(){
+        $invoice  = DB::table('invoices')->orderBy('id', 'DESC')->get();       
+        return DataTables::of($invoice)->make(true);
     }
 
     public function update_invoice($id, $status)
     {
-        var_dump(auth()->user()->id);
-        die();
+        $id_admin = Auth::guard('admins')->user()->id;
         if ($id == 0) {
             $invoice  = DB::table('invoices')->orderBy('id', 'DESC')->get();
 
             echo view('backend.invoice.index_invoice_table')->with('invoice', $invoice);
         } else {
             try {
-                DB::table('invoices')->where('id', $id)->update(['status_order' => $status]);
+                DB::table('invoices')->where('id', $id)->update(['status_order' => $status, 'id_admin' => $id_admin]);
 
                 $invoice  = DB::table('invoices')->orderBy('id', 'DESC')->get();
                 echo view('backend.invoice.index_invoice_table')->with('invoice', $invoice);

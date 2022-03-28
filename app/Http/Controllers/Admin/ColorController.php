@@ -44,4 +44,6 @@ class ColorController extends Controller
         return redirect('/admin/color');
     }
 
+    
+
 }
