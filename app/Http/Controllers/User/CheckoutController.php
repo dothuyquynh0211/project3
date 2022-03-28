@@ -42,8 +42,12 @@ class CheckoutController extends Controller
             ]);
             $invoices_id = DB::getPDO()->lastInsertId();
             $product_invoice = Cart::content();
+           
             foreach ($product_invoice as $item) {
-                var_dump($item->price);
+                // echo '<pre>';
+                // print_r($item);
+                // echo '</pre>';
+                // var_dump($item->price);
                 DB::table('invoice_details')->insert([
                     'id_product' => $item->id,
                     'coupons_code' => '0',
@@ -54,13 +58,14 @@ class CheckoutController extends Controller
             }
             DB::commit();
             Cart::destroy();
-            return redirect('/history')->with('message', 'You have order');
+           return redirect('/history')->with('message', 'You have order');
         } catch (Exception $e) {
             DB::rollBack();
             // echo '<pre>';
             // print_r($e->getMessage());
             // echo '</pre>';
-            return redirect()->back()->with('message', 'Something went wrong');
+
+             return redirect()->back()->with('message', 'Something went wrong');
         }
     }
 

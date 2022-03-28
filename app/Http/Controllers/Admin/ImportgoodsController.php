@@ -16,7 +16,11 @@ class ImportgoodsController extends Controller
     public function indexImportgoods()
     {
         $data = array(
-            'list' => DB::table('import_goods')->get()
+            'list' => DB::table('import_goods')->join('admins','admins.id','=','import_goods.id_admin')
+            ->select('import_goods.*','admins.name as name_admin','warehouses.address')
+            ->join('warehouses','warehouses.id','=','import_goods.id_warehouse')
+  
+            ->get()
         );
         $today = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d');
         return view('backend.importgoods.index_importgoods', $data)->with('today', $today);
@@ -31,6 +35,8 @@ class ImportgoodsController extends Controller
         );
         return view('backend.importgoods.add_importgoods', $data1);
     }
+  
+
     public function addImportgoods(Request $request)
     {
         $id_admin = Auth::guard('admins')->user()->id;
@@ -103,5 +109,15 @@ class ImportgoodsController extends Controller
             //     // ->orWhere('sku', 'LIKE', '%' . $query . '%')
             ->get(1);
         echo json_encode($filter_data, JSON_UNESCAPED_UNICODE);
+    }
+    public function detail($id)
+    {
+
+        
+        $row = DB::table('import_details')->where('id', $id)->first();
+        $data = array(
+            'info' => $row,
+        );
+        return view('backend.importgoods.detail', $data);
     }
 }

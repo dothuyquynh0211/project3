@@ -115,8 +115,10 @@
                         <th>Mã sp</th>
                         <th>Name</th>
                         <th>Image</th>
-                        <th>Price</th>
+                        
                         <th>Sku</th>
+                        <th>SL</th>
+                        <th>Giá nhập</th>
                         <th>Action</th>
                     </thead>
                     <tbody id="tr_body">
@@ -194,7 +196,7 @@
                             <img src="/image/${element.image}">
                         </td>
                         <td>${element.sku}</td>
-                        <td>${element.price}</td>
+                        
                         <td><input type="text" name="quantity"></td>
                         <td><input type="text" name="cost_price"></td>
                         <td onClick="removeProduct(${element.id})">
