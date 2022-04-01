@@ -15,7 +15,7 @@
                 <table class="table table-hover">
                     <thead>
                         <th> Mã</th>
-                        <th> Ngày</th>
+                       
                        
                         <th>giá nhập</th>
                         <th>tên</th>
@@ -25,13 +25,14 @@
                     </thead>
                     <tbody>
 
-                        @foreach ($dt as $item)
+                        @foreach ($info as $item)
+                       
                         <tr>
                             <td>{{$item->id}}</td>
                            
-                            <td>{{$item->date}}</td>
+                           
                             <td>{{$item->cost_price}}</td>
-                            <td>{{$item->name}}</td>
+                            <td>{{$item->name_pr}}</td>
                             <td>{{$item->quantity}}</td>
                             <td>
                                 <div class='btn-group'>

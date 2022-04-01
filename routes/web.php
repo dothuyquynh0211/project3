@@ -73,7 +73,7 @@ Route::post('/admin/importgoods/update', [ImportgoodsController::class, 'update'
 Route::get('/admin/importgoods/delete/{id}', [ImportgoodsController::class, 'delete']);
 Route::get('/admin/importgoods/action', [ImportgoodsController::class, 'action']);
 Route::get('/admin/importgoods/product', [ImportgoodsController::class, 'getProduct']);
-Route::get('admin/detail/{id}', [ImportgoodController::class, 'detail']);
+Route::get('admin/detail/{id}', [ImportgoodsController::class, 'detail']);
 
 
 ///Import detail\
@@ -120,6 +120,9 @@ Route::post('/admin/warehouse', [WarehouseController::class, 'add']);
 Route::get('/admin/warehouse/edit/{id}', [WarehouseController::class, 'edit']);
 Route::post('/admin/warehouse/update', [WarehouseController::class, 'update']);
 Route::get('/admin/warehouse/delete/{id}', [WarehouseController::class, 'delete']);
+Route::get('/admin/warehouse/inventory', [WarehouseController::class, 'index1']);
+Route::post('admin/warehouse/inventory', [WarehouseController::class, 'update_order_qty']);
+Route::post('admin/warehouse/inventory', [WarehouseController::class, 'update_qty']);
 
 //Manage coupons
 Route::get('/admin/coupons', [CouponsController::class, 'indexCoupons']);
