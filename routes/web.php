@@ -5,11 +5,8 @@ use App\Http\Controllers\Admin\AdminController;
 
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\User\AuthController;
-
 use App\Http\Controllers\User\UserController;
-
 use App\Http\Controllers\Admin\AccountController;
-
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\WarehouseController;
 use App\Http\Controllers\Admin\SizeController;
@@ -18,10 +15,9 @@ use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CouponsController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ImportgoodsController;
-use App\Http\Controllers\Admin\ImportDetailController;
+use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\User\CartController;
 use App\Http\Controllers\User\CheckoutController;
-use App\Http\Controllers\IndexController;
 
 
 
@@ -153,9 +149,15 @@ Route::get('/admin/invoice/update/{id}/{status}', [CheckoutController::class, 'u
 Route::get('/admin/invoice/detail/{id}', [CheckoutController::class, 'invoice_detail']);
 
 
+
+//Manage Report
+Route::get('/admin/report', [ReportController::class, 'report_sale']);
+
+
 // Cart
 Route::post('/shop_cart', [CartController::class, 'save_cart']);
 Route::get('/shop_cart', [CartController::class, 'shop_cart']);
+Route::get('/shop_cart_content', [CartController::class, 'shop_cart_content']);
 Route::get('/delete_cart', [CartController::class, 'delete_cart']);
 Route::get('/update_cart', [CartController::class, 'update_cart']);
 
@@ -164,6 +166,7 @@ Route::get('/checkout', [CheckoutController::class, 'checkout'])->middleware('au
 Route::post('/invoice', [CheckoutController::class, 'save_invoice']);
 Route::get('/history', [CheckoutController::class, 'history']);
 Route::get('/history/{id}', [CheckoutController::class, 'history_detail']);
+Route::get('/check-coupons', [CartController::class, 'check_coupons']);
 
 
 

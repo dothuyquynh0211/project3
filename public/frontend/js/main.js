@@ -11,15 +11,15 @@ Created: Colorib
 
 (function ($) {
     /*------------------
-        Preloader
-    --------------------*/
+Preloader
+--------------------*/
     $(window).on("load", function () {
         $(".loader").fadeOut();
         $("#preloder").delay(200).fadeOut("slow");
 
         /*------------------
-            Product filter
-        --------------------*/
+Product filter
+--------------------*/
         $(".filter__controls li").on("click", function () {
             $(".filter__controls li").removeClass("active");
             $(this).addClass("active");
@@ -31,8 +31,8 @@ Created: Colorib
     });
 
     /*------------------
-        Background Set
-    --------------------*/
+Background Set
+--------------------*/
     $(".set-bg").each(function () {
         var bg = $(this).data("setbg");
         $(this).css("background-image", "url(" + bg + ")");
@@ -61,16 +61,16 @@ Created: Colorib
     });
 
     /*------------------
-		Navigation
-	--------------------*/
+Navigation
+--------------------*/
     $(".header__menu").slicknav({
         prependTo: "#mobile-menu-wrap",
         allowParentLinks: true,
     });
 
     /*------------------
-        Accordin Active
-    --------------------*/
+Accordin Active
+--------------------*/
     $(".collapse").on("shown.bs.collapse", function () {
         $(this).prev().addClass("active");
     });
@@ -80,8 +80,8 @@ Created: Colorib
     });
 
     /*--------------------------
-        Banner Slider
-    ----------------------------*/
+Banner Slider
+----------------------------*/
     $(".banner__slider").owlCarousel({
         loop: true,
         margin: 0,
@@ -93,8 +93,8 @@ Created: Colorib
     });
 
     /*--------------------------
-        Product Details Slider
-    ----------------------------*/
+Product Details Slider
+----------------------------*/
     $(".product__details__pic__slider")
         .owlCarousel({
             loop: false,
@@ -128,8 +128,8 @@ Created: Colorib
     }
 
     /*------------------
-		Magnific
-    --------------------*/
+Magnific
+--------------------*/
     $(".image-popup").magnificPopup({
         type: "image",
     });
@@ -145,8 +145,8 @@ Created: Colorib
     });
 
     /*------------------
-        CountDown
-    --------------------*/
+CountDown
+--------------------*/
     // For demo preview start
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, "0");
@@ -179,8 +179,8 @@ Created: Colorib
     });
 
     /*-------------------
-		Range Slider
-	--------------------- */
+Range Slider
+--------------------- */
     var rangeSlider = $(".price-range"),
         minamount = $("#minamount"),
         maxamount = $("#maxamount"),
@@ -200,8 +200,8 @@ Created: Colorib
     maxamount.val("$" + rangeSlider.slider("values", 1));
 
     /*------------------
-		Single Product
-	--------------------*/
+Single Product
+--------------------*/
     $(".product__thumb .pt").on("click", function () {
         var imgurl = $(this).data("imgbigurl");
 
@@ -212,98 +212,27 @@ Created: Colorib
     });
 
     /*-------------------
-		Quantity change
-	--------------------- */
+Quantity change
+--------------------- */
     var proQty = $(".pro-qty");
-    proQty.prepend('<span class="dec qtybtn">-</span>');
-    proQty.append('<span class="inc qtybtn">+</span>');
-    proQty.on("click", ".qtybtn", function () {
-        var $button = $(this);
-        var oldValue = $button.parent().find("input").val();
-
-        if ($button.hasClass("inc")) {
-            var newVal = parseFloat(oldValue) + 1;
-        } else {
-            // Don't allow decrementing below zero
-            if (oldValue > 0) {
-                let newValue = 0;
-                if (oldValue == 1) {
-                    return false;
-                } else {
-                    newVal = parseFloat(oldValue) - 1;
-                }
-            } else {
-                newVal = 1;
-            }
-        }
-        let checkPage = $button.closest(".product__details__button").length;
-
-        if (checkPage == 0) {
-
-            let rowId = $button.closest("tr").attr("rowId");
-
-            $.ajax({
-                url: "/update_cart",
-                type: "get",
-                data: {
-                    rowId: rowId,
-                    qty: newVal,
-                },
-            }).done(function (ketqua) {
-                switch (ketqua) {
-                    case "success":
-                        $button.parent().find('input[id="qty"]').val(newVal);
-                        let price = $button
-                            .closest("tr")
-                            .find(".content-price")
-                            .val();
-
-                        let totalPrice = newVal * price;
-                        // totalPrice = formatNumber(totalPrice, '.', ',')
-                        $button
-                            .closest("tr")
-                            .find(".cart__total .price-total-number")
-                            .text(formatNumber(totalPrice, ".", ","));
-                        // alert("<?=$re; ?>");
-
-                        let totalArray = $(".price-total-number");
-                        let total = 0;
-
-                        for (let i = 0; i < totalArray.length; i++) {
-                            const element = totalArray[i];
-                            total += Number(
-                                $(element).text().replaceAll(",", "")
-                            );
-                        }
-                        // console.log(total);
-
-                        $(".total-cart").text(`${formatNumber(total)}đ`);
-                        break;
-
-                    default:
-                        break;
-                }
-                // console.log(ketqua);
-            });
-        }
-        $button.parent().find('input[name="qty"]').val(newVal);
-    });
+    // proQty.prepend('<span class="dec qtybtn">-</span>');
+    // proQty.append('<span class="inc qtybtn">+</span>');
 
     function formatNumber(num) {
         return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
     }
 
     /*-------------------
-		Radio Btn
-	--------------------- */
+Radio Btn
+--------------------- */
     $(".size__btn label").on("click", function () {
         $(".size__btn label").removeClass("active");
         $(this).addClass("active");
     });
 
     /*-------------------
-		delete cart Btn
-	--------------------- */
+delete cart Btn
+--------------------- */
 })(jQuery);
 
 function deleteCart(rowId, event) {
@@ -316,12 +245,84 @@ function deleteCart(rowId, event) {
         },
     }).done(function (ketqua) {
         switch (ketqua) {
-            case "success":
-                $(event).closest("tr").remove();
+            case "error":
                 break;
+
             default:
+                $("#shop_cart_content").html(ketqua);
                 break;
         }
         // console.log(ketqua);
+    });
+}
+
+function quantityCart(evt) {
+    var $button = $(evt);
+    var oldValue = $button.parent().find("input").val();
+
+    if ($button.hasClass("inc")) {
+        var newVal = parseFloat(oldValue) + 1;
+    } else {
+        // Don't allow decrementing below zero
+        if (oldValue > 0) {
+            let newValue = 0;
+            if (oldValue == 1) {
+                return false;
+            } else {
+                newVal = parseFloat(oldValue) - 1;
+            }
+        } else {
+            newVal = 1;
+        }
+    }
+    let checkPage = $button.closest(".product__details__button").length;
+
+    if (checkPage != 0) {
+        $button.closest(".pro-qty").find("input[name='qty']").val(newVal);
+    } else {
+        let rowId = $button.closest("tr").attr("rowId");
+
+        $.ajax({
+            url: "/update_cart",
+            type: "get",
+            data: {
+                rowId: rowId,
+                qty: newVal,
+            },
+        }).done(function (ketqua) {
+            switch (ketqua) {
+                case "error":
+                    break;
+
+                default:
+                    $("#shop_cart_content").html(ketqua);
+                    break;
+            }
+        });
+    }
+}
+
+function discountCheck(e) {
+    // console.log(e.value);
+    let discount = e.value;
+    let productId = e.getAttribute("product_id");
+    let coupons_code = e.getAttribute("coupons_code");
+    $.ajax({
+        url: "/check-coupons",
+        type: "get",
+        data: {
+            discount: discount,
+            productId: productId,
+            coupons_code: coupons_code,
+        },
+    }).done(function (ketqua) {
+        switch (ketqua) {
+            case "error":
+                break;
+
+            default:
+                $("#shop_cart_content").html(ketqua);
+                break;
+        }
     });
 }

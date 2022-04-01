@@ -74,11 +74,14 @@ class CouponsController extends Controller
 
     public function updateCoupons(Request $request)
     {
-        if ($request->input('status') == 'on') {
+        $today = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d');
+        if ($request->input('status') == 'on' && $request->input('end_date') > $today) {
             $status = '1';
+           
         } else {
             $status = '0';
         }
+        
         $query = DB::table('coupons')->where('id', $request->input('id'))->update([
             'name' => $request->input('name'),
             'value' => $request->input('value'),

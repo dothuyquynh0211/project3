@@ -77,10 +77,10 @@
 
                         {{-- <div class="product__details__price">$ 75.0 <span>$ 83.0</span></div> --}}
 
-                        <div class="product__details__price">{{ number_format($product->price, 0, ',', '.') }}đ                        
-                                <?php if ($product->sale_price > 0) {
-                                    echo '<span>' . number_format($product->sale_price, 0, ',', '.') . ' đ </span>';
-                                } ?>
+                        <div class="product__details__price">{{ number_format($product->price, 0, ',', '.') }}đ
+                            <?php if ($product->sale_price > 0) {
+                                echo '<span>' . number_format($product->sale_price, 0, ',', '.') . ' đ </span>';
+                            } ?>
                         </div>
 
                         <form method="POST" action="/shop_cart">
@@ -89,8 +89,10 @@
                                 <div class="quantity">
                                     <span>Quantity:</span>
                                     <div class="pro-qty">
-                                        <input name="qty" type="text" value="1" readonly>
-                                        <input type="hidden" name="productid_hidden" value="{{ $product->id }}">
+                                        <span class="dec qtybtn" onclick="quantityCart(this)">-</span>
+                                        <input name="qty" type="text" value="1" readonly id="quantity">
+                                        <input type="hidden" name="productid_hidden" value="{{$product->id }}">
+                                        <span class="inc qtybtn" onclick="quantityCart(this) ">+</span>
                                     </div>
                                 </div>
 

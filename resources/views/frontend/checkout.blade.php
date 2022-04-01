@@ -25,12 +25,12 @@
                 </div>
             </div>
             <?php
-                $message = Session::get('message');
-                if ($message) {
-                    echo '<span class="text-alert">' . $message . '</span>';
-                    Session::put('message', null);
-                }
-                ?>
+            $message = Session::get('message');
+            if ($message) {
+                echo '<span class="text-alert">' . $message . '</span>';
+                Session::put('message', null);
+            }
+            ?>
             <form action="/invoice" class="checkout__form" method="POST">
                 {{ csrf_field() }}
                 <input hidden name="id_user" value="{{ Auth::user()->id }}">
@@ -63,7 +63,7 @@
                                         value="{{ Auth::user()->address }}">
                                 </div>
                                 <div class="checkout__form__input">
-                                    <p>Ghi chú <span>*</span></p>
+                                    <p>Ghi chú </p>
                                     <input type="text" name="note">
 
                                 </div>
@@ -71,15 +71,16 @@
                             </div>
                         </div>
                     </div>
+                    <?php
+                    
+                    $content = Cart::content();
+                    // echo '<pre>';
+                    // print_r($content);
+                    // echo '</pre>';
+                    ?>
 
                     <div class="col-lg-4">
-                        <?php
-                        
-                        $content = Cart::content();
-                        // echo '<pre>';
-                        //     print_r($content);
-                        //     echo '</pre>';
-                        ?>
+
                         <div class="checkout__order">
 
                             <h5>Your order</h5>
@@ -96,7 +97,13 @@
                                             <span>
                                                 <?php
                                                 $subtotal = $v_content->price * $v_content->qty;
-                                                echo number_format($subtotal) . '' . 'VND';
+                                                
+                                                if ($v_content->options->discount > 0) {
+                                                    echo '<span>' . number_format($v_content->options->discount * $v_content->qty, 0, ',', '.') . '' . 'đ' . '</span>';
+                                                    echo '<span style="text-decoration-line: line-through">' . number_format($subtotal, 0, ',', '.') . '' . 'đ' . '</span>';
+                                                } else {
+                                                    echo '<span>' . number_format($subtotal, 0, ',', '.') . '' . 'đ' . '</span>';
+                                                }
                                                 ?>
                                             </span>
                                         </li>
@@ -106,8 +113,29 @@
                             </div>
                             <div class="checkout__order__total">
                                 <ul>
-                                    <li>Subtotal <span>{{ Cart::subtotal() . '' . 'VNĐ' }}</span></li>
-                                    {{-- <li>Total <span>$ 750.0</span></li> --}}
+                                    <li>Subtotal <span class="total-cart">{{ Cart::subtotal(0, ',', '.') }}đ</span>
+                                    </li>
+                                    <li>
+                                        <?php
+                                        $disc_total = '';
+                                        $total = '';
+                                        
+                                        $disc_total = Session::get('discount_total');
+                                        
+                                        $total = Session::get('total');
+                                        
+                                        // print_r(Session::get('total'))
+                                        
+                                        ?>
+                                        Discount :
+                                        <span>{{ number_format($disc_total, 0, ',', '.') }}đ</span>
+                                    </li>
+                                    <?php
+                                    
+                                    // print_r(Session::get('total'))
+                                    ?>
+
+                                    <li>Total <span>{{ number_format($total, 0, ',', '.') }}đ</span></li>
                                 </ul>
                             </div>
 
