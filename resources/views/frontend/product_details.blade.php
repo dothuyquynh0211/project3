@@ -174,11 +174,8 @@
                         <div class="tab-content">
                             <div class="tab-pane active" id="tabs-1" role="tabpanel">
                                 <h6>Mô tả </h6>
-                                <p>{{ $product->description }}</p>
-                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget
-                                    dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,
-                                    nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium
-                                    quis, sem.</p>
+                              {{ $product->description }} 
+                                
                             </div>
                             {{-- <div class="tab-pane" id="tabs-2" role="tabpanel">
                                 <h6>Specification</h6>
