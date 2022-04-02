@@ -77,8 +77,11 @@
 
                         {{-- <div class="product__details__price">$ 75.0 <span>$ 83.0</span></div> --}}
 
-                        <div class="product__details__price">{{ number_format($product->price,0,',','.') }}VNĐ<span>
-                                {{ number_format($product->sale_price,0,',','.') }}VNĐ</span></div>
+                        <div class="product__details__price">{{ number_format($product->price, 0, ',', '.') }}đ
+                            <?php if ($product->sale_price > 0) {
+                                echo '<span>' . number_format($product->sale_price, 0, ',', '.') . ' đ </span>';
+                            } ?>
+                        </div>
 
                         <form method="POST" action="/shop_cart">
                             {{ csrf_field() }}
@@ -86,8 +89,10 @@
                                 <div class="quantity">
                                     <span>Quantity:</span>
                                     <div class="pro-qty">
-                                        <input name="qty" type="text" value="1" readonly>
-                                        <input type="hidden" name="productid_hidden" value="{{ $product->id }}">
+                                        <span class="dec qtybtn" onclick="quantityCart(this)">-</span>
+                                        <input name="qty" type="text" value="1" readonly id="quantity">
+                                        <input type="hidden" name="productid_hidden" value="{{$product->id }}">
+                                        <span class="inc qtybtn" onclick="quantityCart(this) ">+</span>
                                     </div>
                                 </div>
 
@@ -95,7 +100,7 @@
                                     cart</button>
 
                                 <ul>
-                                    <li><a href="#"><span class="icon_heart_alt"></span></a></li>
+                                    <li><a href="/wishlist"><span class="icon_heart_alt"></span></a></li>
                                     <li><a href="#"><span class="icon_adjust-horiz"></span></a></li>
                                 </ul>
                             </div>
@@ -104,14 +109,16 @@
                         <div class="product__details__widget">
                             <ul>
                                 <li>
-                                    <span>Availability:</span>
+                                    {{-- <span>Availability:</span>
                                     <div class="stock__checkbox">
                                         <label for="stockin">
                                             In Stock
                                             <input type="checkbox" id="stockin">
                                             <span class="checkmark"></span>
                                         </label>
-                                    </div>
+                                    </div> --}}
+                                    <span>Availability:</span>
+                                    <p>In Stock</p>
                                 </li>
                                 <li>
                                     <span>Available color:</span>
@@ -201,100 +208,38 @@
                         <h5>RELATED PRODUCTS</h5>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="img/product/related/rp-1.jpg">
-                            <div class="label new">New</div>
-                            <ul class="product__hover">
-                                <li><a href="img/product/related/rp-1.jpg" class="image-popup"><span
-                                            class="arrow_expand"></span></a></li>
-                                <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                                <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                            </ul>
-                        </div>
-                        <div class="product__item__text">
-                            <h6><a href="#">Buttons tweed blazer</a></h6>
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
+                @foreach ($product_related as $item)
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="product__item">
+                            <div class="product__item__pic set-bg" data-setbg="{{ '/image/' . $item->image }}">
+                                <div class="label new">New</div>
+                                <ul class="product__hover">
+                                    <li><a href="/image/{{ $item->image }}" class="image-popup"><span
+                                                class="arrow_expand"></span></a></li>
+                                    <li><a href="/wishlist"><span class="icon_heart_alt"></span></a></li>
+                                    <li><a href="/product-detail/{{ $item->id }}"><span
+                                                class="icon_bag_alt"></span></a></li>
+                                </ul>
                             </div>
-                            <div class="product__price">$ 59.0</div>
+                            <div class="product__item__text">
+                                <h6><a href="/product-detail/{{ $item->id }}">{{ $item->name }}</a></h6>
+                                <div class="rating">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                                <div class="product__price">{{ number_format($item->price, 0, ',', '.') }} đ
+                                    <?php if ($item->sale_price > 0) {
+                                        echo '<span>' . number_format($item->sale_price, 0, ',', '.') . ' đ </span>';
+                                    } ?>
+
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="img/product/related/rp-2.jpg">
-                            <ul class="product__hover">
-                                <li><a href="img/product/related/rp-2.jpg" class="image-popup"><span
-                                            class="arrow_expand"></span></a></li>
-                                <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                                <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                            </ul>
-                        </div>
-                        <div class="product__item__text">
-                            <h6><a href="#">Flowy striped skirt</a></h6>
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <div class="product__price">$ 49.0</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="img/product/related/rp-3.jpg">
-                            <div class="label stockout">out of stock</div>
-                            <ul class="product__hover">
-                                <li><a href="img/product/related/rp-3.jpg" class="image-popup"><span
-                                            class="arrow_expand"></span></a></li>
-                                <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                                <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                            </ul>
-                        </div>
-                        <div class="product__item__text">
-                            <h6><a href="#">Cotton T-Shirt</a></h6>
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <div class="product__price">$ 59.0</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="img/product/related/rp-4.jpg">
-                            <ul class="product__hover">
-                                <li><a href="img/product/related/rp-4.jpg" class="image-popup"><span
-                                            class="arrow_expand"></span></a></li>
-                                <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                                <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                            </ul>
-                        </div>
-                        <div class="product__item__text">
-                            <h6><a href="#">Slim striped pocket shirt</a></h6>
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <div class="product__price">$ 59.0</div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>

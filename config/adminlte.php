@@ -188,7 +188,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'home',
+    'dashboard_url' => '/admin/dashboard',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -237,10 +237,10 @@ return [
         ],
 
         // Sidebar items:
-        [
-            'type' => 'sidebar-menu-search',
-            'text' => 'search',
-        ],
+        // [
+        //     'type' => 'sidebar-menu-search',
+        //     'text' => 'search',
+        // ],
         [
             'text' => 'blog',
             'url'  => 'admin/blog',
@@ -254,9 +254,9 @@ return [
         //     'label_color' => 'success',
         // ],
         [
-            'text'        => 'Thống kê',
-            'url'         => 'admin/pages',
-            'icon'        => 'far fa-fw fa-file',
+            // 'text'        => 'Thống kê',
+            // 'url'         => 'admin/pages',
+            // 'icon'        => 'far fa-fw fa-file',
             // 'label'       => 4,
             // 'label_color' => 'success',
         ],

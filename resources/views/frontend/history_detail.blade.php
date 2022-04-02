@@ -36,9 +36,10 @@
                             </thead>
                             <tbody>
                                 @foreach ($invoice as $item)
-                                    <?php echo '<pre>';
-                                    print_r($item);
-                                    echo '</pre>'; ?>
+                                    <?php 
+                                    // echo '<pre>';
+                                    // print_r($item);
+                                    // echo '</pre>'; ?>
                                     <tr>
                                         <td class="cart__price">
                                             <h6> {{ $item->id }}</h6>

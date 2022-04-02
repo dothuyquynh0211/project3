@@ -15,8 +15,12 @@ class UserController extends Controller
     function index()
     {
         $product = DB::table('products')->paginate(8);
+        $product_hot = DB::table('products')->inRandomOrder()->paginate(3);
+        $product_bestseller = DB::table('products')->inRandomOrder()->paginate(3);
+        $product_feature = DB::table('products')->inRandomOrder()->paginate(3);
         // view()->share('category', $cate_product);
-        return view('frontend.index')->with('products', $product);
+        return view('frontend.index')->with('products', $product)->with('product_hot', $product_hot)
+            ->with('product_sell', $product_bestseller)->with('product_feature', $product_feature);
     }
 
     public function checkout()
@@ -44,13 +48,14 @@ class UserController extends Controller
     {
         $product = Product::findOrFail($id);
         $image = Image::where('id_product', $product->id)->get();
+        $product_related = DB::table('products')->inRandomOrder()->paginate(4);
         $attr_product = Product::join('brands', 'brands.id', '=', 'products.id_brand')
             ->join('categories', 'categories.id', '=', 'products.id_category')
             ->join('sizes', 'sizes.id', '=', 'products.id_size')
             ->join('colors', 'colors.id', '=', 'products.id_color')
             ->where('products.id', $product->id)
             ->get(['products.*', 'brands.name as brand_name', 'colors.name as name_color', 'categories.name as category_name', 'sizes.name as size_name'])->first();
-        return view('frontend.product_details')->with('product', $product)->with('image', $image)->with('attr_product', $attr_product);
+        return view('frontend.product_details')->with('product', $product)->with('image', $image)->with('attr_product', $attr_product)->with('product_related', $product_related);
     }
     public function cart_count()
     {
@@ -61,9 +66,24 @@ class UserController extends Controller
         die();
         return view('frontend.shop')->with('cart_count', $cart_count);
     }
-    public function shop()
+    public function shop($id)
     {
-        // dd('bug');
-        return view('frontend.shop');
+        $id = str_replace('_', ' ', $id);
+        $size = DB::table('sizes')->get();
+        $color = DB::table('colors')->get();
+
+        $attr_product = Product::join('brands', 'brands.id', '=', 'products.id_brand')
+            ->join('categories', 'categories.id', '=', 'products.id_category')
+            ->join('sizes', 'sizes.id', '=', 'products.id_size')
+            ->join('colors', 'colors.id', '=', 'products.id_color')
+            ->where('categories.name', $id)
+            ->select([
+                'products.*',
+                'brands.name as brand_name',
+                'colors.name as name_color',
+                'categories.name as category_name',
+                'sizes.name as size_name'
+            ])->get();
+        return view('frontend.shop')->with('product', $attr_product)->with('size', $size)->with('color', $color);
     }
 }

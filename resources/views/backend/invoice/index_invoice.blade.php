@@ -5,14 +5,11 @@
     <div class="row">
         <div class="col-lg-12">
             <section class="panel">
-                {{-- <header class="panel-heading">
-                <a href="/admin/product/create">Thêm sản phẩm  </a> 
-            </header> --}}
                 <div>
                     <div class="form-group">
                         <label>Danh sách hoá đơn </label>
                     </div>
-                    <table class="table table-hover">
+                    <table class="table table-hover" id="useTable">
                         <thead>
                             <th> Mã</th>
                             <th> Tên khách hàng</th>
@@ -22,49 +19,12 @@
                             <th> Ngày tạo </th>
                         </thead>
                         <tbody id="invoice_table">
-                            @foreach ($invoice as $item)
-    <tr>
-        <td>{{ $item->id }}</td>
-        <td>{{ $item->receiver }}</td>
-        <td>{{ $item->address }}</td>
-        <td>{{ $item->total_payment }}</td>
-        <td>{{ changeStatus($item->status_order)}}</td>
-        <td>{{ $item->created_at }}</td>
-        <td>
-            <div class='btn-group'>
-                @if($item->status_order == 1 )
-                <button onclick="handleUpdate({{ $item->id }},2)" class="btn btn-primary btn-xs ">DUYỆT </button>
-                <button onclick="handleUpdate({{ $item->id }},0)" class="btn btn-danger btn-xs ">HUỶ</button>
-                @endif
-            </div>
-        </td>
-        <td> <a href="/admin/invoice/detail/{{ $item->id }}">Chi tiết</a></td>
-    </tr>
-@endforeach
-<?php 
-    function changeStatus($status){
-        switch ($status) {
-            case 0:
-            return 'Đã huỷ';
-                break;
-            case 1:
-            return 'Đang chờ duyệt';
-                break;
-            case 2:
-            return 'Đã duyệt';
-                break; 
-            default:
-                break;
-        }
-    }
-?>
+                            
 
                         </tbody>
                     </table>
                 </div>
-
             </section>
-
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
@@ -99,6 +59,58 @@
             type: "get",
         }).done(function(ketqua) {
             $('#invoice_table').html(ketqua);
+        });
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <script>
+        $('#userTable').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: '{{ asset('admin/product/get-product') }}',
+            pageLength: 5,
+
+            columns: [{
+                    data: 'id',
+                    name: 'id'
+                }, {
+                    data: 'image',
+                    name: 'Anh',
+                    render: (data, type, row, meta) => {
+                        return `<img src="../image/${data}" alt="" style="max-width:100px; max-height:100px">`
+                    }
+                },
+                {
+                    data: 'name',
+                    name: 'Ten',
+                    searching: true,
+                },
+                {
+                    data: 'sku',
+                    name: 'SKU',
+                },
+                {
+                    data: 'price',
+                    name: 'Gia',
+                },
+                {
+                    data: 'id',
+                    name: 'Action',
+                    render: (data, type, row, meta) => {
+                        return `<div class='btn-group'>
+                                <form action="/admin/product/delete/${data}" method="post">
+                                    <a href="/admin/product/detail/${data}" class="btn btn-danger btn-xs ">Detail </a>
+                                    <button type="submit" onclick=" return confirm('are you sure')" class="btn btn-primary btn-xs">Delete</button>
+                                    @csrf
+                                    @method('delete')
+                                <a href="/admin/product/edit/${data}" class="btn btn-primary btn-xs ">Edit</a>
+                                </form>                                   
+                            </div>`
+                    }
+                },
+
+            ]
         });
     </script>
 @endsection

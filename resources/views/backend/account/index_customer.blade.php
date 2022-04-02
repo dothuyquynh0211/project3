@@ -12,7 +12,7 @@
                 <div class="form-group">
                     <label>Danh sách tài khoản   </label>
                 </div>
-                <table class="table table-hover">
+                <table class="table table-hover" id="student_tbl">
                     <thead>
                         <th> Mã</th>
                         <th> Tên khách hàng  </th>
@@ -46,4 +46,12 @@
 
     </div>
 </div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script>
+        $(document).ready( function () {
+        $('#student_tbl').DataTable();
+    } );
+        </script>
 @endsection

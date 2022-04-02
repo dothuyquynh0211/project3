@@ -43,22 +43,11 @@ class WarehouseController extends Controller
         $delete = DB::table('warehouses')->where('id', $id)->delete();
         return redirect('/admin/warehouse');
     }
-
-
-
-    public function index1(){
-        $data1 = array(
-            'list1' => DB::table('import_details')
-            ->join('products','products.id','=','import_details.id_product')
-            ->join('invoice_details','invoice_details.id','=','invoice_details.id_product')
-
-            ->select('import_details.id_product','products.name as name_pr',
-            DB::raw('sum(import_details.quantity) as sum_quantity'),
-            DB::raw('sum(invoice_details.quantity) as sum_quantity_buy'))
-            ->groupBy('import_details.id_product')
-            ->get()
-        );
-        return view('backend.warehouse.inventory',$data1);
+    
+    public function inventory(){
+        $data = DB::table('report_warehouses')->get();
+        // dd($data);
+        return view('backend.warehouse.inventory')->with('data',$data);
     }
 
    

@@ -4,6 +4,8 @@
 
 @endsection
 @section('content')
+<script type="text/javascript" src="{{ asset('/backend/ckeditor/ckeditor.js') }}"></script>
+
     <style>
         .color-choise-group {
             display: flex;

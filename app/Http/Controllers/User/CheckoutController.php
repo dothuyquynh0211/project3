@@ -9,6 +9,7 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Yajra\DataTables\DataTables;
 
 class CheckoutController extends Controller
 {
@@ -24,7 +25,6 @@ class CheckoutController extends Controller
         $payment_method = 1;
         $total_payment = Cart::total();
         $total_payment = (float)str_replace([',', '.00'], '', $total_payment);
-        $invoice = $request->all();
         DB::beginTransaction();
         try {
             DB::table('invoices')->insert([
@@ -41,29 +41,25 @@ class CheckoutController extends Controller
             ]);
             $invoices_id = DB::getPDO()->lastInsertId();
             $product_invoice = Cart::content();
-           
             foreach ($product_invoice as $item) {
-                // echo '<pre>';
-                // print_r($item);
-                // echo '</pre>';
-                // var_dump($item->price);
                 DB::table('invoice_details')->insert([
                     'id_product' => $item->id,
-                    'coupons_code' => '0',
+                    'coupons_code' => $item->options->coupons_code,
                     'quantity' => $item->qty,
-                    'price' => $item->price,
+                    'price' => $item->options->discount,
                     'id_invoice' => $invoices_id,
                 ]);
             }
             DB::commit();
             Cart::destroy();
-           return redirect('/history')->with('message', 'You have order');
+            return redirect('/history')->with('message', 'You have order');
         } catch (Exception $e) {
             DB::rollBack();
             // echo '<pre>';
             // print_r($e->getMessage());
             // echo '</pre>';
-             return redirect()->back()->with('message', 'Something went wrong');
+
+            return redirect()->back()->with('message', 'Something went wrong');
         }
     }
 
@@ -82,21 +78,25 @@ class CheckoutController extends Controller
 
     public function invoice()
     {
+        return view('backend.invoice.index_invoice');
+    }
+
+    public function getInvoice()
+    {
         $invoice  = DB::table('invoices')->orderBy('id', 'DESC')->get();
-        return view('backend.invoice.index_invoice')->with('invoice', $invoice);
+        return DataTables::of($invoice)->make(true);
     }
 
     public function update_invoice($id, $status)
     {
-        var_dump(auth()->user()->id);
-        die();
+        $id_admin = Auth::guard('admins')->user()->id;
         if ($id == 0) {
             $invoice  = DB::table('invoices')->orderBy('id', 'DESC')->get();
 
             echo view('backend.invoice.index_invoice_table')->with('invoice', $invoice);
         } else {
             try {
-                DB::table('invoices')->where('id', $id)->update(['status_order' => $status]);
+                DB::table('invoices')->where('id', $id)->update(['status_order' => $status, 'id_admin' => $id_admin]);
 
                 $invoice  = DB::table('invoices')->orderBy('id', 'DESC')->get();
                 echo view('backend.invoice.index_invoice_table')->with('invoice', $invoice);

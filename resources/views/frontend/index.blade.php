@@ -69,7 +69,7 @@
                         <h4>New product</h4>
                     </div>
                 </div>
-                <div class="col-lg-8 col-md-8">
+                {{-- <div class="col-lg-8 col-md-8">
                     <ul class="filter__controls">
                         <li class="active" data-filter="*">All</li>
                         <li data-filter=".women">Women’s</li>
@@ -78,7 +78,7 @@
                         <li data-filter=".accessories">Accessories</li>
                         <li data-filter=".cosmetic">Cosmetics</li>
                     </ul>
-                </div>
+                </div> --}}
             </div>
             <div class="row property__gallery">
                 @foreach ($products as $item)
@@ -87,10 +87,11 @@
                             <div class="product__item__pic set-bg" data-setbg="{{ 'image/' . $item->image }}">
                                 <div class="label new">New</div>
                                 <ul class="product__hover">
-                                    <li><a href="img/product/product-1.jpg" class="image-popup"><span
+                                    <li><a href="image/{{ $item->image }}" class="image-popup"><span
                                                 class="arrow_expand"></span></a></li>
-                                    <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                                    <li><a href="#"><span class="icon_bag_alt"></span></a></li>
+                                    <li><a href="/wishlist"><span class="icon_heart_alt"></span></a></li>
+                                    <li><a href="/product-detail/{{ $item->id }}"><span
+                                                class="icon_bag_alt"></span></a></li>
                                 </ul>
                             </div>
                             <div class="product__item__text">
@@ -103,42 +104,20 @@
                                     <i class="fa fa-star"></i>
                                 </div>
                                 {{-- <div class="product__price">$ 49.0 <span>$ 59.0</span></div> --}}
-                                <div class="product__price">{{ $item->price }}
+                                <div class="product__price">{{ number_format($item->price, 0, ',', '.') }} đ
                                     <?php if ($item->sale_price !== 0) {
-                                        echo '<span>' . $item->sale_price . '</span>';
+                                        echo '<span>' . number_format($item->sale_price, 0, ',', '.') . ' đ </span>';
                                     } ?>
 
                                 </div>
                             </div>
 
-                            <div class="product__price">{{number_format( $item->price)}}VNĐ</div>
+                            {{-- <div class="product__price">{{number_format( $item->price)}}</div> --}}
                         </div>
                     </div>
                 @endforeach
 
-                {{-- <div class="col-lg-3 col-md-4 col-sm-6 mix women">
-                <div class="product__item">
-                    <div class="product__item__pic set-bg" data-setbg="{{('frontend/images/shop-2.jpg')}}">
-                        <div class="label new">New</div>
-                        <ul class="product__hover">
-                            <li><a href="img/product/product-1.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
-                            <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                            <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                        </ul>
-                    </div>
-                    <div class="product__item__text">
-                        <h6><a href="#">Buttons tweed blazer</a></h6>
-                        <div class="rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <div class="product__price">$ 59.0</div>
-                    </div>
-                </div>
-            </div> --}}
+
                 {{-- <div class="col-lg-3 col-md-4 col-sm-6 mix men">
                 <div class="product__item">
                     <div class="product__item__pic set-bg" data-setbg="{{('frontend/images/shop-2.jpg')}}">
@@ -184,50 +163,6 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 mix cosmetic">
-                <div class="product__item">
-                    <div class="product__item__pic set-bg" data-setbg="{{('frontend/images/shop-6.jpg')}}">
-                        <ul class="product__hover">
-                            <li><a href="img/product/product-4.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
-                            <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                            <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                        </ul>
-                    </div>
-                    <div class="product__item__text">
-                        <h6><a href="#">Slim striped pocket shirt</a></h6>
-                        <div class="rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <div class="product__price">$ 59.0</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 mix kid">
-                <div class="product__item">
-                    <div class="product__item__pic set-bg" data-setbg="{{('frontend/images/shop-2.jpg')}}">
-                        <ul class="product__hover">
-                            <li><a href="img/product/product-5.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
-                            <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                            <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                        </ul>
-                    </div>
-                    <div class="product__item__text">
-                        <h6><a href="#">Fit micro corduroy shirt</a></h6>
-                        <div class="rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <div class="product__price">$ 59.0</div>
-                    </div>
-                </div>
-            </div>
             <div class="col-lg-3 col-md-4 col-sm-6 mix women men kid accessories cosmetic">
                 <div class="product__item sale">
                     <div class="product__item__pic set-bg" data-setbg="{{('frontend/images/shop-6.jpg')}}">
@@ -240,51 +175,6 @@
                     </div>
                     <div class="product__item__text">
                         <h6><a href="#">Tropical Kimono</a></h6>
-                        <div class="rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <div class="product__price">$ 49.0 <span>$ 59.0</span></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 mix women men kid accessories cosmetic">
-                <div class="product__item">
-                    <div class="product__item__pic set-bg" data-setbg="{{('frontend/images/shop-2.jpg')}}">
-                        <ul class="product__hover">
-                            <li><a href="img/product/product-7.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
-                            <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                            <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                        </ul>
-                    </div>
-                    <div class="product__item__text">
-                        <h6><a href="#">Contrasting sunglasses</a></h6>
-                        <div class="rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <div class="product__price">$ 59.0</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 mix women men kid accessories cosmetic">
-                <div class="product__item sale">
-                    <div class="product__item__pic set-bg" data-setbg="{{('frontend/images/shop-2.jpg')}}">
-                        <div class="label">Sale</div>
-                        <ul class="product__hover">
-                            <li><a href="img/product/product-8.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
-                            <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                            <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                        </ul>
-                    </div>
-                    <div class="product__item__text">
-                        <h6><a href="#">Water resistant backpack</a></h6>
                         <div class="rating">
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
@@ -344,7 +234,25 @@
                         <div class="section-title">
                             <h4>Hot Trend</h4>
                         </div>
+                        @foreach ($product_hot as $product_thumb)
                         <div class="trend__item">
+                            <div class="trend__item__pic">
+                                <img src="image/{{$product_thumb->image}}" alt="" style="max-height: 90px; max-width:90px">
+                            </div>
+                            <div class="trend__item__text">
+                                <h6>{{$product_thumb->name}}</h6>
+                                <div class="rating">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                                <div class="product__price">{{$product_thumb->price}}</div>
+                            </div>
+                        </div>
+                        @endforeach
+                        {{-- <div class="trend__item">
                             <div class="trend__item__pic">
                                 <img src="{{ 'frontend/images/ht-1.jpg' }}" alt="">
                             </div>
@@ -359,39 +267,7 @@
                                 </div>
                                 <div class="product__price">$ 59.0</div>
                             </div>
-                        </div>
-                        <div class="trend__item">
-                            <div class="trend__item__pic">
-                                <img src="img/trend/ht-2.jpg" alt="">
-                            </div>
-                            <div class="trend__item__text">
-                                <h6>Pendant earrings</h6>
-                                <div class="rating">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                                <div class="product__price">$ 59.0</div>
-                            </div>
-                        </div>
-                        <div class="trend__item">
-                            <div class="trend__item__pic">
-                                <img src="img/trend/ht-3.jpg" alt="">
-                            </div>
-                            <div class="trend__item__text">
-                                <h6>Cotton T-Shirt</h6>
-                                <div class="rating">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                                <div class="product__price">$ 59.0</div>
-                            </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-6">
@@ -399,12 +275,13 @@
                         <div class="section-title">
                             <h4>Best seller</h4>
                         </div>
+                        @foreach ($product_sell as $product_thumbs)
                         <div class="trend__item">
                             <div class="trend__item__pic">
-                                <img src="img/trend/bs-1.jpg" alt="">
+                                <img src="image/{{$product_thumbs->image}}" alt="" style="max-height: 90px; max-width:90px">
                             </div>
                             <div class="trend__item__text">
-                                <h6>Cotton T-Shirt</h6>
+                                <h6>{{$product_thumbs->name}}</h6>
                                 <div class="rating">
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
@@ -412,41 +289,10 @@
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
                                 </div>
-                                <div class="product__price">$ 59.0</div>
+                                <div class="product__price">{{$product_thumbs->price}}</div>
                             </div>
                         </div>
-                        <div class="trend__item">
-                            <div class="trend__item__pic">
-                                <img src="img/trend/bs-2.jpg" alt="">
-                            </div>
-                            <div class="trend__item__text">
-                                <h6>Zip-pockets pebbled tote <br />briefcase</h6>
-                                <div class="rating">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                                <div class="product__price">$ 59.0</div>
-                            </div>
-                        </div>
-                        <div class="trend__item">
-                            <div class="trend__item__pic">
-                                <img src="img/trend/bs-3.jpg" alt="">
-                            </div>
-                            <div class="trend__item__text">
-                                <h6>Round leather bag</h6>
-                                <div class="rating">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                                <div class="product__price">$ 59.0</div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-6">
@@ -454,12 +300,13 @@
                         <div class="section-title">
                             <h4>Feature</h4>
                         </div>
+                        @foreach ($product_feature as $product_thumb)
                         <div class="trend__item">
                             <div class="trend__item__pic">
-                                <img src="img/trend/f-1.jpg" alt="">
+                                <img src="image/{{$product_thumb->image}}" alt="" style="max-height: 90px; max-width:90px">
                             </div>
                             <div class="trend__item__text">
-                                <h6>Bow wrap skirt</h6>
+                                <h6>{{$product_thumb->name}}</h6>
                                 <div class="rating">
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
@@ -467,41 +314,10 @@
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
                                 </div>
-                                <div class="product__price">$ 59.0</div>
+                                <div class="product__price">{{$product_thumb->price}}</div>
                             </div>
                         </div>
-                        <div class="trend__item">
-                            <div class="trend__item__pic">
-                                <img src="img/trend/f-2.jpg" alt="">
-                            </div>
-                            <div class="trend__item__text">
-                                <h6>Metallic earrings</h6>
-                                <div class="rating">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                                <div class="product__price">$ 59.0</div>
-                            </div>
-                        </div>
-                        <div class="trend__item">
-                            <div class="trend__item__pic">
-                                <img src="img/trend/f-3.jpg" alt="">
-                            </div>
-                            <div class="trend__item__text">
-                                <h6>Flap cross-body bag</h6>
-                                <div class="rating">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                                <div class="product__price">$ 59.0</div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -522,12 +338,12 @@
                     <div class="discount__text">
                         <div class="discount__text__title">
                             <span>Discount</span>
-                            <h2>Summer 2019</h2>
+                            <h2>Black Friday</h2>
                             <h5><span>Sale</span> 50%</h5>
                         </div>
                         <div class="discount__countdown" id="countdown-time">
                             <div class="countdown__item">
-                                <span>22</span>
+                                <span>6</span>
                                 <p>Days</p>
                             </div>
                             <div class="countdown__item">
@@ -543,7 +359,7 @@
                                 <p>Sec</p>
                             </div>
                         </div>
-                        <a href="#">Shop now</a>
+                        <a href="/">Shop now</a>
                     </div>
                 </div>
             </div>

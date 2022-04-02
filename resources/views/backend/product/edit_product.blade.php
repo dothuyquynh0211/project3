@@ -4,6 +4,8 @@
 
 @endsection
 @section('content')
+<script type="text/javascript" src="{{ asset('/backend/ckeditor/ckeditor.js') }}"></script>
+
 <style>
     .color-choise-group {
         display: flex;
@@ -60,7 +62,7 @@
     <div class="col-lg-6">
         <section class="panel">
             <header class="panel-heading">
-                Thêm sản phẩm 
+                Cập nhập sản phẩm 
             </header>
                 <?php
                 $message = Session::get('message');
@@ -90,10 +92,7 @@
                         <label>Sale price  </label>
                         <input type="text" name="sale_price" class="form-control"  placeholder=" 300000 " value="{{$products->sale_price}}">
                     </div>
-                    <div class="form-group">
-                        <label>Description </label>
-                        <input type="text" name="description" class="form-control"  placeholder=" 300000 " value="{{$products->description}}">
-                    </div>
+                    
                     <div class="form-group">
                         <label> Image </label>
                         <input type="file" name="image" class="form-control">
@@ -142,7 +141,11 @@
                                 @endforeach
                             </div>
                     </div>
-                    <button type="submit" name="add_account" class="btn btn-info">Thêm tài khoản  </button>
+                    <div class="form-group">
+                        <label>Mô tả </label>
+                        <textarea name="description" class="form-control" placeholder=" 300000 " id='ckeditor1'></textarea>
+                    </div>
+                    <button type="submit" name="add_account" class="btn btn-info">Cập nhật </button>
                     </form>
                     <br>
                 </div>
@@ -174,4 +177,7 @@
         
     </div>
 </div>
+<script type="text/javascript">
+    CKEDITOR.replace( 'ckeditor1' );
+</script>
 @endsection

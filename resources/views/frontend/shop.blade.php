@@ -1,6 +1,5 @@
 @extends('master')
 @section('content')
-
     <!-- Breadcrumb Begin -->
     <div class="breadcrumb-option">
         <div class="container">
@@ -73,7 +72,7 @@
                             </div>
                             <div class="filter-range-wrap">
                                 <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
-                                data-min="33" data-max="99"></div>
+                                    data-min="33" data-max="99"></div>
                                 <div class="range-slider">
                                     <div class="price-input">
                                         <p>Price:</p>
@@ -89,53 +88,32 @@
                                 <h4>Shop by size</h4>
                             </div>
                             <div class="size__list">
-                                <label for="xxs">
+                                @foreach ($size as $size )
+                                <label for="{{$size->name}}">
+                                    {{$size->name}}
+                                    <input type="checkbox" id="{{$size->name}}">
+                                    <span class="checkmark"></span>
+                                </label>
+                                @endforeach
+                                {{-- <label for="xxs">
                                     xxs
                                     <input type="checkbox" id="xxs">
                                     <span class="checkmark"></span>
-                                </label>
-                                <label for="xs">
-                                    xs
-                                    <input type="checkbox" id="xs">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="xss">
-                                    xs-s
-                                    <input type="checkbox" id="xss">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="s">
-                                    s
-                                    <input type="checkbox" id="s">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="m">
-                                    m
-                                    <input type="checkbox" id="m">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="ml">
-                                    m-l
-                                    <input type="checkbox" id="ml">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="l">
-                                    l
-                                    <input type="checkbox" id="l">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="xl">
-                                    xl
-                                    <input type="checkbox" id="xl">
-                                    <span class="checkmark"></span>
-                                </label>
+                                </label> --}}
                             </div>
                         </div>
                         <div class="sidebar__color">
                             <div class="section-title">
-                                <h4>Shop by size</h4>
+                                <h4>Shop by color</h4>
                             </div>
                             <div class="size__list color__list">
+                                {{-- @foreach ($color as $color)
+                                <label for="black">
+                                  
+                                    <input type="checkbox" id="black" style="background: {{$color->name}}">
+                                    <span class="checkmark"></span>
+                                </label>
+                                @endforeach --}}
                                 <label for="black">
                                     Blacks
                                     <input type="checkbox" id="black">
@@ -182,12 +160,46 @@
                 </div>
                 <div class="col-lg-9 col-md-9">
                     <div class="row">
-                        <div class="col-lg-4 col-md-6">
+                        @foreach ($product as $item)
+                            <div class="col-lg-4 col-md-6">
+                                <div class="product__item">
+                                    <div class="product__item__pic set-bg" data-setbg="{{ 'image/' . $item->image }}">
+                                        <div class="label new">New</div>
+                                        <ul class="product__hover">
+                                            <li><a href="image/{{ $item->image }}" class="image-popup"><span
+                                                        class="arrow_expand"></span></a></li>
+                                            <li><a href="/wishlist"><span class="icon_heart_alt"></span></a></li>
+                                            <li><a href="/product-detail/{{ $item->id }}"><span
+                                                        class="icon_bag_alt"></span></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="product__item__text">
+                                        <h6><a href="/product-detail/{{ $item->id }}">{{ $item->name }}</a></h6>
+                                        <div class="rating">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                        <div class="product__price">{{ number_format($item->price, 0, ',', '.') }} đ
+                                            <?php if ($item->sale_price > 0) {
+                                                echo '<span>' . number_format($item->sale_price, 0, ',', '.') . ' đ </span>';
+                                            }
+                                            ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+
+                        {{-- <div class="col-lg-4 col-md-6">
                             <div class="product__item">
                                 <div class="product__item__pic set-bg" data-setbg="img/shop/shop-1.jpg">
                                     <div class="label new">New</div>
                                     <ul class="product__hover">
-                                        <li><a href="img/shop/shop-1.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                        <li><a href="img/shop/shop-1.jpg" class="image-popup"><span
+                                                    class="arrow_expand"></span></a></li>
                                         <li><a href="#"><span class="icon_heart_alt"></span></a></li>
                                         <li><a href="#"><span class="icon_bag_alt"></span></a></li>
                                     </ul>
@@ -209,7 +221,8 @@
                             <div class="product__item">
                                 <div class="product__item__pic set-bg" data-setbg="img/shop/shop-2.jpg">
                                     <ul class="product__hover">
-                                        <li><a href="img/shop/shop-2.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                        <li><a href="img/shop/shop-2.jpg" class="image-popup"><span
+                                                    class="arrow_expand"></span></a></li>
                                         <li><a href="#"><span class="icon_heart_alt"></span></a></li>
                                         <li><a href="#"><span class="icon_bag_alt"></span></a></li>
                                     </ul>
@@ -231,7 +244,8 @@
                             <div class="product__item">
                                 <div class="product__item__pic set-bg" data-setbg="img/shop/shop-3.jpg">
                                     <ul class="product__hover">
-                                        <li><a href="img/shop/shop-3.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                        <li><a href="img/shop/shop-3.jpg" class="image-popup"><span
+                                                    class="arrow_expand"></span></a></li>
                                         <li><a href="#"><span class="icon_heart_alt"></span></a></li>
                                         <li><a href="#"><span class="icon_bag_alt"></span></a></li>
                                     </ul>
@@ -253,7 +267,8 @@
                             <div class="product__item">
                                 <div class="product__item__pic set-bg" data-setbg="img/shop/shop-4.jpg">
                                     <ul class="product__hover">
-                                        <li><a href="img/shop/shop-4.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                        <li><a href="img/shop/shop-4.jpg" class="image-popup"><span
+                                                    class="arrow_expand"></span></a></li>
                                         <li><a href="#"><span class="icon_heart_alt"></span></a></li>
                                         <li><a href="#"><span class="icon_bag_alt"></span></a></li>
                                     </ul>
@@ -276,7 +291,8 @@
                                 <div class="product__item__pic set-bg" data-setbg="img/shop/shop-5.jpg">
                                     <div class="label">Sale</div>
                                     <ul class="product__hover">
-                                        <li><a href="img/shop/shop-5.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                        <li><a href="img/shop/shop-5.jpg" class="image-popup"><span
+                                                    class="arrow_expand"></span></a></li>
                                         <li><a href="#"><span class="icon_heart_alt"></span></a></li>
                                         <li><a href="#"><span class="icon_bag_alt"></span></a></li>
                                     </ul>
@@ -298,7 +314,8 @@
                             <div class="product__item">
                                 <div class="product__item__pic set-bg" data-setbg="img/shop/shop-6.jpg">
                                     <ul class="product__hover">
-                                        <li><a href="img/shop/shop-6.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                        <li><a href="img/shop/shop-6.jpg" class="image-popup"><span
+                                                    class="arrow_expand"></span></a></li>
                                         <li><a href="#"><span class="icon_heart_alt"></span></a></li>
                                         <li><a href="#"><span class="icon_bag_alt"></span></a></li>
                                     </ul>
@@ -320,7 +337,8 @@
                             <div class="product__item">
                                 <div class="product__item__pic set-bg" data-setbg="img/shop/shop-7.jpg">
                                     <ul class="product__hover">
-                                        <li><a href="img/shop/shop-7.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                        <li><a href="img/shop/shop-7.jpg" class="image-popup"><span
+                                                    class="arrow_expand"></span></a></li>
                                         <li><a href="#"><span class="icon_heart_alt"></span></a></li>
                                         <li><a href="#"><span class="icon_bag_alt"></span></a></li>
                                     </ul>
@@ -343,7 +361,8 @@
                                 <div class="product__item__pic set-bg" data-setbg="img/shop/shop-8.jpg">
                                     <div class="label stockout stockblue">Out Of Stock</div>
                                     <ul class="product__hover">
-                                        <li><a href="img/shop/shop-8.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                        <li><a href="img/shop/shop-8.jpg" class="image-popup"><span
+                                                    class="arrow_expand"></span></a></li>
                                         <li><a href="#"><span class="icon_heart_alt"></span></a></li>
                                         <li><a href="#"><span class="icon_bag_alt"></span></a></li>
                                     </ul>
@@ -366,7 +385,8 @@
                                 <div class="product__item__pic set-bg" data-setbg="img/shop/shop-9.jpg">
                                     <div class="label">Sale</div>
                                     <ul class="product__hover">
-                                        <li><a href="img/shop/shop-9.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                        <li><a href="img/shop/shop-9.jpg" class="image-popup"><span
+                                                    class="arrow_expand"></span></a></li>
                                         <li><a href="#"><span class="icon_heart_alt"></span></a></li>
                                         <li><a href="#"><span class="icon_bag_alt"></span></a></li>
                                     </ul>
@@ -383,7 +403,7 @@
                                     <div class="product__price">$ 49.0 <span>$ 59.0</span></div>
                                 </div>
                             </div>
-                        </div>
+                        </div>--}}
                         <div class="col-lg-12 text-center">
                             <div class="pagination__option">
                                 <a href="#">1</a>
@@ -392,7 +412,7 @@
                                 <a href="#"><i class="fa fa-angle-right"></i></a>
                                 <a href="#"><i class="fa fa-angle-left"></i></a>
                             </div>
-                        </div>
+                        </div> 
                     </div>
                 </div>
             </div>
