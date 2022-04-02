@@ -19,6 +19,7 @@
                             <th> Ngày tạo </th>
                         </thead>
                         <tbody id="invoice_table">
+                            
 
                         </tbody>
                     </table>

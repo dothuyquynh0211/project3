@@ -37,7 +37,7 @@
                                 <div class='btn-group'>
                                     <a href="/admin/detail/{{$item->id}}" class="btn btn-danger btn-xs ">Detail </a>
                                     <a href="/admin/importgoods/delete/{{$item->id}}" class="btn btn-danger btn-xs ">Delete </a>
-                                    <a href="/admin/importgoods/detail/{{ $item->id }}"
+                                    <a href="/admin/detail/{{ $item->id }}"
                                         class="btn btn-primary btn-xs ">detail</a>
                                 </div>
                             </td>

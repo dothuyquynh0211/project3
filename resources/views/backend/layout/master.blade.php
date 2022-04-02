@@ -1,7 +1,6 @@
 @extends('adminlte::page')
 
 @section('title', 'Dashboard')
-<script type="text/javascript" src="{{ asset('/backend/ckeditor/ckeditor.js') }}"></script>
 
 @section('content')
 
@@ -24,9 +23,9 @@
    
 
 @stop
-<script type="text/javascript">
+{{-- <script type="text/javascript">
     CKEDITOR.replace('ckeditor1');
-</script>
+</script> --}}
 
 
 

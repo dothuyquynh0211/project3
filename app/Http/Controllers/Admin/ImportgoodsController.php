@@ -114,7 +114,8 @@ class ImportgoodsController extends Controller
     {
 
         
-        $row = DB::table('import_details')->where('id', $id)->first();
+        $row = DB::table('import_details')->join('products','products.id','=','import_details.id_product')
+        ->select('import_details.*','products.name as name_pr')->where('import_details.id_importgoods', $id)->get();
         $data = array(
             'info' => $row,
         );

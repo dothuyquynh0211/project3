@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\ImportDetail;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -41,4 +43,12 @@ class WarehouseController extends Controller
         $delete = DB::table('warehouses')->where('id', $id)->delete();
         return redirect('/admin/warehouse');
     }
+    
+    public function inventory(){
+        $data = DB::table('report_warehouses')->get();
+        // dd($data);
+        return view('backend.warehouse.inventory')->with('data',$data);
+    }
+
+   
 }

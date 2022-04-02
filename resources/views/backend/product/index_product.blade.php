@@ -76,7 +76,7 @@
             </section>
 
         </div>
-{{--  --}}
+
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
@@ -131,14 +131,6 @@
     </script>
     {{--  --}}
 </div>
-{{-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-<script>
-    $(document).ready( function () {
-    $('#student_tbl').DataTable();
-} );
-    </script> --}}
 @endsection
 
 
