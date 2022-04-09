@@ -67,8 +67,14 @@ class CheckoutController extends Controller
     {
         $id_user = auth()->user()->id;
         $invoice  = DB::table('invoices')->where('id_user', $id_user)->orderBy('id', 'DESC')->get();
-        return view('frontend.history')->with('invoice', $invoice);
+        return view('frontend.history')->with('invoice',$invoice);
     }
+    // public function history_table()
+    // {
+    //     $id_user = auth()->user()->id;
+    //     $invoice  = DB::table('invoices')->where('id_user', $id_user)->orderBy('id', 'DESC')->get();
+    //     return view('frontend.history_table')->with('invoice', $invoice);
+    // }
 
     public function history_detail($id)
     {
@@ -121,5 +127,16 @@ class CheckoutController extends Controller
         // echo '</pre>';
 
         return view('backend.invoice.detail_invoice')->with('invoice', $invoice_detail);
+    }
+    public function cancel_order($id)
+    {
+        try {
+            DB::table('invoices')->where('id', $id)->update(['status_order' => 0]);
+            $invoice  = DB::table('invoices')->orderBy('id', 'DESC')->get();
+            return redirect()->back();
+                        // return view('frontend.history')->with('invoice', $invoice);
+        } catch (\Throwable $th) {
+            echo "error";
+        }
     }
 }

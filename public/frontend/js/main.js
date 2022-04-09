@@ -326,3 +326,43 @@ function discountCheck(e) {
         }
     });
 }
+
+// function cancelOrder(rowId, event) {
+//     // let deleteRow = this;
+    
+//     $.ajax({
+//         url: `/admin/invoice/update/0/0`,
+//         type: "get",
+//     }).done(function(ketqua) {
+//         $('#invoice_table').html(ketqua);
+//     });
+// }
+function cancelOrder(id, status) {
+
+    var answer = null;
+
+    switch (status) {
+        case 0:
+            answer = confirm('Bạn có muốn huỷ đơn không ?');
+            break;
+        default:
+            break;
+    }
+    if (!answer) {
+        return false;
+    }
+    $.ajax({
+        url: `/cancel_order/${id}/0`,
+        type: "get",
+    }).done(function(ketqua) {
+        location.reload(true); 
+        // $('#invoice_table').html(ketqua);
+    });
+}
+
+// $.ajax({
+//     url: `/admin/invoice/update/0/0`,
+//     type: "get",
+// }).done(function(ketqua) {
+//     $('#invoice_table').html(ketqua);
+// });
