@@ -40,8 +40,12 @@
                                 </li>
                             </ul>
                         </div>
+                        <div id="fb-root"></div>
+                        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v13.0" nonce="Epaa6oqi"></script>
+                                            <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v13.0" nonce="Epaa6oqi"></script>
+                        <div class="fb-page" data-href="https://www.facebook.com/T%E1%BB%95ng-%C4%91%E1%BA%A1i-l%C3%AD-Mi%E1%BB%81n-B%E1%BA%AFc-107366178060431" data-tabs="timeline" data-width="350" data-height="450" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/T%E1%BB%95ng-%C4%91%E1%BA%A1i-l%C3%AD-Mi%E1%BB%81n-B%E1%BA%AFc-107366178060431" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/T%E1%BB%95ng-%C4%91%E1%BA%A1i-l%C3%AD-Mi%E1%BB%81n-B%E1%BA%AFc-107366178060431">Tổng đại lí Miền Bắc</a></blockquote></div>
                         <div class="contact__form">
-                            <h5>SEND MESSAGE</h5>
+                            {{-- <h5>SEND MESSAGE</h5>
                             {!! Form::open(array('route' => 'front.fb', 'class' => '')) !!}
                             <div>
                                 <label  class="email">Your name</label>
@@ -55,7 +59,7 @@
                             </div><div class="send">
                                 {!! Form::submit('Send', ['class' => 'button']) !!}
                             </div>
-                            {!! Form::close() !!}
+                            {!! Form::close() !!} --}}
                         </div>
                     </div>
                 </div>
@@ -64,6 +68,7 @@
                         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d119278.47231023389!2d104.6139159296591!3d20.894116616743187!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3133958847c386ab%3A0x564ff5659f0f283d!2zTsO0bmcgdHLGsOG7nW5nIE3hu5ljIENow6J1LCBN4buZYyBDaMOidSwgU8ahbiBMYSwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1647077913398!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                     </iframe>
                     </div>
+                   
                 </div>
             </div>
         </div>

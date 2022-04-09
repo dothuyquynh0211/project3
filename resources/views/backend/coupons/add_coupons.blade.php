@@ -105,7 +105,7 @@
                                 <label>Ngày kết thúc </label>
                                 <input type="date" name="end_date" class="form-control">
                             </div>
-                            <button type="submit" name="add_" class="btn btn-info">Thêm</button>
+                            <button type="submit" name="add_"  onclick="sweetalert2()"class="btn btn-info">Thêm</button>
 
                             <br>
                         </div>
@@ -142,6 +142,9 @@
             </div>
         </div>
     </form>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.29.2/dist/sweetalert2.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@7.29.2/dist/sweetalert2.min.css">
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"
         integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous">
     </script>
@@ -242,5 +245,15 @@
                 $('#search_result').removeClass('active');
             }
         });
+    </script>
+    <script>
+        function sweetalert2(){
+            Swal({
+                title: 'Success',
+                text: 'Do you want to continue',
+                type: 'success',
+                confirmButtonText: 'Cool'
+            })
+        }
     </script>
 @endsection

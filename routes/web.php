@@ -167,8 +167,8 @@ Route::get('/update_cart', [CartController::class, 'update_cart']);
 // Checkout
 Route::get('/checkout', [CheckoutController::class, 'checkout'])->middleware('auth');
 Route::post('/invoice', [CheckoutController::class, 'save_invoice']);
-Route::get('/history', [CheckoutController::class, 'history']);
 Route::get('/cancel_order/{id}/0', [CheckoutController::class, 'cancel_order']);
+Route::get('/history', [CheckoutController::class, 'history'])->name('invoice.history');
 Route::get('/history/{id}', [CheckoutController::class, 'history_detail']);
 Route::get('/check-coupons', [CartController::class, 'check_coupons']);
 
