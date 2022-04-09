@@ -28,6 +28,7 @@
                                     <th>Tên</th>
                                     <th>Địa chỉ</th>
                                     <th>Tổng tiền </th>
+                                    <th>Ngày đặt </th>
                                     <th>Trạng thái</th>
                                     <th></th>
                                     <th></th>
@@ -47,7 +48,10 @@
                                             <h6> {{ $item->address }}</h6>
                                         </td>
                                         <td class="cart__quantity">
-                                            <h6>{{ number_format($item->total_payment,0,',','.') }} đ</h6>
+                                            <h6>{{number_format($item->total_payment).' '.'VNĐ'}}</h6>
+                                        </td>
+                                        <td class="cart__date">
+                                            <h6> {{ $item->created_at }}</h6>
                                         </td>
                                         <td class="cart__total">
 

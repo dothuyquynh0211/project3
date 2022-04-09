@@ -4524,7 +4524,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
                                    <a href="http://cookingfoodsworld.blogspot.in/" target="_blank" ></a>
 								</p>
                                 <p class="change_link">
-									Not a member yet ?
+									<a href="/register">Đăng kí</a>
 									<button type="submit">ĐĂNG NHẬP</button>
 								</p>
                             </form>

@@ -9,6 +9,7 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+//use JeroenNoten\LaravelAdminLte\View\Components\Tool\Datatable;
 use Yajra\DataTables\DataTables;
 
 class CheckoutController extends Controller
@@ -84,7 +85,7 @@ class CheckoutController extends Controller
     public function getInvoice()
     {
         $invoice  = DB::table('invoices')->orderBy('id', 'DESC')->get();
-        return DataTables::of($invoice)->make(true);
+        return Datatable::of($invoice)->make(true);
     }
 
     public function update_invoice($id, $status)

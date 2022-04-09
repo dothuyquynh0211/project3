@@ -5,8 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use RealRashid\SweetAlert\Facades\Alert;
+
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use JeroenNoten\LaravelAdminLte\View\Components\Widget\Alert as WidgetAlert;
 
 class ColorController extends Controller
 {
@@ -21,6 +24,7 @@ class ColorController extends Controller
     public function addColors(Request $request){
         $query = DB::table('colors')->insert([ 'name' => $request->input('name_colors')]);
         if ($query) {
+
             return back()->with('message','Data have been successfully inserted');
         } else {
             return back()->with('message','Something went wrong');

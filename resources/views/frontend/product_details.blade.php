@@ -96,7 +96,7 @@
                                     </div>
                                 </div>
 
-                                <button type="submit" class="cart-btn add_cart"><span class="icon_bag_alt"></span> Add to
+                                <button type="submit" class="cart-btn add_cart" onclick="sweetalert2()"><span class="icon_bag_alt"></span> Add to
                                     cart</button>
 
                                 <ul>
@@ -244,4 +244,17 @@
         </div>
     </section>
     <!-- Product Details Section End -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.29.2/dist/sweetalert2.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@7.29.2/dist/sweetalert2.min.css">
+    <script>
+        function sweetalert2(){
+            Swal({
+                title: 'Thêm giỏ hàng thành công',
+                text: 'Do you want to continue',
+                type: 'success',
+                confirmButtonText: 'Cool'
+            })
+        }
+    </script>
 @endsection
