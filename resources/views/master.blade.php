@@ -90,7 +90,7 @@
                                 </ul>
                             </li>
                                     {{-- <li><a href="/block">Blog</a></li>  --}}
-                             <li><a href="/contact">Contact</a></li> 
+                             <li><a href="/contact">Liên hệ</a></li> 
                              <li><a href="/">Giới thiệu</a></li>
                         </ul>
                     </nav>
@@ -101,6 +101,7 @@
                             @if (Auth::guard('users')->user() != null)
                                 {{-- <span>{{Auth::guard('users')->user()->name}}</span> --}}
                                 <a href="#">{{ Auth::guard('users')->user()->name }}</a>
+                                <a href="{{ route('invoice.history') }}">History</a>
                                 <a href="{{ route('user.logout') }}">Logout</a>
                             @else
                                 <a href="{{ route('user.login') }}">Login</a>
@@ -272,6 +273,11 @@
         </div>
     </div>
     <!-- Search End -->
+    <div class="zalo-chat-widget" data-oaid="579745863508352884" data-welcome-message="Rất vui khi được hỗ trợ bạn!" data-autopopup="0" data-width="" data-height=""></div>
+
+    
+<script src="https://sp.zalo.me/plugins/sdk.js"></script>
+
 
     <!-- Js Plugins -->
     <script src="{{ asset('frontend/js/jquery-3.3.1.min.js') }}"></script>
@@ -284,6 +290,8 @@
     <script src="{{ asset('frontend/js/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('frontend/js/jquery.nicescroll.min.js') }}"></script>
     <script src="{{ asset('frontend/js/main.js') }}"></script>
+    
+    
 </body>
 
 </html>

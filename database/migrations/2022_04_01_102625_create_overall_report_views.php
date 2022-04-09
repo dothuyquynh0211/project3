@@ -15,7 +15,8 @@ class CreateOverallReportViews extends Migration
     public function up()
     {
         DB::statement("CREATE VIEW report_warehouses AS 
-        SELECT products.*,(sum_import.quantity_import - sum_invoice.quantity_invoice ) AS product_inventory , sum_invoice.quantity_invoice ,sum_import.quantity_import 
+        SELECT products.*,(sum_import.quantity_import - sum_invoice.quantity_invoice ) 
+        AS product_inventory , sum_invoice.quantity_invoice ,sum_import.quantity_import 
         FROM (
             SELECT sum(quantity) AS quantity_invoice , id_product FROM `invoice_details` GROUP BY id_product
             ) AS sum_invoice

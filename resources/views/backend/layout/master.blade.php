@@ -3,6 +3,10 @@
 @section('title', 'Dashboard')
 
 @section('content')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.29.2/dist/sweetalert2.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@7.29.2/dist/sweetalert2.min.css">
+
 
     {{-- @if (Auth::guard('admins')->user() != null)
         <span>{{ Auth::guard('admins')->user()->name }}</span>

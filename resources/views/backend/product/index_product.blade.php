@@ -5,11 +5,11 @@
     <div class="row">
         <div class="col-lg-12">
             <section class="panel">
-                <header class="panel-heading">
+                {{-- <header class="panel-heading">
                     <a href="/admin/product/create">Thêm sản phẩm </a>
-                </header>
+                </header> --}}
                 <div>
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <label>Danh sách </label>
                     </div>
                     <table class="table table-hover" id="userTable">
@@ -21,9 +21,9 @@
                             <th> Giá</th>
                             <th> Action </th>
                         </thead>
-                        <tbody>
+                        <tbody> --}}
 {{-- test --}}
- {{-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.11.5/af-2.3.7/b-2.2.2/b-colvis-2.2.2/b-html5-2.2.2/b-print-2.2.2/datatables.min.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.11.5/af-2.3.7/b-2.2.2/b-colvis-2.2.2/b-html5-2.2.2/b-print-2.2.2/datatables.min.css"/>
 <div class="row">
     <div class="col-lg-12">
         <section class="panel">
@@ -44,8 +44,8 @@
                         <th> Action </th>
                     </thead>
                     <tbody> 
- --}}
-{{-- test
+ 
+
                             @foreach ($product as $item)
                         <tr>
                             <td>{{$item->id}}</td>
@@ -68,9 +68,9 @@
                                 </div>
                             </td>
                         </tr>
-                        @endforeach --}}
+                        @endforeach 
                         </tbody>
-                    </table>
+                    </table> 
                 </div>
 
             </section>
@@ -81,6 +81,19 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
     <script>
+        
+  $(document).ready(function() {
+    $('#student_tbl').DataTable({
+      dom: 'Bfrtip',
+      buttons: [
+        'copy', 'csv', 'excel', 'pdf', 'print'
+      ]
+    });
+
+  });
+</script>
+    
+    {{-- <script>
         $('#userTable').DataTable({
             processing: true,
             serverSide: true,
@@ -128,9 +141,9 @@
 
             ]
         });
-    </script>
+    </script> --}}
     {{--  --}}
-</div>
+
 @endsection
 
 

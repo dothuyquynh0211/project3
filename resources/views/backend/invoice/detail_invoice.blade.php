@@ -14,8 +14,9 @@
                     </div>
                     <table class="table table-hover">
                         <thead>
-                            <th> Ảnh</th>
+                            
                             <th> Tên sản phẩm </th>
+                            <th> Ảnh</th>
                             <th> Mã phiếu giảm giá</th>
                             <th> Số lượng</th>
                             <th> Đơn giá</th>
@@ -24,28 +25,33 @@
                         <tbody id="invoice_table">
                             @foreach ($invoice as $item)
                                 <tr>
+                                    <td>{{$item->name}}</td>
                                     <td>
                                         <img src="/image/{{ $item->image }}" alt=""
                                             style="max-height: 80px;max-width:80px">
                                     </td>
-                                    <td>{{$item->name}}</td>
+                                   
                                     <td>{{ $item->coupons_code }}</td>
                                     <td>{{ $item->quantity }}</td>
                                     <td>{{ $item->price }}</td>
-                                    <td> </td>
-                                    <td> </td>
+                                   
+                                    
                                 </tr>
                             @endforeach
-
+                          
+                           {{-- <?php
+                            // $total=$price*$quantity;
+                            //  echo "$total";
+                             ?> --}}
                         </tbody>
                     </table>
                     <div class="total-payment">
                         <h3>Thành tiền : </h3>
                     </div>
                 </div>
-
+               
             </section>
-
+            <a target="_blank" href="#">In đơn hàng</a>
         </div>
     </div>
 

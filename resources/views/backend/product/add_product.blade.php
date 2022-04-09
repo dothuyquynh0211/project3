@@ -150,7 +150,7 @@
                                 <label>Mô tả </label>
                                 <textarea name="description" class="form-control" placeholder=" 300000 " id='ckeditor1'></textarea>
                             </div>
-                            <button type="submit" name="add_account" class="btn btn-info">Thêm sản phẩm </button>
+                            <button  type="submit" name="add_account" onclick="sweetalert2()" class="btn btn-info">Thêm sản phẩm </button>
                         </form>
                         <br>
                     </div>
@@ -169,7 +169,9 @@
             </div>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.29.2/dist/sweetalert2.min.js"></script>
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@7.29.2/dist/sweetalert2.min.css">
     <script>
         function changePhoto() {
             let vPhoto = document.getElementById('img_preview');
@@ -190,5 +192,16 @@
     </script>
     <script type="text/javascript">
     CKEDITOR.replace( 'ckeditor1' );
+</script>
+
+<script>
+    function sweetalert2(){
+        Swal({
+            title: 'Success',
+            text: 'Do you want to continue',
+            type: 'success',
+            confirmButtonText: 'Cool'
+        })
+    }
 </script>
 @endsection
