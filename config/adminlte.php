@@ -287,7 +287,7 @@ return [
         [
             'text' => 'Quản lý hoá đơn ',
             'url'  => 'admin/invoice',
-            'icon' => 'fa-solid fa-file-invoice-dollar',
+            'icon' => 'bi bi-bag-heart-fill',
         ],
         [
             'text'    => 'Quản lý kho hàng ',
