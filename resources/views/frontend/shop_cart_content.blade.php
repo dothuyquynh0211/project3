@@ -13,7 +13,7 @@
                     <tr>
                         <th>Product</th>
                         <th>Price</th>
-                        <th>Discount</th>
+                        <th></th>
                         <th>Quantity</th>
                         <th>Total</th>
                         <th></th>
@@ -33,16 +33,26 @@
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
                             </td>
-                            <td class="cart__price">{{ number_format($v_content->price, 0, ',', '.') }}đ
+                            @if ($v_content->options->discount == 0 )
+                            <td class="cart__price" >{{ number_format($v_content->price, 0, ',', '.') }}đ
                                 <input hidden value="<?= $v_content->price ?>" class="content-price" />
 
                             </td>
-                            <td class="cart__price">
+                            @else
+                            <td class="cart__price" style="text-decoration-line: line-through">{{ number_format($v_content->price, 0, ',', '.') }}đ
+                                <input hidden value="<?= $v_content->price ?>" class="content-price" />
+
+                            </td>
+                            <td class="cart__price" >
                                 {{ number_format($v_content->options->discount, 0, ',', '.') }}đ
                                 <input hidden value="<?= $v_content->options->discount ?>"
                                     class="content_discount_price" />
 
-                            </td>
+                            </td> 
+                            @endif
+                            
+
+                            
 
                             <td class="cart__quantity">
                                 <form method="POST" action="/updateCart">

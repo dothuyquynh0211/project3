@@ -21,6 +21,7 @@ class CheckoutController extends Controller
     }
     public function save_invoice(Request $request)
     {
+        //  dd(Cart::content());
         $today = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d H:m:s');
         $status_order = 1;
         $payment_method = 1;
@@ -42,7 +43,11 @@ class CheckoutController extends Controller
             ]);
             $invoices_id = DB::getPDO()->lastInsertId();
             $product_invoice = Cart::content();
+            
             foreach ($product_invoice as $item) {
+                if($item->options->discount == 0) {
+                    $item->options->discount = $item->price ;
+                }
                 DB::table('invoice_details')->insert([
                     'id_product' => $item->id,
                     'coupons_code' => $item->options->coupons_code,
@@ -50,7 +55,11 @@ class CheckoutController extends Controller
                     'price' => $item->options->discount,
                     'id_invoice' => $invoices_id,
                 ]);
+                
+                // DB::table('report_warehouse')->where('id', $item->id)->update([ 'product_inventory' =>( 'product_inventory' - $item->qty)]);
+            
             }
+            
             DB::commit();
             Cart::destroy();
             return redirect('/history')->with('message', 'You have order');
@@ -70,12 +79,6 @@ class CheckoutController extends Controller
         $invoice  = DB::table('invoices')->where('id_user', $id_user)->orderBy('id', 'DESC')->get();
         return view('frontend.history')->with('invoice',$invoice);
     }
-    // public function history_table()
-    // {
-    //     $id_user = auth()->user()->id;
-    //     $invoice  = DB::table('invoices')->where('id_user', $id_user)->orderBy('id', 'DESC')->get();
-    //     return view('frontend.history_table')->with('invoice', $invoice);
-    // }
 
     public function history_detail($id)
     {
