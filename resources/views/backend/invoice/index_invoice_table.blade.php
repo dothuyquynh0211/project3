@@ -1,3 +1,6 @@
+
+
+
 @foreach ($invoice as $item)
     <tr>
         <td>{{ $item->id }}</td>
@@ -9,12 +12,23 @@
         <td>
             <div class='btn-group'>
                 @if($item->status_order == 1 )
-                <button onclick="handleUpdate({{ $item->id }},2)" class="btn btn-primary btn-xs ">DUYỆT </button>
-                <button onclick="handleUpdate({{ $item->id }},0)" class="btn btn-danger btn-xs ">HUỶ</button>
+                <label class="switch">
+                    <input type="checkbox" checked onclick="handleUpdate({{ $item->id }},2),handleUpdate({{ $item->id }},0)">
+                {{-- <button onclick="handleUpdate({{ $item->id }},2)" class="btn btn-primary btn-xs ">DUYỆT </button>
+                <button onclick="handleUpdate({{ $item->id }},0)" class="btn btn-danger btn-xs ">HUỶ</button> --}}
+                <span class="slider round"></span>
+                </label>
                 @endif
+               
             </div>
         </td>
-        <td> <a href="/admin/invoice/detail/{{ $item->id }}">Chi tiết</a></td>
+        <td> <form action="/admin/product/delete/" method="post">
+                  
+            <button type="submit" onclick=" return confirm('are you sure')" class="btn btn-primary btn-xs">Delete</button>
+            @csrf
+            @method('delete')
+        <a href="/admin/product/edit/${id}" class="btn btn-primary btn-xs ">Edit</a>
+        </form>    <a href="/admin/invoice/detail/{{ $item->id }}">detail</a></td>
     </tr>
 @endforeach
 <?php 
@@ -34,3 +48,4 @@
         }
     }
 ?>
+  
