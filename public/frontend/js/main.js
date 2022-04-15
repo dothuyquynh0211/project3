@@ -303,7 +303,7 @@ function quantityCart(evt) {
 }
 
 function discountCheck(e) {
-    // console.log(e.value);
+    console.log($(e).is(':checked'));
     let discount = e.value;
     let productId = e.getAttribute("product_id");
     let coupons_code = e.getAttribute("coupons_code");
@@ -314,6 +314,7 @@ function discountCheck(e) {
             discount: discount,
             productId: productId,
             coupons_code: coupons_code,
+            checked: e.checked,
         },
     }).done(function (ketqua) {
         switch (ketqua) {

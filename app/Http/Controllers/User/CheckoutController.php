@@ -9,6 +9,7 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 //use JeroenNoten\LaravelAdminLte\View\Components\Tool\Datatable;
 use Yajra\DataTables\DataTables;
 
@@ -21,7 +22,7 @@ class CheckoutController extends Controller
     }
     public function save_invoice(Request $request)
     {
-        //  dd(Cart::content());
+        // dd(Cart::content());
         $today = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d H:m:s');
         $status_order = 1;
         $payment_method = 1;
@@ -43,10 +44,10 @@ class CheckoutController extends Controller
             ]);
             $invoices_id = DB::getPDO()->lastInsertId();
             $product_invoice = Cart::content();
-            
+
             foreach ($product_invoice as $item) {
-                if($item->options->discount == 0) {
-                    $item->options->discount = $item->price ;
+                if ($item->options->discount == 0) {
+                    $item->options->discount = $item->price;
                 }
                 DB::table('invoice_details')->insert([
                     'id_product' => $item->id,
@@ -55,13 +56,16 @@ class CheckoutController extends Controller
                     'price' => $item->options->discount,
                     'id_invoice' => $invoices_id,
                 ]);
-                
-                // DB::table('report_warehouse')->where('id', $item->id)->update([ 'product_inventory' =>( 'product_inventory' - $item->qty)]);
-            
+                if ($item->options->coupons_code !== null) {
+                    $quantity = DB::table('coupons')->where('coupons_code', $item->options->coupons_code)->value('coupons_number');
+
+
+                    DB::table('coupons')->where('coupons_code', $item->options->coupons_code)->update(['coupons_number' => $quantity - 1]);
+                }
             }
-            
             DB::commit();
             Cart::destroy();
+            Session::push('couponCheck', null);
             return redirect('/history')->with('message', 'You have order');
         } catch (Exception $e) {
             DB::rollBack();
@@ -77,7 +81,7 @@ class CheckoutController extends Controller
     {
         $id_user = auth()->user()->id;
         $invoice  = DB::table('invoices')->where('id_user', $id_user)->orderBy('id', 'DESC')->get();
-        return view('frontend.history')->with('invoice',$invoice);
+        return view('frontend.history')->with('invoice', $invoice);
     }
 
     public function history_detail($id)
@@ -138,7 +142,7 @@ class CheckoutController extends Controller
             DB::table('invoices')->where('id', $id)->update(['status_order' => 0]);
             $invoice  = DB::table('invoices')->orderBy('id', 'DESC')->get();
             return redirect()->back();
-                        // return view('frontend.history')->with('invoice', $invoice);
+            // return view('frontend.history')->with('invoice', $invoice);
         } catch (\Throwable $th) {
             echo "error";
         }

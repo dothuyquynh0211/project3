@@ -1,5 +1,5 @@
 <?php 
-$connect= new mysqli('localhost','root','','project3');
+ $connect= new mysqli('localhost','admin','admin123','laravel');
 $query =" SELECT products.*,(sum_import.quantity_import - sum_invoice.quantity_invoice ) 
         AS product_inventory , sum_invoice.quantity_invoice ,sum_import.quantity_import 
         FROM (

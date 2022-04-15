@@ -4,8 +4,8 @@
         
         $content = Cart::content();
         // echo '<pre>';
-        //     print_r($content);
-        //     echo '</pre>';
+        // print_r($content);
+        // echo '</pre>';
         ?>
         <div class="shop__cart__table">
             <table>
@@ -33,26 +33,27 @@
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
                             </td>
-                            @if ($v_content->options->discount == 0 )
-                            <td class="cart__price" >{{ number_format($v_content->price, 0, ',', '.') }}đ
-                                <input hidden value="<?= $v_content->price ?>" class="content-price" />
+                            @if ($v_content->options->discount == 0)
+                                <td class="cart__price">{{ number_format($v_content->price, 0, ',', '.') }}đ
+                                    <input hidden value="<?= $v_content->price ?>" class="content-price" />
 
-                            </td>
+                                </td>
                             @else
-                            <td class="cart__price" style="text-decoration-line: line-through">{{ number_format($v_content->price, 0, ',', '.') }}đ
-                                <input hidden value="<?= $v_content->price ?>" class="content-price" />
+                                <td class="cart__price" style="text-decoration-line: line-through">
+                                    {{ number_format($v_content->price, 0, ',', '.') }}đ
+                                    <input hidden value="<?= $v_content->price ?>" class="content-price" />
 
-                            </td>
-                            <td class="cart__price" >
-                                {{ number_format($v_content->options->discount, 0, ',', '.') }}đ
-                                <input hidden value="<?= $v_content->options->discount ?>"
-                                    class="content_discount_price" />
+                                </td>
+                                <td class="cart__price">
+                                    {{ number_format($v_content->options->discount, 0, ',', '.') }}đ
+                                    <input hidden value="<?= $v_content->options->discount ?>"
+                                        class="content_discount_price" />
 
-                            </td> 
+                                </td>
                             @endif
-                            
 
-                            
+
+
 
                             <td class="cart__quantity">
                                 <form method="POST" action="/updateCart">
@@ -167,12 +168,11 @@
     
     function checkedCoupon($produtId, $couponCode)
     {
-        $couponCheck = Session::get('couponCheck');
-        if (getType($couponCheck) == 'array') {
-            foreach ($couponCheck as $key => $value) {
-                if ($value['couponCode'] == $couponCode && $value['productId'] == $produtId) {
-                    return 'checked';
-                }
+        // $couponCheck = Session::get('couponCheck');
+        $couponCheck = Cart::content();
+        foreach ($couponCheck as $key => $value) {
+            if ($value->options->coupons_code == $couponCode && $value->id == $produtId) {
+                return 'checked';
             }
         }
     }

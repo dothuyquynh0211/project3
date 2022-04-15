@@ -15,6 +15,7 @@
                     <div class="form-group">
                         <form action="" method="post">
                             <input type="date" name="date">
+                            <input type="date" name="date">
                             <button type="submit">Lọc </button>
                         </form>
                     </div>

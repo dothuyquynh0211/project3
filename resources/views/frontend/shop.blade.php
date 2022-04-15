@@ -91,7 +91,7 @@
                                 @foreach ($size as $size )
                                 <label for="{{$size->name}}">
                                     {{$size->name}}
-                                    <input type="checkbox" id="{{$size->name}}">
+                                    <input type="checkbox" id="{{$size->name}}" value="{{$size->name}}">
                                     <span class="checkmark"></span>
                                 </label>
                                 @endforeach
@@ -100,60 +100,6 @@
                                     <input type="checkbox" id="xxs">
                                     <span class="checkmark"></span>
                                 </label> --}}
-                            </div>
-                        </div>
-                        <div class="sidebar__color">
-                            <div class="section-title">
-                                <h4>Shop by color</h4>
-                            </div>
-                            <div class="size__list color__list">
-                                {{-- @foreach ($color as $color)
-                                <label for="black">
-                                  
-                                    <input type="checkbox" id="black" style="background: {{$color->name}}">
-                                    <span class="checkmark"></span>
-                                </label>
-                                @endforeach --}}
-                                <label for="black">
-                                    Blacks
-                                    <input type="checkbox" id="black">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="whites">
-                                    Whites
-                                    <input type="checkbox" id="whites">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="reds">
-                                    Reds
-                                    <input type="checkbox" id="reds">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="greys">
-                                    Greys
-                                    <input type="checkbox" id="greys">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="blues">
-                                    Blues
-                                    <input type="checkbox" id="blues">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="beige">
-                                    Beige Tones
-                                    <input type="checkbox" id="beige">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="greens">
-                                    Greens
-                                    <input type="checkbox" id="greens">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="yellows">
-                                    Yellows
-                                    <input type="checkbox" id="yellows">
-                                    <span class="checkmark"></span>
-                                </label>
                             </div>
                         </div>
                     </div>
