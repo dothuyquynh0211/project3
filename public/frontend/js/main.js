@@ -303,7 +303,7 @@ function quantityCart(evt) {
 }
 
 function discountCheck(e) {
-    // console.log(e.value);
+    console.log($(e).is(':checked'));
     let discount = e.value;
     let productId = e.getAttribute("product_id");
     let coupons_code = e.getAttribute("coupons_code");
@@ -314,6 +314,7 @@ function discountCheck(e) {
             discount: discount,
             productId: productId,
             coupons_code: coupons_code,
+            checked: e.checked,
         },
     }).done(function (ketqua) {
         switch (ketqua) {
@@ -326,3 +327,43 @@ function discountCheck(e) {
         }
     });
 }
+
+// function cancelOrder(rowId, event) {
+//     // let deleteRow = this;
+    
+//     $.ajax({
+//         url: `/admin/invoice/update/0/0`,
+//         type: "get",
+//     }).done(function(ketqua) {
+//         $('#invoice_table').html(ketqua);
+//     });
+// }
+function cancelOrder(id, status) {
+
+    var answer = null;
+
+    switch (status) {
+        case 0:
+            answer = confirm('Bạn có muốn huỷ đơn không ?');
+            break;
+        default:
+            break;
+    }
+    if (!answer) {
+        return false;
+    }
+    $.ajax({
+        url: `/cancel_order/${id}/0`,
+        type: "get",
+    }).done(function(ketqua) {
+        location.reload(true); 
+        // $('#invoice_table').html(ketqua);
+    });
+}
+
+// $.ajax({
+//     url: `/admin/invoice/update/0/0`,
+//     type: "get",
+// }).done(function(ketqua) {
+//     $('#invoice_table').html(ketqua);
+// });

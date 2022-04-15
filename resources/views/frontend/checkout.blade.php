@@ -139,7 +139,7 @@
                                 </ul>
                             </div>
 
-                            <div class="checkout__order__widget">
+                            {{-- <div class="checkout__order__widget">
                                 <label for="o-acc">
                                     Create an acount?
                                     <input type="checkbox" id="o-acc">
@@ -157,7 +157,7 @@
                                     <input type="checkbox" id="paypal">
                                     <span class="checkmark"></span>
                                 </label>
-                            </div>
+                            </div> --}}
                             <button type="submit" class="site-btn">Place oder</button>
 
 

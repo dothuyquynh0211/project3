@@ -127,13 +127,23 @@ class CartController extends Controller
 
 
         // echo $image; 
-        Cart::update($rowId, [
-            'options' => [
-                'image' => $image,
-                'discount' => $request->discount,
-                'coupons_code' => $request->coupons_code,
-            ]
-        ]);
+        if (!$request->checked) {
+            Cart::update($rowId, [
+                'options' => [
+                    'image' => $image,
+                    'discount' => 0,
+                    'coupons_code' => null,
+                ]
+            ]);
+        } else {
+            Cart::update($rowId, [
+                'options' => [
+                    'image' => $image,
+                    'discount' => $request->discount,
+                    'coupons_code' => $request->coupons_code,
+                ]
+            ]);
+        }
         echo $this->shop_cart_content();
     }
 
