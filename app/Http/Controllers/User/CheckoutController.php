@@ -95,11 +95,11 @@ class CheckoutController extends Controller
         return view('backend.invoice.index_invoice');
     }
 
-    public function getInvoice()
-    {
-        $invoice  = DB::table('invoices')->orderBy('id', 'DESC')->get();
-        return Datatable::of($invoice)->make(true);
-    }
+    // public function getInvoice()
+    // {
+    //     $invoice  = DB::table('invoices')->orderBy('id', 'DESC')->get();
+    //     return Datatable::of($invoice)->make(true);
+    // }
 
     public function update_invoice($id, $status)
     {

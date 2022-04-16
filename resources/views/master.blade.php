@@ -100,9 +100,36 @@
                         <div class="header__right__auth">
                             @if (Auth::guard('users')->user() != null)
                                 {{-- <span>{{Auth::guard('users')->user()->name}}</span> --}}
-                                <a href="#">{{ Auth::guard('users')->user()->name }}</a>
-                                <a href="{{ route('invoice.history') }}">History</a>
-                                <a href="{{ route('user.logout') }}">Logout</a>
+                                
+                    <nav class="header__menu">
+                        <ul>
+                            
+                            
+                            
+
+                       
+                          
+                            
+                            <li><a href="#">{{ Auth::guard('users')->user()->name }}</a>
+                                <ul class="dropdown">
+                                    <li>
+                                        <a href="{{ route('invoice.history') }}">History</a></li>
+                                        <li><a href="{{ route('user.info') }}">Thông tin </a></li>
+                                        <li><a href="{{ route('user.logout') }}">Logout</a>
+                                        </li>
+                                </ul>
+                            </li>
+                        </nav>
+                                    {{-- <li><a href="/block">Blog</a></li> 
+                            
+                        
+                                {{-- <a href="#">{{ Auth::guard('users')->user()->name }}</a>
+                                <li>
+                                <a href="{{ route('invoice.history') }}">History</a></li>
+                                <li><a href="{{ route('user.info') }}">Thông tin </a></li>
+                                <li><a href="{{ route('user.logout') }}">Logout</a>
+                                </li>
+                                </ul> --}}
                             @else
                                 <a href="{{ route('user.login') }}">Login</a>
                                 <a href="{{ route('user.register') }}">Register</a>

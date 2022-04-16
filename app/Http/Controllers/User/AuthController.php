@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
@@ -20,7 +21,7 @@ class AuthController extends Controller
             $file->move('avatar/', $imageName);
         }
         else{
-            $imageName="avatar.jpeg";
+            $imageName="avatar.jpg";
         }
         $user = new User();
         $user->name = $request->name;
@@ -64,4 +65,23 @@ class AuthController extends Controller
         //session()->forget('admin');
         return redirect()->route('user.login');
     }
+    /////
+    public function info(){
+        $user=auth()->user()->id;
+        $data = DB::table('users')->where('id', $user)->get();
+       
+        return view('frontend.auth.index')->with('data',$data);
+    }
+    
+   
+    // public function editColors($id ) {
+    //     $row = DB::table('colors')->where('id',$id)->first();
+    //     $data = array('info'=> $row);
+    //     return view('backend.colors.edit',$data);
+    // }
+    
+    // public function updateColors(Request $request){
+    //     $query = DB::table('colors')->where('id', $request->input('id'))->update([ 'name' => $request->input('name_colors')]);
+    //     return redirect('/admin/color');
+    // }
 }
