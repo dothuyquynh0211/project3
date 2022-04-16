@@ -23,6 +23,11 @@
                             <th> Tổng tiền </th>
                         </thead>
                         <tbody id="invoice_table">
+                            <?php
+                           $total=0;
+                            // $total=$price*$quantity;
+                            //  print $total;
+                             ?> 
                             @foreach ($invoice as $item)
                                 <tr>
                                     <td>{{$item->name}}</td>
@@ -34,19 +39,24 @@
                                     <td>{{ $item->coupons_code }}</td>
                                     <td>{{ $item->quantity }}</td>
                                     <td>{{ $item->price }}</td>
+                                    <td>{{ $item->price * $item->quantity }}</td>
                                    
+                                    <?php
+                                    $total +=$item->price * $item->quantity;
+                                
+                                      ?> 
                                     
                                 </tr>
                             @endforeach
                           
-                           {{-- <?php
-                            // $total=$price*$quantity;
-                            //  echo "$total";
-                             ?> --}}
+                           
                         </tbody>
                     </table>
                     <div class="total-payment">
-                        <h3>Thành tiền : </h3>
+                        <h3>Thành tiền :  <?php
+                           echo $total; 
+                        
+                              ?> </h3>
                     </div>
                 </div>
                

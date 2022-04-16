@@ -177,6 +177,7 @@ Route::get('/check-coupons', [CartController::class, 'check_coupons']);
 Route::get('/', [UserController::class, 'index'])->name('user.index');
 Route::get('/login', [AuthController::class, 'showFormLogin'])->name('user.login');
 Route::post('/login', [AuthController::class, 'loginUser']);
+Route::get('/info', [AuthController::class, 'info'])->name('user.info');
 Route::get('/register', [AuthController::class, 'showFormRegister'])->name('user.register');
 Route::post('/register', [AuthController::class, 'register']);
 Route::get('/logoutUser', [AuthController::class, 'logoutUser'])->name('user.logout');

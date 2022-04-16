@@ -1,5 +1,5 @@
 <?php 
- $connect= new mysqli('localhost','admin','admin123','laravel');
+ $connect= new mysqli('localhost','root','','project3');
 $query =" SELECT products.*,(sum_import.quantity_import - sum_invoice.quantity_invoice ) 
         AS product_inventory , sum_invoice.quantity_invoice ,sum_import.quantity_import 
         FROM (
@@ -215,7 +215,7 @@ while ($row = mysqli_fetch_array($result)){
       function drawChart() {
 
         var data = google.visualization.arrayToDataTable([
-            ['nameb','number_book'],
+            ['name','quantity_import'],
             <?php 
 
           foreach ($data as $key ) {
