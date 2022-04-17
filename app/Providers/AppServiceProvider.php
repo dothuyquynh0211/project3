@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Http\View\Composers\LayoutComposer;
 use Illuminate\Bus\Dispatcher;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -29,7 +30,9 @@ class AppServiceProvider extends ServiceProvider
         // $this->menuItems = ['Men', 'kid', 'unnisex'];
         // view()->composer('master', function ($view) {
         //     $view->with(['category' => $this->menuItems]);
+
         // });
+        Paginator::useBootstrap();
         view()->composer('master', LayoutComposer::class);
     }
 }

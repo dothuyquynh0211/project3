@@ -22,9 +22,11 @@ class ProductController extends Controller
     public function index()
     {
         
-        $product = Product::all();
+        //return view('backend.product.index_product', [
+            $product = Product::all();
+        //]);
+      
         return view('backend.product.index_product')->with('product', $product);
-        //return view('backend.product.index_product');
     }
 
     // public function getProduct()
