@@ -178,6 +178,8 @@ Route::get('/', [UserController::class, 'index'])->name('user.index');
 Route::get('/login', [AuthController::class, 'showFormLogin'])->name('user.login');
 Route::post('/login', [AuthController::class, 'loginUser']);
 Route::get('/info', [AuthController::class, 'info'])->name('user.info');
+Route::get('/user/Info/edit/{id}', [AuthController::class, 'editInfo']);
+Route::post('/info', [AuthController::class, 'updateInfo']);
 Route::get('/register', [AuthController::class, 'showFormRegister'])->name('user.register');
 Route::post('/register', [AuthController::class, 'register']);
 Route::get('/logoutUser', [AuthController::class, 'logoutUser'])->name('user.logout');

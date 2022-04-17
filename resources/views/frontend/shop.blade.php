@@ -87,7 +87,7 @@
                             <div class="section-title">
                                 <h4>Shop by size</h4>
                             </div>
-                            <div class="size__list">
+                            {{-- <div class="size__list">
                                 @foreach ($size as $size )
                                 <label for="{{$size->name}}">
                                     {{$size->name}}
@@ -99,28 +99,28 @@
                                     xxs
                                     <input type="checkbox" id="xxs">
                                     <span class="checkmark"></span>
-                                </label> --}}
-                            </div>
+                                </label> 
+                            </div> --}}
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-9 col-md-9">
                     <div class="row">
-                        @foreach ($product as $item)
+                        @foreach ($product as $product)
                             <div class="col-lg-4 col-md-6">
                                 <div class="product__item">
-                                    <div class="product__item__pic set-bg" data-setbg="{{ 'image/' . $item->image }}">
+                                    <div class="product__item__pic set-bg" data-setbg="{{ 'image/' . $product->image }}">
                                         <div class="label new">New</div>
                                         <ul class="product__hover">
-                                            <li><a href="image/{{ $item->image }}" class="image-popup"><span
+                                            <li><a href="image/{{ $product->image }}" class="image-popup"><span
                                                         class="arrow_expand"></span></a></li>
                                             <li><a href="/wishlist"><span class="icon_heart_alt"></span></a></li>
-                                            <li><a href="/product-detail/{{ $item->id }}"><span
+                                            <li><a href="/product-detail/{{ $product->id }}"><span
                                                         class="icon_bag_alt"></span></a></li>
                                         </ul>
                                     </div>
                                     <div class="product__item__text">
-                                        <h6><a href="/product-detail/{{ $item->id }}">{{ $item->name }}</a></h6>
+                                        <h6><a href="/product-detail/{{ $product->id }}">{{ $product->name }}</a></h6>
                                         <div class="rating">
                                             <i class="fa fa-star"></i>
                                             <i class="fa fa-star"></i>
@@ -128,9 +128,9 @@
                                             <i class="fa fa-star"></i>
                                             <i class="fa fa-star"></i>
                                         </div>
-                                        <div class="product__price">{{ number_format($item->price, 0, ',', '.') }} đ
-                                            <?php if ($item->sale_price > 0) {
-                                                echo '<span>' . number_format($item->sale_price, 0, ',', '.') . ' đ </span>';
+                                        <div class="product__price">{{ number_format($product->price, 0, ',', '.') }} đ
+                                            <?php if ($product->sale_price > 0) {
+                                                echo '<span>' . number_format($product->sale_price, 0, ',', '.') . ' đ </span>';
                                             }
                                             ?>
                                         </div>
@@ -351,13 +351,16 @@
                             </div>
                         </div>--}}
                         <div class="col-lg-12 text-center">
+                            
                             <div class="pagination__option">
+                                {{ $product->links()}}
                                 <a href="#">1</a>
                                 <a href="#">2</a>
                                 <a href="#">3</a>
                                 <a href="#"><i class="fa fa-angle-right"></i></a>
-                                <a href="#"><i class="fa fa-angle-left"></i></a>
+                                <a href="#"><i class="fa fa-angle-left"></i></a> 
                             </div>
+                            {{-- {{ $product -> links() }} --}}
                         </div> 
                     </div>
                 </div>

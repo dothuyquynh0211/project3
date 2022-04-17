@@ -74,14 +74,20 @@ class AuthController extends Controller
     }
     
    
-    // public function editColors($id ) {
-    //     $row = DB::table('colors')->where('id',$id)->first();
-    //     $data = array('info'=> $row);
-    //     return view('backend.colors.edit',$data);
-    // }
+    public function editInfo($id ) {
+        $row = DB::table('users')->where('id',$id)->first();
+        $data = array('info'=> $row);
+        return view('frontend.auth.edit',$data);
+    }
     
-    // public function updateColors(Request $request){
-    //     $query = DB::table('colors')->where('id', $request->input('id'))->update([ 'name' => $request->input('name_colors')]);
-    //     return redirect('/admin/color');
-    // }
+    public function updateInfo(Request $request){
+        $query = DB::table('users')
+        ->where('id', $request->input('id'))
+        ->update([ 'name' => $request->input('name'),'
+        email' => $request->input('email'),
+        'avatar' => $request->input('avatar'),
+        'phone' => $request->input('phone'),
+        'address' => $request->input('address')]);
+        return redirect('info');
+    }
 }
